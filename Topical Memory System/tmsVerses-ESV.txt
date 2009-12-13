@@ -23,3 +23,42 @@ John/1:12/B 9/But to all who did receive him, who believed in his name, he gave 
 Revelation/3:20/B 10/"Behold, I stand at the door and knock. If anyone hears my voice and opens the door, I will come in to him and eat with him, and he with me."
 1 John/5:13/B 11/I write these things to you who believe in the name of the Son of God that you may know that you have eternal life.
 John/5:24/B 12/"Truly, truly, I say to you, whoever hears my word and believes him who sent me has eternal life. He does not come into judgment, but has passed from death to life."
+
+1 Corinthians/3:16/C 1/Do you not know that you are God's temple and that God's Spirit dwells in you?
+1 Corinthians/2:12/C 2/Now we have received not the spirit of the world, but the Spirit who is from God, that we might understand the things freely given us by God.
+Isaiah/41:10/C 3/Fear not, for I am with you; be not dismayed, for I am your God; I will strengthen you, I will help you, I will uphold you with my righteous right hand.
+Philippians/4:13/C 4/I can do all things through him who strengthens me.
+Lamentations/3:22,23/C 5/The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.
+Numbers/23:19/C 6/"God is not man, that he should lie, or a son of man, that he should change his mind. Has he said, and will he not do it? Or has he spoken, and will he not fulfill it?"
+Isaiah/26:3/C 7/"You keep him in perfect peace whose mind is stayed on you, because he trusts in you."
+1 Peter/5:7/C 8/Casting all your anxieties on him, because he cares for you.
+Romans/8:32/C 9/He who did not spare his own Son but gave him up for us all, how will he not also with him graciously give us all things?
+Philippians/4:19/C 10/And my God will supply every need of yours according to his riches in glory in Christ Jesus.
+Hebrews/2:18/C 11/For because he himself has suffered when tempted, he is able to help those who are being tempted.
+Psalm/119:9,11/C 12/How can a young man keep his way pure? By guarding it according to your word. With my whole heart I seek you; let me not wander from your commandments!
+
+Matthew/6:33/D 1/"But seek first the kingdom of God and his righteousness, and all these things will be added to you."
+Luke/9:23/D 2/And he said to all, "If anyone would come after me, let him deny himself and take up his cross daily and follow me."
+1 John/2:15,16/D 3/Do not love the world or the things in the world. If anyone loves the world, the love of the Father is not in him.  For all that is in the world--the desires of the flesh and the desires of the eyes and pride in possessions--is not from the Father but is from the world.
+Romans/12:2/D 4/Do not be conformed to this world, but be transformed by the renewal of your mind, that by testing you may discern what is the will of God, what is good and acceptable and perfect.
+1 Corinthians/15:58/D 5/Therefore, my beloved brothers, be steadfast, immovable, always abounding in the work of the Lord, knowing that in the Lord your labor is not in vain.
+Hebrews/12:3/D 6/Consider him who endured from sinners such hostility against himself, so that you may not grow weary or fainthearted.
+Mark/10:45/D 7/"For even the Son of Man came not to be served but to serve, and to give his life as a ransom for many."
+2 Corinthians/4:5/D 8/For what we proclaim is not ourselves, but Jesus Christ as Lord, with ourselves as your servants for Jesus' sake.
+Proverbs/3:9,10/D 9/Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine.
+2 Corinthians/9:6,7/D 10/The point is this: whoever sows sparingly will also reap sparingly, and whoever sows bountifully will also reap bountifully.  Each one must give as he has made up his mind, not reluctantly or under compulsion, for God loves a cheerful giver.
+Acts/1:8/D 11/"But you will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth."
+Matthew/28:19,20/D 12/"Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all that I have commanded you. And behold, I am with you always, to the end of the age."
+
+John/13:34,35/E 1/"A new commandment I give to you, that you love one another: just as I have loved you, you also are to love one another.  By this all people will know that you are my disciples, if you have love for one another."
+1 John/3:18/E 2/Little children, let us not love in word or talk but in deed and in truth.
+Philippians/2:3,4/E 3/Do nothing from rivalry or conceit, but in humility count others more significant than yourselves.  Let each of you look not only to his own interests, but also to the interests of others.
+1 Peter/5:5,6/E 4/Likewise, you who are younger, be subject to the elders. Clothe yourselves, all of you, with humility toward one another, for "God opposes the proud but gives grace to the humble."  Humble yourselves, therefore, under the mighty hand of God so that at the proper time he may exalt you
+Ephesians/5:3/E 5/But sexual immorality and all impurity or covetousness must not even be named among you, as is proper among saints.
+1 Peter/2:11/E 6/Beloved, I urge you as sojourners and exiles to abstain from the passions of the flesh, which wage war against your soul.
+Leviticus/19:11/E 7/"You shall not steal; you shall not deal falsely; you shall not lie to one another."
+Acts/24:16/E 8/"So I always take pains to have a clear conscience toward both God and man."
+Hebrews/11:6/E 9/And without faith it is impossible to please him, for whoever would draw near to God must believe that he exists and that he rewards those who seek him.
+Romans/4:20,21/E 10/No distrust made him waver concerning the promise of God, but he grew strong in his faith as he gave glory to God, fully convinced that God was able to do what he had promised.
+Galatians/6:9,10/E 11/And let us not grow weary of doing good, for in due season we will reap, if we do not give up.  So then, as we have opportunity, let us do good to everyone, and especially to those who are of the household of faith.
+Matthew/5:16/E 12/"In the same way, let your light shine before others, so that they may see your good works and give glory to your Father who is in heaven."

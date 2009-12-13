@@ -6,3 +6,11 @@ C:\Users\l3ender\Desktop\TMS Workspace\Topical Memory System\Topical Memory Syst
 C:\Users\l3ender\Desktop\TMS Workspace\Topical Memory System\Topical Memory System\obj\Debug\Topical Memory System.exe
 C:\Users\l3ender\Desktop\TMS Workspace\Topical Memory System\Topical Memory System\obj\Debug\Topical Memory System.pdb
 C:\Users\l3ender\Desktop\TMS Workspace\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.MenuExit.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical Memory System.exe
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical Memory System.pdb
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\bin\Debug\Topical Memory System.exe
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\bin\Debug\Topical Memory System.pdb
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.MenuExit.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.Properties.Resources.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical Memory System.csproj.GenerateResource.Cache
