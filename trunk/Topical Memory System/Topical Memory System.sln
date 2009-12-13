@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topical Memory System", "Topical Memory System\Topical Memory System.csproj", "{DE9DA3D5-126C-45A2-B755-C6AEBCE12724}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE9DA3D5-126C-45A2-B755-C6AEBCE12724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9DA3D5-126C-45A2-B755-C6AEBCE12724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9DA3D5-126C-45A2-B755-C6AEBCE12724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9DA3D5-126C-45A2-B755-C6AEBCE12724}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
