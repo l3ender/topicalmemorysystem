@@ -1,6 +1,6 @@
 ﻿namespace Topical_Memory_System
 {
-	partial class MatchingVersesPanel
+	partial class MainMenuPanel
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -28,24 +28,25 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new System.Windows.Forms.Button();
+			this.reviewVersesButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// button1
+			// reviewVersesButton
 			// 
-			this.button1.Location = new System.Drawing.Point(370, 196);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(140, 43);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Test";
-			this.button1.UseVisualStyleBackColor = true;
+			this.reviewVersesButton.Location = new System.Drawing.Point(129, 112);
+			this.reviewVersesButton.Name = "reviewVersesButton";
+			this.reviewVersesButton.Size = new System.Drawing.Size(143, 46);
+			this.reviewVersesButton.TabIndex = 0;
+			this.reviewVersesButton.Text = "Review Verses";
+			this.reviewVersesButton.UseVisualStyleBackColor = true;
+			this.reviewVersesButton.Click += new System.EventHandler(this.reviewVersesButton_Click);
 			// 
-			// UserControl1
+			// ReviewVersesPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.button1);
-			this.Name = "UserControl1";
+			this.Controls.Add(this.reviewVersesButton);
+			this.Name = "ReviewVersesPanel";
 			this.Size = new System.Drawing.Size(637, 411);
 			this.ResumeLayout(false);
 
@@ -53,6 +54,6 @@
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button reviewVersesButton;
 	}
 }
