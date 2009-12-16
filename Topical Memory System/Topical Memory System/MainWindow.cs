@@ -181,5 +181,14 @@ namespace Topical_Memory_System
 			SR.Close();
 			return topics;
 		}
+
+		private void MainMenuStripClick(object sender, EventArgs e)
+		{
+			while (mainPanel.Controls.Count > 0)
+			{
+				mainPanel.Controls.RemoveAt(0);
+			}
+			mainPanel.Controls.Add(new MainMenuPanel());
+		}
 	}
 }
