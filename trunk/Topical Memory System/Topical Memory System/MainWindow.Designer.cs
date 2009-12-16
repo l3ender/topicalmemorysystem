@@ -30,6 +30,7 @@
         {
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mainMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.translationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,15 +53,23 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenuStrip,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
 			// 
+			// mainMenuStrip
+			// 
+			this.mainMenuStrip.Name = "mainMenuStrip";
+			this.mainMenuStrip.Size = new System.Drawing.Size(152, 22);
+			this.mainMenuStrip.Text = "Main Menu";
+			this.mainMenuStrip.Click += new System.EventHandler(this.MainMenuStripClick);
+			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExitClick);
 			// 
@@ -123,8 +132,9 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem translationToolStripMenuItem;
-        private static System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem translationToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem mainMenuStrip;
+		private static System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
 		private static System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
 		private static System.Windows.Forms.Panel mainPanel;
     }
