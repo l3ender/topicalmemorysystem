@@ -6,23 +6,38 @@ using System.Text;
 namespace Topical_Memory_System
 {
 
-	class Verse
+	public class Verse
 	{
-		private static string book;
-		private static int chapter;
-		private static string verseNumbers;	//can be multiple verses
-		private static string packLetter;
-		private static int packNumber;
-		private static string verseData;
+		private string book;
+		private int chapter;
+		private string verseNumbers;	//can be multiple verses
+		private string packLetter;
+		private int packNumber;
+		private string verseData;
 
 		public Verse(string book, int chapter, string verseNumbers, string packLetter, int packNumber, string verseData)
 		{
-			Verse.book = book;
-			Verse.chapter = chapter;
-			Verse.verseNumbers = verseNumbers;
-			Verse.packLetter = packLetter;
-			Verse.packNumber = packNumber;
-			Verse.verseData = verseData;
+			this.book = book;
+			this.chapter = chapter;
+			this.verseNumbers = verseNumbers;
+			this.packLetter = packLetter;
+			this.packNumber = packNumber;
+			this.verseData = verseData;
+		}
+
+		public override int GetHashCode()
+		{
+			return Convert.ToInt32(book) * chapter * Convert.ToInt32(verseNumbers);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return this.GetHashCode() == ((Verse)obj).GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return book + Convert.ToString(chapter) + verseNumbers;
 		}
 
 		public string getBook()

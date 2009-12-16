@@ -32,8 +32,8 @@
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.translationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.nivStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			nivStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			mainPanel = new System.Windows.Forms.Panel();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -67,29 +67,29 @@
 			// translationToolStripMenuItem
 			// 
 			this.translationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.esvStripMenuItem,
-            this.nivStripMenuItem});
+            esvStripMenuItem,
+            nivStripMenuItem});
 			this.translationToolStripMenuItem.Name = "translationToolStripMenuItem";
 			this.translationToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
 			this.translationToolStripMenuItem.Text = "Translation";
 			// 
 			// esvStripMenuItem
 			// 
-			this.esvStripMenuItem.Name = "esvStripMenuItem";
-			this.esvStripMenuItem.Size = new System.Drawing.Size(240, 22);
-			this.esvStripMenuItem.Tag = "esv";
-			this.esvStripMenuItem.Text = "English Standard Version (ESV)";
-			this.esvStripMenuItem.Click += new System.EventHandler(this.TranslationChanged);
+			esvStripMenuItem.Name = "esvStripMenuItem";
+			esvStripMenuItem.Size = new System.Drawing.Size(240, 22);
+			esvStripMenuItem.Tag = "esv";
+			esvStripMenuItem.Text = "English Standard Version (ESV)";
+			esvStripMenuItem.Click += new System.EventHandler(this.TranslationChanged);
 			// 
 			// nivStripMenuItem
 			// 
-			this.nivStripMenuItem.Checked = true;
-			this.nivStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.nivStripMenuItem.Name = "nivStripMenuItem";
-			this.nivStripMenuItem.Size = new System.Drawing.Size(240, 22);
-			this.nivStripMenuItem.Tag = "niv";
-			this.nivStripMenuItem.Text = "New International Version (NIV)";
-			this.nivStripMenuItem.Click += new System.EventHandler(this.TranslationChanged);
+			nivStripMenuItem.Checked = true;
+			nivStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			nivStripMenuItem.Name = "nivStripMenuItem";
+			nivStripMenuItem.Size = new System.Drawing.Size(240, 22);
+			nivStripMenuItem.Tag = "niv";
+			nivStripMenuItem.Text = "New International Version (NIV)";
+			nivStripMenuItem.Click += new System.EventHandler(this.TranslationChanged);
 			// 
 			// mainPanel
 			// 
@@ -124,8 +124,8 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem translationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
+        private static System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
+		private static System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
 		private static System.Windows.Forms.Panel mainPanel;
     }
 }

@@ -10,6 +10,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Speech.Synthesis;
 using System.Globalization;
+using System.Collections;
 
 namespace Topical_Memory_System
 {
@@ -19,7 +20,7 @@ namespace Topical_Memory_System
 		{
 			InitializeComponent();
 			LoadConfigFile();
-			mainPanel.Controls.Add(new ReviewVersesPanel());
+			mainPanel.Controls.Add(new MainMenuPanel());
 		}
 
 		private void LoadConfigFile()
@@ -77,32 +78,6 @@ namespace Topical_Memory_System
 			Application.Exit();
 		}
 
-		private void ReadFromFile()
-		{
-			StreamReader SR;
-			string S;
-			SR = File.OpenText("../../tmsResources/tmsVerses-NIV.txt");
-			S = SR.ReadLine();
-			while (S != null)
-			{
-				if (S.Trim().Length > 0)
-				{
-					string[] info = S.Split('/');
-					Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
-						info[2].Split(' ')[0], Convert.ToInt32(info[2].Split(' ')[1]), info[3]);
-					SpeechSynthesizer speaker = new SpeechSynthesizer();
-					speaker.Rate = -2;
-					speaker.Volume = 100;
-					speaker.Speak(v.getReference());
-					speaker.Speak(v.getVerseData());
-					Debug.WriteLine(v.getReference());
-					Debug.WriteLine(v.getVerseData());
-				}
-				S = SR.ReadLine();
-			}
-			SR.Close();
-		}
-
 		private void TranslationChanged(object sender, EventArgs e)
 		{
 			if (sender is ToolStripMenuItem)
@@ -123,12 +98,88 @@ namespace Topical_Memory_System
 
 		public static void reviewVerses(object sender, EventArgs e)
 		{
-			foreach (Control c in mainPanel.Controls)
+			mainPanel.Controls.Remove((Control)sender);
+			mainPanel.Controls.Add(new reviewVersesOptionsPanel());
+		}
+
+		public static void reviewVerses(List<string> packs, object sender)
+		{
+			mainPanel.Controls.Remove((Control)sender);
+			List<Verse> allVerses = ReadInVerses();
+			List<Verse> versesToReview = new List<Verse>();
+			if (packs.Contains("all"))
 			{
-				c.Enabled = false;
-				c.Visible = false;
+				versesToReview = allVerses;
 			}
-			mainPanel.Controls.Add(new MatchingVersesPanel());
+			else
+			{
+				foreach (Verse v in allVerses)
+				{
+					if (packs.Contains(v.getPackLetter()))
+					{
+						versesToReview.Add(v);
+					}
+				}
+			}
+			string translation = "NIV";
+			if (esvStripMenuItem.Checked)
+			{
+				translation = "ESV";
+			}
+			Hashtable topics = ReadInTopics();
+			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation, topics));
+		}
+
+		private static List<Verse> ReadInVerses()
+		{
+			List<Verse> allVerses = new List<Verse>();
+			string fileLocation = Constants.NivFileLocation;	//defaults to niv
+			if (esvStripMenuItem.Checked)
+			{
+				fileLocation = Constants.EsvFileLocation;
+			}
+			StreamReader SR;
+			string S;
+			SR = File.OpenText(fileLocation);
+			S = SR.ReadLine();
+			while (S != null)
+			{
+				if (S.Trim().Length > 0)
+				{
+					string[] info = S.Split('/');
+					Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
+						info[2].Split(' ')[0], Convert.ToInt32(info[2].Split(' ')[1]), info[3]);
+					allVerses.Add(v);
+				}
+				S = SR.ReadLine();
+			}
+			SR.Close();
+			return allVerses;
+		}
+
+		private static Hashtable ReadInTopics()
+		{
+			Hashtable topics = new Hashtable();		//stored as <pack#, hashtable<pack#, topics>>
+			string fileLocation = Constants.TmsTopicsFileLocation;
+			StreamReader SR;
+			string S;
+			SR = File.OpenText(fileLocation);
+			S = SR.ReadLine();
+			for (int i = 0; i < 5; i++)
+			{
+				Hashtable inner = new Hashtable();
+				for (int j = 0; j < 7; j++)
+				{
+					if (S != null && S.Trim().Length > 0)
+					{
+						inner.Add(j, S.Trim());
+					}
+					S = SR.ReadLine();
+				}
+				topics.Add((i + 1), inner);
+			}
+			SR.Close();
+			return topics;
 		}
 	}
 }
