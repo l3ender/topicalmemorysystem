@@ -70,11 +70,31 @@ namespace Topical_Memory_System
 
 		private void hearButton_Click(object sender, EventArgs e)
 		{
+			previousVerseButton.Enabled = false;
+			nextVerseButton.Enabled = false;
+			flipButton.Enabled = false;
+			hearButton.Enabled = false;
+			hearButton.Text = "Playing";
 			SpeechSynthesizer speaker = new SpeechSynthesizer();
 			speaker.Rate = -2;
 			speaker.Volume = 100;
-			speaker.Speak(verses[currentVerseIndex].getReference());
+			string verseReference = verses[currentVerseIndex].getBook() + ", " + Convert.ToString(verses[currentVerseIndex].getChapter() + " ");
+			if (verses[currentVerseIndex].getVerseNumbers().Contains(','))
+			{
+				string[] numbers = verses[currentVerseIndex].getVerseNumbers().Split(',');
+				verseReference += numbers[0] + " and " + numbers[1];
+			}
+			else
+			{
+				verseReference += verses[currentVerseIndex].getVerseNumbers();
+			}
+			speaker.Speak(verseReference);
 			speaker.Speak(verses[currentVerseIndex].getVerseData());
+			hearButton.Text = "Hear it!";
+			previousVerseButton.Enabled = true;
+			nextVerseButton.Enabled = true;
+			flipButton.Enabled = true;
+			hearButton.Enabled = true;
 		}
 
 		private void flipButton_Click(object sender, EventArgs e)
