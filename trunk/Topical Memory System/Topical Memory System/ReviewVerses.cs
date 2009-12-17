@@ -14,17 +14,17 @@ namespace Topical_Memory_System
 {
 	public partial class ReviewVerses : UserControl
 	{
-		private List<Verse> verses;
+		private static List<Verse> verses;
 		private string translationText;
-		private Hashtable topics;
-		private int currentVerseIndex;
+		private static Hashtable topics;
+		private static int currentVerseIndex;
 		private bool frontOfCard;
 
-		public ReviewVerses(List<Verse> incomingVerses, string translation, Hashtable topics)
+		public ReviewVerses(List<Verse> incomingVerses, string incomingTranslation, Hashtable incomingTopics)
 		{
 			InitializeComponent();
-			this.translationText = translation;
-			this.topics = topics;
+			this.translationText = incomingTranslation;
+			topics = incomingTopics;
 			frontOfCard = true;
 			verses = new List<Verse>(incomingVerses.Count);
 			Random r = new Random();
@@ -36,36 +36,36 @@ namespace Topical_Memory_System
 			}
 			currentVerseIndex = 0;
 
-			this.theme.Enabled = false;
-			this.theme.Visible = false;
-			this.reference.Enabled = false;
-			this.reference.Visible = false;
-			this.translation.Enabled = false;
-			this.translation.Visible = false;
-			this.verseData.Enabled = false;
-			this.verseData.Visible = false;
-			this.packInformation.Enabled = false;
-			this.packInformation.Visible = false;
+			theme.Enabled = false;
+			theme.Visible = false;
+			reference.Enabled = false;
+			reference.Visible = false;
+			translation.Enabled = false;
+			translation.Visible = false;
+			verseData.Enabled = false;
+			verseData.Visible = false;
+			packInformation.Enabled = false;
+			packInformation.Visible = false;
 			this.hearButton.Enabled = false;
 			this.hearButton.Visible = false;
 
-			this.frontReference.Enabled = true;
-			this.frontReference.Visible = true;
+			frontReference.Enabled = true;
+			frontReference.Visible = true;
 
 			this.previousVerseButton.Enabled = false;
 
 			Verse v = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(v), v.getReference(), translationText, v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
+			setVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
 		}
 
-		private void setVerseFields(string theme, string reference, string translation, string verseData, string packInformation)
+		private static void setVerseFields(string incomingTheme, string incomingReference, string incomingTranslation, string incomingVerseData, string incomingPackInformation)
 		{
-			this.theme.Text = theme;
-			this.reference.Text = reference;
-			this.translation.Text = translation;
-			this.verseData.Text = Constants.TAB + verseData;
-			this.packInformation.Text = packInformation;
-			this.frontReference.Text = reference;
+			theme.Text = incomingTheme;
+			reference.Text = incomingReference;
+			translation.Text = incomingTranslation;
+			verseData.Text = Constants.TAB + incomingVerseData;
+			packInformation.Text = incomingPackInformation;
+			frontReference.Text = incomingReference;
 		}
 
 		private void hearButton_Click(object sender, EventArgs e)
@@ -81,39 +81,39 @@ namespace Topical_Memory_System
 		{
 			if (frontOfCard)
 			{
-				this.theme.Enabled = true;
-				this.theme.Visible = true;
-				this.reference.Enabled = true;
-				this.reference.Visible = true;
-				this.translation.Enabled = true;
-				this.translation.Visible = true;
-				this.verseData.Enabled = true;
-				this.verseData.Visible = true;
-				this.packInformation.Enabled = true;
-				this.packInformation.Visible = true;
+				theme.Enabled = true;
+				theme.Visible = true;
+				reference.Enabled = true;
+				reference.Visible = true;
+				translation.Enabled = true;
+				translation.Visible = true;
+				verseData.Enabled = true;
+				verseData.Visible = true;
+				packInformation.Enabled = true;
+				packInformation.Visible = true;
 				this.hearButton.Enabled = true;
 				this.hearButton.Visible = true;
 
-				this.frontReference.Enabled = false;
-				this.frontReference.Visible = false;
+				frontReference.Enabled = false;
+				frontReference.Visible = false;
 			}
 			else
 			{
-				this.theme.Enabled = false;
-				this.theme.Visible = false;
-				this.reference.Enabled = false;
-				this.reference.Visible = false;
-				this.translation.Enabled = false;
-				this.translation.Visible = false;
-				this.verseData.Enabled = false;
-				this.verseData.Visible = false;
-				this.packInformation.Enabled = false;
-				this.packInformation.Visible = false;
+				theme.Enabled = false;
+				theme.Visible = false;
+				reference.Enabled = false;
+				reference.Visible = false;
+				translation.Enabled = false;
+				translation.Visible = false;
+				verseData.Enabled = false;
+				verseData.Visible = false;
+				packInformation.Enabled = false;
+				packInformation.Visible = false;
 				this.hearButton.Enabled = false;
 				this.hearButton.Visible = false;
 
-				this.frontReference.Enabled = true;
-				this.frontReference.Visible = true;
+				frontReference.Enabled = true;
+				frontReference.Visible = true;
 			}
 			//flip
 			frontOfCard = !frontOfCard;
@@ -121,6 +121,10 @@ namespace Topical_Memory_System
 
 		private void nextVerseButton_Click(object sender, EventArgs e)
 		{
+			if (!frontOfCard)
+			{
+				flipButton_Click(null, null);	//done so the person always sees the reference side first
+			}
 			currentVerseIndex++;
 			if (currentVerseIndex == 1)
 			{
@@ -131,11 +135,15 @@ namespace Topical_Memory_System
 				nextVerseButton.Enabled = false;
 			}
 			Verse v = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(v), v.getReference(), translationText, v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
+			setVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
 		}
 
 		private void previousVerseButton_Click(object sender, EventArgs e)
 		{
+			if (!frontOfCard)
+			{
+				flipButton_Click(null, null);	//done so the person always sees the reference side first
+			}
 			currentVerseIndex--;
 			if (currentVerseIndex == 0)
 			{
@@ -146,10 +154,10 @@ namespace Topical_Memory_System
 				nextVerseButton.Enabled = true;
 			}
 			Verse v = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(v), v.getReference(), translationText, v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
+			setVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
 		}
 
-		private string GetVerseTheme(Verse v)
+		private static string GetVerseTheme(Verse v)
 		{
 			int mainThemeIndex = 0;
 			if (v.getPackLetter().Equals("A"))
@@ -184,7 +192,7 @@ namespace Topical_Memory_System
 			return ((string)((Hashtable)topics[mainThemeIndex])[verseThemeIndex]);
 		}
 
-		private string GetPackTheme(Verse v)
+		private static string GetPackTheme(Verse v)
 		{
 			int mainThemeIndex = 0;
 			if (v.getPackLetter().Equals("A"))
@@ -208,6 +216,16 @@ namespace Topical_Memory_System
 				mainThemeIndex = 5;
 			}
 			return ((string)((Hashtable)topics[mainThemeIndex])[0]);
+		}
+
+		public static void ChangeTranslation(int translation)
+		{
+			foreach (Verse v in verses)
+			{
+				v.setTranslation(translation);
+			}
+			Verse verse = verses[currentVerseIndex];
+			setVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackLetter() + "-" + verse.getPackNumber() + "  " + GetPackTheme(verse));
 		}
 	}
 }
