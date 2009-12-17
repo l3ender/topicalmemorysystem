@@ -13,16 +13,19 @@ namespace Topical_Memory_System
 		private string verseNumbers;	//can be multiple verses
 		private string packLetter;
 		private int packNumber;
-		private string verseData;
+		private string nivVerseData;
+		private string esvVerseData;
+		private int translation;	//0 == niv, 1 == esv
 
-		public Verse(string book, int chapter, string verseNumbers, string packLetter, int packNumber, string verseData)
+		public Verse(string book, int chapter, string verseNumbers, string packLetter, int packNumber, string nivVerseData)
 		{
+			this.translation = 0;
 			this.book = book;
 			this.chapter = chapter;
 			this.verseNumbers = verseNumbers;
 			this.packLetter = packLetter;
 			this.packNumber = packNumber;
-			this.verseData = verseData;
+			this.nivVerseData = nivVerseData;
 		}
 
 		public override int GetHashCode()
@@ -64,9 +67,42 @@ namespace Topical_Memory_System
 		{
 			return packNumber;
 		}
+		public string getTranslation()
+		{
+			if (translation == 1)
+			{
+				return "ESV";
+			}
+			else
+			{
+				return "NIV";
+			}
+		}
+		public void setTranslation(int translation)
+		{
+			this.translation = translation;
+		}
 		public string getVerseData()
 		{
-			return verseData;
+			if (translation == 1)
+			{
+				return getEsvVerseData();
+			} else
+			{
+				return getNivVerseData();
+			}
+		}
+		public string getNivVerseData()
+		{
+			return nivVerseData;
+		}
+		public void setEsvVerseData(string esvVerseData)
+		{
+			this.esvVerseData = esvVerseData;
+		}
+		public string getEsvVerseData()
+		{
+			return esvVerseData;
 		}
 	}
 

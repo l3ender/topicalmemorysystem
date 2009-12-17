@@ -33,7 +33,7 @@
 			// 
 			// reviewVersesButton
 			// 
-			this.reviewVersesButton.Location = new System.Drawing.Point(129, 112);
+			this.reviewVersesButton.Location = new System.Drawing.Point(247, 182);
 			this.reviewVersesButton.Name = "reviewVersesButton";
 			this.reviewVersesButton.Size = new System.Drawing.Size(143, 46);
 			this.reviewVersesButton.TabIndex = 0;
@@ -41,12 +41,12 @@
 			this.reviewVersesButton.UseVisualStyleBackColor = true;
 			this.reviewVersesButton.Click += new System.EventHandler(this.reviewVersesButton_Click);
 			// 
-			// ReviewVersesPanel
+			// MainMenuPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.reviewVersesButton);
-			this.Name = "ReviewVersesPanel";
+			this.Name = "MainMenuPanel";
 			this.Size = new System.Drawing.Size(637, 411);
 			this.ResumeLayout(false);
 

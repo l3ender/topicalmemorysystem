@@ -29,13 +29,13 @@
 		private void InitializeComponent()
 		{
 			this.versePanel = new System.Windows.Forms.Panel();
-			this.frontReference = new System.Windows.Forms.TextBox();
-			this.hearButton = new System.Windows.Forms.Button();
-			this.verseData = new System.Windows.Forms.TextBox();
-			this.packInformation = new System.Windows.Forms.Label();
-			this.translation = new System.Windows.Forms.Label();
-			this.reference = new System.Windows.Forms.Label();
-			this.theme = new System.Windows.Forms.Label();
+			frontReference = new System.Windows.Forms.TextBox();
+			hearButton = new System.Windows.Forms.Button();
+			verseData = new System.Windows.Forms.TextBox();
+			packInformation = new System.Windows.Forms.Label();
+			translation = new System.Windows.Forms.Label();
+			reference = new System.Windows.Forms.Label();
+			theme = new System.Windows.Forms.Label();
 			this.flipButton = new System.Windows.Forms.Button();
 			this.nextVerseButton = new System.Windows.Forms.Button();
 			this.previousVerseButton = new System.Windows.Forms.Button();
@@ -47,13 +47,13 @@
 			// 
 			this.versePanel.BackColor = System.Drawing.Color.White;
 			this.versePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.versePanel.Controls.Add(this.frontReference);
-			this.versePanel.Controls.Add(this.hearButton);
-			this.versePanel.Controls.Add(this.verseData);
-			this.versePanel.Controls.Add(this.packInformation);
-			this.versePanel.Controls.Add(this.translation);
-			this.versePanel.Controls.Add(this.reference);
-			this.versePanel.Controls.Add(this.theme);
+			this.versePanel.Controls.Add(frontReference);
+			this.versePanel.Controls.Add(hearButton);
+			this.versePanel.Controls.Add(verseData);
+			this.versePanel.Controls.Add(packInformation);
+			this.versePanel.Controls.Add(translation);
+			this.versePanel.Controls.Add(reference);
+			this.versePanel.Controls.Add(theme);
 			this.versePanel.Location = new System.Drawing.Point(148, 84);
 			this.versePanel.Name = "versePanel";
 			this.versePanel.Size = new System.Drawing.Size(340, 233);
@@ -61,15 +61,15 @@
 			// 
 			// frontReference
 			// 
-			this.frontReference.BackColor = System.Drawing.Color.White;
-			this.frontReference.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.frontReference.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.frontReference.Location = new System.Drawing.Point(98, 113);
-			this.frontReference.Name = "frontReference";
-			this.frontReference.ReadOnly = true;
-			this.frontReference.Size = new System.Drawing.Size(137, 17);
-			this.frontReference.TabIndex = 6;
-			this.frontReference.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			frontReference.BackColor = System.Drawing.Color.White;
+			frontReference.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			frontReference.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			frontReference.Location = new System.Drawing.Point(98, 113);
+			frontReference.Name = "frontReference";
+			frontReference.ReadOnly = true;
+			frontReference.Size = new System.Drawing.Size(137, 17);
+			frontReference.TabIndex = 6;
+			frontReference.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// hearButton
 			// 
@@ -83,56 +83,56 @@
 			// 
 			// verseData
 			// 
-			this.verseData.BackColor = System.Drawing.Color.White;
-			this.verseData.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.verseData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.verseData.Location = new System.Drawing.Point(24, 73);
-			this.verseData.Multiline = true;
-			this.verseData.Name = "verseData";
-			this.verseData.ReadOnly = true;
-			this.verseData.Size = new System.Drawing.Size(290, 115);
-			this.verseData.TabIndex = 4;
+			verseData.BackColor = System.Drawing.Color.White;
+			verseData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			verseData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			verseData.Location = new System.Drawing.Point(24, 73);
+			verseData.Multiline = true;
+			verseData.Name = "verseData";
+			verseData.ReadOnly = true;
+			verseData.Size = new System.Drawing.Size(290, 115);
+			verseData.TabIndex = 4;
 			// 
 			// packInformation
 			// 
-			this.packInformation.AutoSize = true;
-			this.packInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.packInformation.Location = new System.Drawing.Point(21, 192);
-			this.packInformation.Name = "packInformation";
-			this.packInformation.Size = new System.Drawing.Size(35, 13);
-			this.packInformation.TabIndex = 3;
-			this.packInformation.Text = "label1";
+			packInformation.AutoSize = true;
+			packInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			packInformation.Location = new System.Drawing.Point(21, 192);
+			packInformation.Name = "packInformation";
+			packInformation.Size = new System.Drawing.Size(35, 13);
+			packInformation.TabIndex = 3;
+			packInformation.Text = "label1";
 			// 
 			// translation
 			// 
-			this.translation.AutoSize = true;
-			this.translation.Location = new System.Drawing.Point(279, 22);
-			this.translation.Name = "translation";
-			this.translation.Size = new System.Drawing.Size(35, 13);
-			this.translation.TabIndex = 2;
-			this.translation.Text = "label1";
-			this.translation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			translation.AutoSize = true;
+			translation.Location = new System.Drawing.Point(279, 22);
+			translation.Name = "translation";
+			translation.Size = new System.Drawing.Size(35, 13);
+			translation.TabIndex = 2;
+			translation.Text = "label1";
+			translation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// reference
 			// 
-			this.reference.AutoSize = true;
-			this.reference.Cursor = System.Windows.Forms.Cursors.Default;
-			this.reference.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.reference.Location = new System.Drawing.Point(21, 48);
-			this.reference.Name = "reference";
-			this.reference.Size = new System.Drawing.Size(41, 15);
-			this.reference.TabIndex = 1;
-			this.reference.Text = "label1";
+			reference.AutoSize = true;
+			reference.Cursor = System.Windows.Forms.Cursors.Default;
+			reference.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			reference.Location = new System.Drawing.Point(21, 48);
+			reference.Name = "reference";
+			reference.Size = new System.Drawing.Size(41, 15);
+			reference.TabIndex = 1;
+			reference.Text = "label1";
 			// 
 			// theme
 			// 
-			this.theme.AutoSize = true;
-			this.theme.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.theme.Location = new System.Drawing.Point(21, 20);
-			this.theme.Name = "theme";
-			this.theme.Size = new System.Drawing.Size(51, 16);
-			this.theme.TabIndex = 0;
-			this.theme.Text = "label1";
+			theme.AutoSize = true;
+			theme.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			theme.Location = new System.Drawing.Point(21, 20);
+			theme.Name = "theme";
+			theme.Size = new System.Drawing.Size(51, 16);
+			theme.TabIndex = 0;
+			theme.Text = "label1";
 			// 
 			// flipButton
 			// 
@@ -146,7 +146,7 @@
 			// 
 			// nextVerseButton
 			// 
-			this.nextVerseButton.Location = new System.Drawing.Point(513, 193);
+			this.nextVerseButton.Location = new System.Drawing.Point(513, 190);
 			this.nextVerseButton.Name = "nextVerseButton";
 			this.nextVerseButton.Size = new System.Drawing.Size(95, 30);
 			this.nextVerseButton.TabIndex = 2;
@@ -156,7 +156,7 @@
 			// 
 			// previousVerseButton
 			// 
-			this.previousVerseButton.Location = new System.Drawing.Point(26, 193);
+			this.previousVerseButton.Location = new System.Drawing.Point(26, 190);
 			this.previousVerseButton.Name = "previousVerseButton";
 			this.previousVerseButton.Size = new System.Drawing.Size(95, 30);
 			this.previousVerseButton.TabIndex = 3;
@@ -195,14 +195,14 @@
 		#endregion
 
 		private System.Windows.Forms.Panel versePanel;
-		private System.Windows.Forms.Label theme;
-		private System.Windows.Forms.Label translation;
-		private System.Windows.Forms.Label reference;
-		private System.Windows.Forms.Label packInformation;
-		private System.Windows.Forms.TextBox verseData;
+		private static System.Windows.Forms.Label theme;
+		private static System.Windows.Forms.Label translation;
+		private static System.Windows.Forms.Label reference;
+		private static System.Windows.Forms.Label packInformation;
+		private static System.Windows.Forms.TextBox verseData;
 		private System.Windows.Forms.Button hearButton;
 		private System.Windows.Forms.Button flipButton;
-		private System.Windows.Forms.TextBox frontReference;
+		private static System.Windows.Forms.TextBox frontReference;
 		private System.Windows.Forms.Button nextVerseButton;
 		private System.Windows.Forms.Button previousVerseButton;
 		private System.Windows.Forms.Label titleLabel;

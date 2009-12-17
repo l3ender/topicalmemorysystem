@@ -62,14 +62,14 @@
 			// mainMenuStrip
 			// 
 			this.mainMenuStrip.Name = "mainMenuStrip";
-			this.mainMenuStrip.Size = new System.Drawing.Size(152, 22);
+			this.mainMenuStrip.Size = new System.Drawing.Size(135, 22);
 			this.mainMenuStrip.Text = "Main Menu";
 			this.mainMenuStrip.Click += new System.EventHandler(this.MainMenuStripClick);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExitClick);
 			// 
@@ -119,7 +119,7 @@
 			this.MaximizeBox = false;
 			this.Name = "MenuExit";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Topical Memory System Assistant";
+			this.Text = "TMS Assistant";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);

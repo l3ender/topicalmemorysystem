@@ -94,6 +94,15 @@ namespace Topical_Memory_System
 					}
 				}
 			}
+			if (mainPanel.Controls[0] is ReviewVerses)
+			{
+				int translation = 0;
+				if (esvStripMenuItem.Checked)
+				{
+					translation = 1;
+				}
+				ReviewVerses.ChangeTranslation(translation);
+			}
 		}
 
 		public static void reviewVerses(object sender, EventArgs e)
@@ -133,14 +142,9 @@ namespace Topical_Memory_System
 		private static List<Verse> ReadInVerses()
 		{
 			List<Verse> allVerses = new List<Verse>();
-			string fileLocation = Constants.NivFileLocation;	//defaults to niv
-			if (esvStripMenuItem.Checked)
-			{
-				fileLocation = Constants.EsvFileLocation;
-			}
 			StreamReader SR;
 			string S;
-			SR = File.OpenText(fileLocation);
+			SR = File.OpenText(Constants.NivFileLocation);
 			S = SR.ReadLine();
 			while (S != null)
 			{
@@ -150,6 +154,21 @@ namespace Topical_Memory_System
 					Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
 						info[2].Split(' ')[0], Convert.ToInt32(info[2].Split(' ')[1]), info[3]);
 					allVerses.Add(v);
+				}
+				S = SR.ReadLine();
+			}
+			SR.Close();
+
+			SR = File.OpenText(Constants.EsvFileLocation);
+			S = SR.ReadLine();
+			int i = 0;
+			while (S != null)
+			{
+				if (S.Trim().Length > 0)
+				{
+					string[] info = S.Split('/');
+					allVerses[i].setEsvVerseData(info[3]);
+					i++;
 				}
 				S = SR.ReadLine();
 			}
