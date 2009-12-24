@@ -115,6 +115,12 @@ namespace Topical_Memory_System
 			mainPanel.Controls.Add(new reviewVersesOptionsPanel("review"));
 		}
 
+        public static void matchVerses(object sender)
+        {
+            mainPanel.Controls.Remove((Control)sender);
+            mainPanel.Controls.Add(new MatchVersesOptionPanel());
+        }
+
         public static void matchVerses(object sender, bool verseToReference)
         {
             mainPanel.Controls.Remove((Control)sender);
