@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Speech.Synthesis;
 using System.Collections;
+using System.Threading;
 
 namespace Topical_Memory_System
 {
@@ -70,32 +71,40 @@ namespace Topical_Memory_System
 
 		private void hearButton_Click(object sender, EventArgs e)
 		{
-			previousVerseButton.Enabled = false;
-			nextVerseButton.Enabled = false;
-			flipButton.Enabled = false;
-			hearButton.Enabled = false;
-			hearButton.Text = "Playing";
-			SpeechSynthesizer speaker = new SpeechSynthesizer();
-			speaker.Rate = -2;
-			speaker.Volume = 100;
-			string verseReference = verses[currentVerseIndex].getBook() + ", " + Convert.ToString(verses[currentVerseIndex].getChapter() + " ");
-			if (verses[currentVerseIndex].getVerseNumbers().Contains(','))
-			{
-				string[] numbers = verses[currentVerseIndex].getVerseNumbers().Split(',');
-				verseReference += numbers[0] + " and " + numbers[1];
-			}
-			else
-			{
-				verseReference += verses[currentVerseIndex].getVerseNumbers();
-			}
-			speaker.Speak(verseReference);
-			speaker.Speak(verses[currentVerseIndex].getVerseData());
-			hearButton.Text = "Hear it!";
-			previousVerseButton.Enabled = true;
-			nextVerseButton.Enabled = true;
-			flipButton.Enabled = true;
-			hearButton.Enabled = true;
+            if (!isReading)
+            {
+                string verseReference = verses[currentVerseIndex].getBook() + ", " + Convert.ToString(verses[currentVerseIndex].getChapter() + " ");
+                if (verses[currentVerseIndex].getVerseNumbers().Contains(','))
+                {
+                    string[] numbers = verses[currentVerseIndex].getVerseNumbers().Split(',');
+                    verseReference += numbers[0] + " and " + numbers[1];
+                }
+                else
+                {
+                    verseReference += verses[currentVerseIndex].getVerseNumbers();
+                }
+                speakReference = verseReference;
+                speakVerse = verses[currentVerseIndex].getVerseData();
+                Thread t = new Thread(sayVerse);
+                t.Start();
+            }
+            unfocus(verseData, null);
 		}
+
+        private static string speakReference;
+        private static string speakVerse;
+        private static bool isReading;
+
+        private static void sayVerse()
+        {
+            isReading = true;
+            SpeechSynthesizer speaker = new SpeechSynthesizer();
+            speaker.Rate = -2;
+            speaker.Volume = 100;
+            speaker.Speak(speakReference);
+            speaker.Speak(speakVerse);
+            isReading = false;
+        }
 
 		private void flipButton_Click(object sender, EventArgs e)
 		{
@@ -113,6 +122,8 @@ namespace Topical_Memory_System
 				packInformation.Visible = true;
 				this.hearButton.Enabled = true;
 				this.hearButton.Visible = true;
+                this.viewVerseInContextButton.Enabled = true;
+                this.viewVerseInContextButton.Visible = true;
 
 				frontReference.Enabled = false;
 				frontReference.Visible = false;
@@ -131,6 +142,8 @@ namespace Topical_Memory_System
 				packInformation.Visible = false;
 				this.hearButton.Enabled = false;
 				this.hearButton.Visible = false;
+                this.viewVerseInContextButton.Enabled = false;
+                this.viewVerseInContextButton.Visible = false;
 
 				frontReference.Enabled = true;
 				frontReference.Visible = true;
@@ -141,6 +154,7 @@ namespace Topical_Memory_System
 
 		private void nextVerseButton_Click(object sender, EventArgs e)
 		{
+            unfocus(frontReference, null);
 			if (!frontOfCard)
 			{
 				flipButton_Click(null, null);	//done so the person always sees the reference side first
@@ -160,6 +174,7 @@ namespace Topical_Memory_System
 
 		private void previousVerseButton_Click(object sender, EventArgs e)
 		{
+            unfocus(frontReference, null);
 			if (!frontOfCard)
 			{
 				flipButton_Click(null, null);	//done so the person always sees the reference side first
@@ -247,5 +262,22 @@ namespace Topical_Memory_System
 			Verse verse = verses[currentVerseIndex];
 			setVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackLetter() + "-" + verse.getPackNumber() + "  " + GetPackTheme(verse));
 		}
+
+        private void viewVerseInContextButton_Click(object sender, EventArgs e)
+        {
+            MenuExit.viewVerseInContext(verses[currentVerseIndex], translation.Text);
+        }
+
+        private void mainUnfocus(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectionLength = 0;
+            blankLabel.Focus();
+        }
+
+        private void unfocus(object sender, MouseEventArgs e)
+        {
+            mainUnfocus(sender, null);
+        }
+
 	}
 }

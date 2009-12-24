@@ -252,5 +252,28 @@ namespace Topical_Memory_System
 			}
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
+
+        public static void viewVerseInContext(Verse v, string translation)
+        {
+            //example URL: http://www.blueletterbible.org/Bible.cfm?b=1%20Peter&c=5&v=7&t=NIV#7
+            string verse = v.getVerseNumbers().Split(',')[0];
+            string url = "http://www.blueletterbible.org/Bible.cfm?b=" + v.getBook() + "&c=" + v.getChapter().ToString() +
+                "&v=" + verse + "&t=" + translation + "#" + verse;
+            mainPanel.Controls.Add(new ViewInContextPanel(url));
+            //disable other controls so the one we just added is visible
+            foreach (Control c in mainPanel.Controls)
+            {
+                if (!(c is ViewInContextPanel))
+                {
+                    c.Visible = false;
+                }
+            }
+        }
+
+        public static void closeVerseInContext(object sender)
+        {
+            mainPanel.Controls.Remove((Control)sender);
+            mainPanel.Controls[0].Visible = true;
+        }
 	}
 }
