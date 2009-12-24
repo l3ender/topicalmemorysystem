@@ -30,7 +30,7 @@ namespace Topical_Memory_System
 
 		public override int GetHashCode()
 		{
-			return Convert.ToInt32(book) * chapter * Convert.ToInt32(verseNumbers);
+			return book.GetHashCode() * chapter.GetHashCode() * verseNumbers.GetHashCode();
 		}
 
 		public override bool Equals(object obj)

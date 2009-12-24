@@ -12,9 +12,13 @@ namespace Topical_Memory_System
 {
 	public partial class reviewVersesOptionsPanel : UserControl
 	{
-		public reviewVersesOptionsPanel()
+        private string caller;
+
+        public reviewVersesOptionsPanel(string incomingCaller)
 		{
 			InitializeComponent();
+            this.caller = incomingCaller;
+            allPacksCheck.Checked = true;
 		}
 
 		private void PaintMethod(object sender, PaintEventArgs e)
@@ -85,7 +89,18 @@ namespace Topical_Memory_System
 			{
 				packs.Add("all");
 			}
-			MenuExit.reviewVerses(packs, this);
+            if (caller.Equals("review"))
+            {
+                MenuExit.reviewVerses(packs, this);
+            }
+            else if (caller.Equals("vr"))
+            {
+                MenuExit.matchVerses(packs, true, this);
+            }
+            else if (caller.Equals("rv"))
+            {
+                MenuExit.matchVerses(packs, false, this);
+            }
 		}
 	}
 }

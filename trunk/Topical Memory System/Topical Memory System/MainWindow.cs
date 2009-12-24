@@ -94,42 +94,44 @@ namespace Topical_Memory_System
 					}
 				}
 			}
+            int translation = 0;
+            if (esvStripMenuItem.Checked)
+            {
+                translation = 1;
+            }
 			if (mainPanel.Controls[0] is ReviewVerses)
 			{
-				int translation = 0;
-				if (esvStripMenuItem.Checked)
-				{
-					translation = 1;
-				}
 				ReviewVerses.ChangeTranslation(translation);
-			}
+            }
+            else if (mainPanel.Controls[0] is MatchVerses)
+            {
+                MatchVerses.ChangeTranslation(translation);
+            }
 		}
 
-		public static void reviewVerses(object sender, EventArgs e)
+		public static void reviewVerses(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new reviewVersesOptionsPanel());
+			mainPanel.Controls.Add(new reviewVersesOptionsPanel("review"));
 		}
+
+        public static void matchVerses(object sender, bool verseToReference)
+        {
+            mainPanel.Controls.Remove((Control)sender);
+            if (verseToReference)
+            {
+                mainPanel.Controls.Add(new reviewVersesOptionsPanel("vr"));
+            }
+            else
+            {
+                mainPanel.Controls.Add(new reviewVersesOptionsPanel("rv"));
+            }
+        }
 
 		public static void reviewVerses(List<string> packs, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			List<Verse> allVerses = ReadInVerses();
-			List<Verse> versesToReview = new List<Verse>();
-			if (packs.Contains("all"))
-			{
-				versesToReview = allVerses;
-			}
-			else
-			{
-				foreach (Verse v in allVerses)
-				{
-					if (packs.Contains(v.getPackLetter()))
-					{
-						versesToReview.Add(v);
-					}
-				}
-			}
+            List<Verse> versesToReview = ReadInDesiredVerses(packs);
 			string translation = "NIV";
 			if (esvStripMenuItem.Checked)
 			{
@@ -138,6 +140,41 @@ namespace Topical_Memory_System
 			Hashtable topics = ReadInTopics();
 			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation, topics));
 		}
+
+        public static void matchVerses(List<string> packs, bool verseToReference, object sender)
+        {
+            mainPanel.Controls.Remove((Control)sender);
+            List<Verse> versesToReview = ReadInDesiredVerses(packs);
+            string translation = "NIV";
+            if (esvStripMenuItem.Checked)
+            {
+                translation = "ESV";
+            }
+            Hashtable topics = ReadInTopics();
+
+            mainPanel.Controls.Add(new MatchVerses(versesToReview, translation, topics, verseToReference));
+        }
+
+        private static List<Verse> ReadInDesiredVerses(List<string> packs)
+        {
+            List<Verse> allVerses = ReadInVerses();
+            List<Verse> versesToReview = new List<Verse>();
+            if (packs.Contains("all"))
+            {
+                versesToReview = allVerses;
+            }
+            else
+            {
+                foreach (Verse v in allVerses)
+                {
+                    if (packs.Contains(v.getPackLetter()))
+                    {
+                        versesToReview.Add(v);
+                    }
+                }
+            }
+            return versesToReview;
+        }
 
 		private static List<Verse> ReadInVerses()
 		{
