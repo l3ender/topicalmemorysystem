@@ -21,14 +21,9 @@ namespace Topical_Memory_System
 			MenuExit.reviewVerses(this);
 		}
 
-        private void matchReferencesToVersesButton_Click(object sender, EventArgs e)
+        private void matchVersesButton_Click(object sender, EventArgs e)
         {
-            MenuExit.matchVerses(this, false);
-        }
-
-        private void matchVersesToReferencesButton_Click(object sender, EventArgs e)
-        {
-            MenuExit.matchVerses(this, true);
+            MenuExit.matchVerses(this);
         }
 	}
 }
