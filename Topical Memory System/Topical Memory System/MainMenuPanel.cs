@@ -18,7 +18,17 @@ namespace Topical_Memory_System
 
 		private void reviewVersesButton_Click(object sender, EventArgs e)
 		{
-			MenuExit.reviewVerses(this, e);
+			MenuExit.reviewVerses(this);
 		}
+
+        private void matchReferencesToVersesButton_Click(object sender, EventArgs e)
+        {
+            MenuExit.matchVerses(this, false);
+        }
+
+        private void matchVersesToReferencesButton_Click(object sender, EventArgs e)
+        {
+            MenuExit.matchVerses(this, true);
+        }
 	}
 }
