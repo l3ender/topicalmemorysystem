@@ -17,9 +17,9 @@ namespace Topical_Memory_System
             webBrowser.Navigate(url);
         }
 
-        private void closeButton_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
-            MenuExit.closeVerseInContext(this);
+            MenuExit.CloseVerseInContext(this);
         }
     }
 }

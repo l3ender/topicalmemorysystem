@@ -58,10 +58,10 @@ namespace Topical_Memory_System
 
             currentMatching = new List<Verse>(5);
             correctMatch = -1;
-            setFields(verseToReference);
+            SetFields(verseToReference);
         }
 
-        private void setFields(bool verseToReference)
+        private void SetFields(bool verseToReference)
         {
             currentMatching.Clear();
             currentToMatch = allVerses[0];
@@ -86,10 +86,10 @@ namespace Topical_Memory_System
             Random r = new Random();
             random = r.Next(5) + 1; //returns numbers 1-5
             correctMatch = random;
-            displayVerses();
+            DisplayVerses();
         }
 
-        private static void displayVerses()
+        private static void DisplayVerses()
         {
             if (verseToReference)
             {
@@ -181,7 +181,7 @@ namespace Topical_Memory_System
             }
         }
 
-        private void boxSelected(object sender, EventArgs e)
+        private void BoxSelected(object sender, EventArgs e)
         {
             if (!viewStatsButton.Visible)
             {
@@ -223,7 +223,7 @@ namespace Topical_Memory_System
             }
         }
 
-        private void nextVerseButton_Click(object sender, EventArgs e)
+        private void NextVerseButton_Click(object sender, EventArgs e)
         {
             blankLabel.Focus();
             versesLeft--;
@@ -234,27 +234,27 @@ namespace Topical_Memory_System
             match3.BackColor = System.Drawing.SystemColors.Control;
             match4.BackColor = System.Drawing.SystemColors.Control;
             match5.BackColor = System.Drawing.SystemColors.Control;
-            setFields(verseToReference);
+            SetFields(verseToReference);
         }
 
-        private void mainUnfocus(object sender, EventArgs e)
+        private void MainUnfocus(object sender, EventArgs e)
         {
             ((TextBox)sender).SelectionLength = 0;
             blankLabel.Focus();
         }
 
-        private void unfocus(object sender, MouseEventArgs e)
+        private void Unfocus(object sender, MouseEventArgs e)
         {
-            mainUnfocus(sender, null);
+            MainUnfocus(sender, null);
         }
 
-        private void viewStatsButton_Click(object sender, EventArgs e)
+        private void ViewStatsButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("You selected the correct answer on your first try " + correctAnswers.ToString() + " out of " + totalVerses.ToString() + " times.\r\n" +
                 "You selected a wrong answer " + incorrectAnswers.ToString() + " times.");
         }
 
-        private void restartButton_Click(object sender, EventArgs e)
+        private void RestartButton_Click(object sender, EventArgs e)
         {
             blankLabel.Focus();
             match1.BackColor = System.Drawing.SystemColors.Control;
@@ -292,7 +292,7 @@ namespace Topical_Memory_System
 
             currentMatching = new List<Verse>(5);
             correctMatch = -1;
-            setFields(verseToReference);
+            SetFields(verseToReference);
         }
 
         public static void ChangeTranslation(int translation)
@@ -313,7 +313,7 @@ namespace Topical_Memory_System
             {
                 v.setTranslation(translation);
             }
-            displayVerses();
+            DisplayVerses();
         }
     }
 }

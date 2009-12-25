@@ -56,10 +56,10 @@ namespace Topical_Memory_System
 			this.previousVerseButton.Enabled = false;
 
 			Verse v = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
+			SetVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
 		}
 
-		private static void setVerseFields(string incomingTheme, string incomingReference, string incomingTranslation, string incomingVerseData, string incomingPackInformation)
+		private static void SetVerseFields(string incomingTheme, string incomingReference, string incomingTranslation, string incomingVerseData, string incomingPackInformation)
 		{
 			theme.Text = incomingTheme;
 			reference.Text = incomingReference;
@@ -69,7 +69,7 @@ namespace Topical_Memory_System
 			frontReference.Text = incomingReference;
 		}
 
-		private void hearButton_Click(object sender, EventArgs e)
+		private void HearButton_Click(object sender, EventArgs e)
 		{
             if (!isReading)
             {
@@ -85,28 +85,42 @@ namespace Topical_Memory_System
                 }
                 speakReference = verseReference;
                 speakVerse = verses[currentVerseIndex].getVerseData();
-                Thread t = new Thread(sayVerse);
+                Thread t = new Thread(SayVerse);
                 t.Start();
             }
-            unfocus(verseData, null);
+            Unfocus(verseData, null);
 		}
 
         private static string speakReference;
         private static string speakVerse;
         private static bool isReading;
 
-        private static void sayVerse()
+        private static void SayVerse()
         {
             isReading = true;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-            speaker.Rate = -2;
-            speaker.Volume = 100;
-            speaker.Speak(speakReference);
-            speaker.Speak(speakVerse);
+            bool canRead = false;
+            try
+            {
+                speaker.SelectVoice(MenuExit.SelectedVoiceName());
+                canRead = true;
+            }
+            catch (ArgumentException e)
+            {
+                MessageBox.Show("Text to speech is not supported on this computer.");
+                e.ToString();
+            }
+            if (canRead)
+            {
+                speaker.Rate = -2;
+                speaker.Volume = 100;
+                speaker.Speak(speakReference);
+                speaker.Speak(speakVerse);
+            }
             isReading = false;
         }
 
-		private void flipButton_Click(object sender, EventArgs e)
+		private void FlipButton_Click(object sender, EventArgs e)
 		{
 			if (frontOfCard)
 			{
@@ -152,12 +166,12 @@ namespace Topical_Memory_System
 			frontOfCard = !frontOfCard;
 		}
 
-		private void nextVerseButton_Click(object sender, EventArgs e)
+		private void NextVerseButton_Click(object sender, EventArgs e)
 		{
-            unfocus(frontReference, null);
+            Unfocus(frontReference, null);
 			if (!frontOfCard)
 			{
-				flipButton_Click(null, null);	//done so the person always sees the reference side first
+				FlipButton_Click(null, null);	//done so the person always sees the reference side first
 			}
 			currentVerseIndex++;
 			if (currentVerseIndex == 1)
@@ -169,15 +183,15 @@ namespace Topical_Memory_System
 				nextVerseButton.Enabled = false;
 			}
 			Verse v = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
+			SetVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
 		}
 
-		private void previousVerseButton_Click(object sender, EventArgs e)
+		private void PreviousVerseButton_Click(object sender, EventArgs e)
 		{
-            unfocus(frontReference, null);
+            Unfocus(frontReference, null);
 			if (!frontOfCard)
 			{
-				flipButton_Click(null, null);	//done so the person always sees the reference side first
+				FlipButton_Click(null, null);	//done so the person always sees the reference side first
 			}
 			currentVerseIndex--;
 			if (currentVerseIndex == 0)
@@ -189,7 +203,7 @@ namespace Topical_Memory_System
 				nextVerseButton.Enabled = true;
 			}
 			Verse v = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
+			SetVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackLetter() + "-" + v.getPackNumber() + "  " + GetPackTheme(v));
 		}
 
 		private static string GetVerseTheme(Verse v)
@@ -260,23 +274,23 @@ namespace Topical_Memory_System
 				v.setTranslation(translation);
 			}
 			Verse verse = verses[currentVerseIndex];
-			setVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackLetter() + "-" + verse.getPackNumber() + "  " + GetPackTheme(verse));
+			SetVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackLetter() + "-" + verse.getPackNumber() + "  " + GetPackTheme(verse));
 		}
 
-        private void viewVerseInContextButton_Click(object sender, EventArgs e)
+        private void ViewVerseInContextButton_Click(object sender, EventArgs e)
         {
-            MenuExit.viewVerseInContext(verses[currentVerseIndex], translation.Text);
+            MenuExit.ViewVerseInContext(verses[currentVerseIndex], translation.Text);
         }
 
-        private void mainUnfocus(object sender, EventArgs e)
+        private void MainUnfocus(object sender, EventArgs e)
         {
             ((TextBox)sender).SelectionLength = 0;
             blankLabel.Focus();
         }
 
-        private void unfocus(object sender, MouseEventArgs e)
+        private void Unfocus(object sender, MouseEventArgs e)
         {
-            mainUnfocus(sender, null);
+            MainUnfocus(sender, null);
         }
 
 	}

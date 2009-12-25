@@ -19,53 +19,95 @@ namespace Topical_Memory_System
 		public MenuExit()
 		{
 			InitializeComponent();
+            FindInstalledVoices();
 			LoadConfigFile();
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
+
+        private void FindInstalledVoices()
+        {
+            //get the installed voices on the system
+            SpeechSynthesizer speechSynth = new SpeechSynthesizer();
+            var listOfVoiceInfo = from voice
+                                      in speechSynth.GetInstalledVoices(CultureInfo.CurrentCulture)
+                                  select voice.VoiceInfo;
+            List<VoiceInfo> availableVoices = listOfVoiceInfo.ToList<VoiceInfo>();
+            if (availableVoices.Count > 0)
+            {
+                voiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                this.menuStrip1.Items.Add(voiceToolStripMenuItem);
+
+                List<ToolStripMenuItem> stripItems = new List<ToolStripMenuItem>(availableVoices.Count);
+                for (int i = 0; i < availableVoices.Count; i++)
+                {
+                    ToolStripMenuItem stripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                    stripMenuItem.Name = availableVoices[i].Name;
+                    stripMenuItem.Size = new System.Drawing.Size(240, 22);
+                    stripMenuItem.Text = availableVoices[i].Name;
+                    stripMenuItem.Click += new System.EventHandler(this.VoiceChanged);
+                    if (i == 0)
+                    {
+                        stripMenuItem.Checked = true;
+                        UpdateConfigFile("voice", availableVoices[i].Name);
+                    }
+
+                    stripItems.Add(stripMenuItem);
+                }
+
+                foreach (ToolStripMenuItem tsmi in stripItems)
+                {
+                    voiceToolStripMenuItem.DropDownItems.Add(tsmi);
+                }
+
+                voiceToolStripMenuItem.Name = "voiceToolStripMenuItem";
+                voiceToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+                voiceToolStripMenuItem.Text = "Voice";
+            }
+        }
 
 		private void LoadConfigFile()
 		{
 			StreamReader SR = null;
 			string S;
-			bool good = true;
 			try
 			{
 				SR = File.OpenText(Constants.ConfigFileLocation);
 			}
 			catch (System.IO.FileNotFoundException)
 			{
-				good = false;
-				//create the file
-				WriteToConfig("primarytranslation=niv");
+                MessageBox.Show("Configuration file not found.  Please reinstall application.");
+                Application.Exit();
 			}
-			if (good)
+			S = SR.ReadLine();
+			while (S != null)
 			{
-				S = SR.ReadLine();
-				while (S != null)
+				if (S.Trim().Length > 0)
 				{
-					if (S.Trim().Length > 0)
+					string[] info = S.Split('=');
+					if (info[0].Equals("translation"))
 					{
-						string[] info = S.Split('=');
-						if (info[0].Equals("primarytranslation"))
-						{
-							if (info[1].Equals("esv"))
-							{
-								esvStripMenuItem.Checked = true;
-								nivStripMenuItem.Checked = false;
-								nivStripMenuItem.CheckState = CheckState.Unchecked;
-							}
-							else if (info[1].Equals("niv"))
-							{
-								nivStripMenuItem.Checked = true;
-								esvStripMenuItem.Checked = false;
-								esvStripMenuItem.CheckState = CheckState.Unchecked;
-							}
-						}
-					}
-					S = SR.ReadLine();
+                        foreach (ToolStripMenuItem tsmi in translationToolStripMenuItem.DropDownItems)
+                        {
+                            if (info[1].Equals(tsmi.Name))
+                            {
+                                TranslationChanged(tsmi, null);
+                            }
+                        }
+                    }
+                    else if (info[0].Equals("voice"))
+                    {
+                        foreach (ToolStripMenuItem tsmi in voiceToolStripMenuItem.DropDownItems)
+                        {
+                            if (info[1].Equals(tsmi.Name))
+                            {
+                                VoiceChanged(tsmi, null);
+                            }
+                        }
+                    }
 				}
-				SR.Close();
+				S = SR.ReadLine();
 			}
+			SR.Close();
 		}
 
 		private void WriteToConfig(string s)
@@ -78,15 +120,54 @@ namespace Topical_Memory_System
 			Application.Exit();
 		}
 
+        private void UpdateConfigFile(string key, string value)
+        {
+            //read in file, keeping track of all data, and change the data we need before we write it all back to file
+            string outString = "";
+            StreamReader SR = null;
+            string S;
+            SR = File.OpenText(Constants.ConfigFileLocation);
+            S = SR.ReadLine();
+            bool added = false;
+            while (S != null)
+            {
+                if (S.Trim().Length > 0)
+                {
+                    string[] info = S.Split('=');
+                    if (info[0].Equals(key))
+                    {
+                        outString += key + "=" + value;
+                        added = true;
+                    }
+                    else 
+                    {
+                        outString += S;
+                    }
+                }
+                S = SR.ReadLine();
+                outString += "\r\n";
+            }
+            SR.Close();
+            if (!added)
+            {
+                outString += key + "=" + value + "\r\n";
+            }
+            File.WriteAllText(Constants.ConfigFileLocation, outString);
+        }
+
 		private void TranslationChanged(object sender, EventArgs e)
 		{
 			if (sender is ToolStripMenuItem)
 			{
-				foreach (ToolStripMenuItem item in (((ToolStripMenuItem)sender).GetCurrentParent().Items))
+				foreach (ToolStripMenuItem item in translationToolStripMenuItem.DropDownItems)
 				{
 					if (item == sender)
 					{
 						item.Checked = true;
+                        if (e != null)
+                        {
+                            UpdateConfigFile("translation", item.Name);
+                        }
 					}
 					if ((item != null) && (item != sender))
 					{
@@ -99,29 +180,54 @@ namespace Topical_Memory_System
             {
                 translation = 1;
             }
-			if (mainPanel.Controls[0] is ReviewVerses)
-			{
-				ReviewVerses.ChangeTranslation(translation);
-            }
-            else if (mainPanel.Controls[0] is MatchVerses)
+            if (mainPanel.Controls.Count > 0)
             {
-                MatchVerses.ChangeTranslation(translation);
+                if (mainPanel.Controls[0] is ReviewVerses)
+                {
+                    ReviewVerses.ChangeTranslation(translation);
+                }
+                else if (mainPanel.Controls[0] is MatchVerses)
+                {
+                    MatchVerses.ChangeTranslation(translation);
+                }
             }
 		}
 
-		public static void reviewVerses(object sender)
+        private void VoiceChanged(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem)
+            {
+                foreach (ToolStripMenuItem item in voiceToolStripMenuItem.DropDownItems)
+                {
+                    if (item == sender)
+                    {
+                        item.Checked = true;
+                        if (e != null)
+                        {
+                            UpdateConfigFile("voice", item.Name);
+                        }
+                    }
+                    if ((item != null) && (item != sender))
+                    {
+                        item.Checked = false;
+                    }
+                }
+            }
+        }
+
+		public static void ReviewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
 			mainPanel.Controls.Add(new reviewVersesOptionsPanel("review"));
 		}
 
-        public static void matchVerses(object sender)
+        public static void MatchVersesHandler(object sender)
         {
             mainPanel.Controls.Remove((Control)sender);
             mainPanel.Controls.Add(new MatchVersesOptionPanel());
         }
 
-        public static void matchVerses(object sender, bool verseToReference)
+        public static void MatchVersesHandler(object sender, bool verseToReference)
         {
             mainPanel.Controls.Remove((Control)sender);
             if (verseToReference)
@@ -134,7 +240,7 @@ namespace Topical_Memory_System
             }
         }
 
-		public static void reviewVerses(List<string> packs, object sender)
+		public static void ReviewVersesHandler(List<string> packs, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
             List<Verse> versesToReview = ReadInDesiredVerses(packs);
@@ -147,7 +253,7 @@ namespace Topical_Memory_System
 			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation, topics));
 		}
 
-        public static void matchVerses(List<string> packs, bool verseToReference, object sender)
+        public static void MatchVersesHandler(List<string> packs, bool verseToReference, object sender)
         {
             mainPanel.Controls.Remove((Control)sender);
             List<Verse> versesToReview = ReadInDesiredVerses(packs);
@@ -253,7 +359,7 @@ namespace Topical_Memory_System
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
 
-        public static void viewVerseInContext(Verse v, string translation)
+        public static void ViewVerseInContext(Verse v, string translation)
         {
             //example URL: http://www.blueletterbible.org/Bible.cfm?b=1%20Peter&c=5&v=7&t=NIV#7
             string verse = v.getVerseNumbers().Split(',')[0];
@@ -270,10 +376,27 @@ namespace Topical_Memory_System
             }
         }
 
-        public static void closeVerseInContext(object sender)
+        public static void CloseVerseInContext(object sender)
         {
             mainPanel.Controls.Remove((Control)sender);
             mainPanel.Controls[0].Visible = true;
+        }
+
+        public static string SelectedVoiceName()
+        {
+            string voice = "";
+            bool found = false;
+            int i = 0;
+            while (!found && i < voiceToolStripMenuItem.DropDownItems.Count)
+            {
+                if (((ToolStripMenuItem)voiceToolStripMenuItem.DropDownItems[i]).Checked)
+                {
+                    found = true;
+                    voice = voiceToolStripMenuItem.DropDownItems[i].Name;
+                }
+                i++;
+            }
+            return voice;
         }
 	}
 }

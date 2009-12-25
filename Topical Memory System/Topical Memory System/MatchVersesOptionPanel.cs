@@ -16,14 +16,14 @@ namespace Topical_Memory_System
             InitializeComponent();
         }
 
-        private void matchReferencesToVersesButton_Click(object sender, EventArgs e)
+        private void MatchReferencesToVersesButton_Click(object sender, EventArgs e)
         {
-            MenuExit.matchVerses(this, false);
+            MenuExit.MatchVersesHandler(this, false);
         }
 
-        private void matchVersesToReferencesButton_Click(object sender, EventArgs e)
+        private void MatchVersesToReferencesButton_Click(object sender, EventArgs e)
         {
-            MenuExit.matchVerses(this, true);
+            MenuExit.MatchVersesHandler(this, true);
         }
     }
 }

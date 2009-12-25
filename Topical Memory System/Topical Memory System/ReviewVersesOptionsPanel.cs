@@ -54,7 +54,7 @@ namespace Topical_Memory_System
 			}
 		}
 
-		private void startButton_Click(object sender, EventArgs e)
+		private void StartButton_Click(object sender, EventArgs e)
 		{
 			List<string> packs = new List<string>();
 			if (allPacksCheck.Checked)
@@ -91,15 +91,15 @@ namespace Topical_Memory_System
 			}
             if (caller.Equals("review"))
             {
-                MenuExit.reviewVerses(packs, this);
+                MenuExit.ReviewVersesHandler(packs, this);
             }
             else if (caller.Equals("vr"))
             {
-                MenuExit.matchVerses(packs, true, this);
+                MenuExit.MatchVersesHandler(packs, true, this);
             }
             else if (caller.Equals("rv"))
             {
-                MenuExit.matchVerses(packs, false, this);
+                MenuExit.MatchVersesHandler(packs, false, this);
             }
 		}
 	}

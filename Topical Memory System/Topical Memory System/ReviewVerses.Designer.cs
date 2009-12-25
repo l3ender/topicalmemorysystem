@@ -73,7 +73,7 @@
             this.viewVerseInContextButton.Text = "View in context";
             this.viewVerseInContextButton.UseVisualStyleBackColor = false;
             this.viewVerseInContextButton.Visible = false;
-            this.viewVerseInContextButton.Click += new System.EventHandler(this.viewVerseInContextButton_Click);
+            this.viewVerseInContextButton.Click += new System.EventHandler(this.ViewVerseInContextButton_Click);
             // 
             // frontReference
             // 
@@ -87,9 +87,9 @@
             frontReference.Size = new System.Drawing.Size(137, 17);
             frontReference.TabIndex = 6;
             frontReference.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            frontReference.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            frontReference.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            frontReference.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            frontReference.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            frontReference.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            frontReference.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // hearButton
             // 
@@ -100,7 +100,7 @@
             this.hearButton.TabIndex = 5;
             this.hearButton.Text = "Hear it";
             this.hearButton.UseVisualStyleBackColor = false;
-            this.hearButton.Click += new System.EventHandler(this.hearButton_Click);
+            this.hearButton.Click += new System.EventHandler(this.HearButton_Click);
             // 
             // verseData
             // 
@@ -114,9 +114,9 @@
             verseData.ReadOnly = true;
             verseData.Size = new System.Drawing.Size(290, 115);
             verseData.TabIndex = 4;
-            verseData.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            verseData.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            verseData.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            verseData.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            verseData.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            verseData.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // packInformation
             // 
@@ -167,7 +167,7 @@
             this.flipButton.TabIndex = 1;
             this.flipButton.Text = "Flip";
             this.flipButton.UseVisualStyleBackColor = true;
-            this.flipButton.Click += new System.EventHandler(this.flipButton_Click);
+            this.flipButton.Click += new System.EventHandler(this.FlipButton_Click);
             // 
             // nextVerseButton
             // 
@@ -177,7 +177,7 @@
             this.nextVerseButton.TabIndex = 2;
             this.nextVerseButton.Text = "Next Verse";
             this.nextVerseButton.UseVisualStyleBackColor = true;
-            this.nextVerseButton.Click += new System.EventHandler(this.nextVerseButton_Click);
+            this.nextVerseButton.Click += new System.EventHandler(this.NextVerseButton_Click);
             // 
             // previousVerseButton
             // 
@@ -187,7 +187,7 @@
             this.previousVerseButton.TabIndex = 3;
             this.previousVerseButton.Text = "Previous Verse";
             this.previousVerseButton.UseVisualStyleBackColor = true;
-            this.previousVerseButton.Click += new System.EventHandler(this.previousVerseButton_Click);
+            this.previousVerseButton.Click += new System.EventHandler(this.PreviousVerseButton_Click);
             // 
             // titleLabel
             // 
