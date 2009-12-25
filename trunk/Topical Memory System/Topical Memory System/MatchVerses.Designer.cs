@@ -55,9 +55,9 @@
             toMatchBox.TabIndex = 0;
             toMatchBox.Text = "holder";
             toMatchBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            toMatchBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            toMatchBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            toMatchBox.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            toMatchBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            toMatchBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            toMatchBox.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // match1
             // 
@@ -72,10 +72,10 @@
             match1.Size = new System.Drawing.Size(402, 63);
             match1.TabIndex = 1;
             match1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            match1.Click += new System.EventHandler(this.boxSelected);
-            match1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match1.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            match1.Click += new System.EventHandler(this.BoxSelected);
+            match1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match1.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // match2
             // 
@@ -90,10 +90,10 @@
             match2.Size = new System.Drawing.Size(402, 63);
             match2.TabIndex = 2;
             match2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            match2.Click += new System.EventHandler(this.boxSelected);
-            match2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match2.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            match2.Click += new System.EventHandler(this.BoxSelected);
+            match2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match2.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // match3
             // 
@@ -108,10 +108,10 @@
             match3.Size = new System.Drawing.Size(402, 63);
             match3.TabIndex = 3;
             match3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            match3.Click += new System.EventHandler(this.boxSelected);
-            match3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match3.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            match3.Click += new System.EventHandler(this.BoxSelected);
+            match3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match3.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // match4
             // 
@@ -126,10 +126,10 @@
             match4.Size = new System.Drawing.Size(402, 63);
             match4.TabIndex = 4;
             match4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            match4.Click += new System.EventHandler(this.boxSelected);
-            match4.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match4.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            match4.Click += new System.EventHandler(this.BoxSelected);
+            match4.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match4.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // match5
             // 
@@ -144,10 +144,10 @@
             match5.Size = new System.Drawing.Size(402, 63);
             match5.TabIndex = 5;
             match5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            match5.Click += new System.EventHandler(this.boxSelected);
-            match5.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.unfocus);
-            match5.MouseEnter += new System.EventHandler(this.mainUnfocus);
+            match5.Click += new System.EventHandler(this.BoxSelected);
+            match5.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Unfocus);
+            match5.MouseEnter += new System.EventHandler(this.MainUnfocus);
             // 
             // nextVerseButton
             // 
@@ -157,7 +157,7 @@
             this.nextVerseButton.TabIndex = 6;
             this.nextVerseButton.Text = "Next Verse";
             this.nextVerseButton.UseVisualStyleBackColor = true;
-            this.nextVerseButton.Click += new System.EventHandler(this.nextVerseButton_Click);
+            this.nextVerseButton.Click += new System.EventHandler(this.NextVerseButton_Click);
             // 
             // versesLeftLabel
             // 
@@ -186,7 +186,7 @@
             this.viewStatsButton.Text = "View Stats";
             this.viewStatsButton.UseVisualStyleBackColor = true;
             this.viewStatsButton.Visible = false;
-            this.viewStatsButton.Click += new System.EventHandler(this.viewStatsButton_Click);
+            this.viewStatsButton.Click += new System.EventHandler(this.ViewStatsButton_Click);
             // 
             // restartButton
             // 
@@ -198,7 +198,7 @@
             this.restartButton.Text = "Restart";
             this.restartButton.UseVisualStyleBackColor = true;
             this.restartButton.Visible = false;
-            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            this.restartButton.Click += new System.EventHandler(this.RestartButton_Click);
             // 
             // MatchVerses
             // 

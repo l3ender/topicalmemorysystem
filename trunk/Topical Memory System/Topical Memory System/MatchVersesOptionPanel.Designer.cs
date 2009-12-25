@@ -40,7 +40,7 @@
             this.matchVerseToReferences.TabIndex = 4;
             this.matchVerseToReferences.Text = "Match Verses to References";
             this.matchVerseToReferences.UseVisualStyleBackColor = true;
-            this.matchVerseToReferences.Click += new System.EventHandler(this.matchVersesToReferencesButton_Click);
+            this.matchVerseToReferences.Click += new System.EventHandler(this.MatchVersesToReferencesButton_Click);
             // 
             // matchReferenceToVerseButton
             // 
@@ -50,7 +50,7 @@
             this.matchReferenceToVerseButton.TabIndex = 3;
             this.matchReferenceToVerseButton.Text = "Match References to Verses";
             this.matchReferenceToVerseButton.UseVisualStyleBackColor = true;
-            this.matchReferenceToVerseButton.Click += new System.EventHandler(this.matchReferencesToVersesButton_Click);
+            this.matchReferenceToVerseButton.Click += new System.EventHandler(this.MatchReferencesToVersesButton_Click);
             // 
             // MatchVersesOptionPanel
             // 

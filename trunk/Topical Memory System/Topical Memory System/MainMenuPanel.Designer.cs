@@ -40,7 +40,7 @@
             this.reviewVersesButton.TabIndex = 0;
             this.reviewVersesButton.Text = "Review Verses";
             this.reviewVersesButton.UseVisualStyleBackColor = true;
-            this.reviewVersesButton.Click += new System.EventHandler(this.reviewVersesButton_Click);
+            this.reviewVersesButton.Click += new System.EventHandler(this.ReviewVersesButton_Click);
             // 
             // matchVerseButton
             // 
@@ -50,7 +50,7 @@
             this.matchVerseButton.TabIndex = 1;
             this.matchVerseButton.Text = "Match Verses";
             this.matchVerseButton.UseVisualStyleBackColor = true;
-            this.matchVerseButton.Click += new System.EventHandler(this.matchVersesButton_Click);
+            this.matchVerseButton.Click += new System.EventHandler(this.MatchVersesButton_Click);
             // 
             // MainMenuPanel
             // 

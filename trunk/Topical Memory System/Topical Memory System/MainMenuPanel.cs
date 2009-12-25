@@ -11,19 +11,20 @@ namespace Topical_Memory_System
 {
 	public partial class MainMenuPanel : UserControl
 	{
+
 		public MainMenuPanel()
 		{
 			InitializeComponent();
 		}
 
-		private void reviewVersesButton_Click(object sender, EventArgs e)
+		private void ReviewVersesButton_Click(object sender, EventArgs e)
 		{
-			MenuExit.reviewVerses(this);
+			MenuExit.ReviewVersesHandler(this);
 		}
 
-        private void matchVersesButton_Click(object sender, EventArgs e)
+        private void MatchVersesButton_Click(object sender, EventArgs e)
         {
-            MenuExit.matchVerses(this);
+            MenuExit.MatchVersesHandler(this);
         }
 	}
 }

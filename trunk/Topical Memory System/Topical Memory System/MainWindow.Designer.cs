@@ -133,6 +133,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem translationToolStripMenuItem;
+        private static System.Windows.Forms.ToolStripMenuItem voiceToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem mainMenuStrip;
 		private static System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
 		private static System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
