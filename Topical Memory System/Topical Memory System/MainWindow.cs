@@ -20,7 +20,6 @@ namespace Topical_Memory_System
 		{
 			InitializeComponent();
             FindInstalledVoices();
-			LoadConfigFile();
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
 
@@ -48,7 +47,6 @@ namespace Topical_Memory_System
                     if (i == 0)
                     {
                         stripMenuItem.Checked = true;
-                        UpdateConfigFile("voice", availableVoices[i].Name);
                     }
 
                     stripItems.Add(stripMenuItem);
@@ -65,95 +63,10 @@ namespace Topical_Memory_System
             }
         }
 
-		private void LoadConfigFile()
-		{
-			StreamReader SR = null;
-			string S;
-			try
-			{
-				SR = File.OpenText(Constants.ConfigFileLocation);
-			}
-			catch (System.IO.FileNotFoundException)
-			{
-                MessageBox.Show("Configuration file not found.  Please reinstall application.");
-                Application.Exit();
-			}
-			S = SR.ReadLine();
-			while (S != null)
-			{
-				if (S.Trim().Length > 0)
-				{
-					string[] info = S.Split('=');
-					if (info[0].Equals("translation"))
-					{
-                        foreach (ToolStripMenuItem tsmi in translationToolStripMenuItem.DropDownItems)
-                        {
-                            if (info[1].Equals(tsmi.Name))
-                            {
-                                TranslationChanged(tsmi, null);
-                            }
-                        }
-                    }
-                    else if (info[0].Equals("voice"))
-                    {
-                        foreach (ToolStripMenuItem tsmi in voiceToolStripMenuItem.DropDownItems)
-                        {
-                            if (info[1].Equals(tsmi.Name))
-                            {
-                                VoiceChanged(tsmi, null);
-                            }
-                        }
-                    }
-				}
-				S = SR.ReadLine();
-			}
-			SR.Close();
-		}
-
-		private void WriteToConfig(string s)
-		{
-			File.AppendAllText(Constants.ConfigFileLocation, s);
-		}
-
 		private void MenuExitClick(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
-
-        private void UpdateConfigFile(string key, string value)
-        {
-            //read in file, keeping track of all data, and change the data we need before we write it all back to file
-            string outString = "";
-            StreamReader SR = null;
-            string S;
-            SR = File.OpenText(Constants.ConfigFileLocation);
-            S = SR.ReadLine();
-            bool added = false;
-            while (S != null)
-            {
-                if (S.Trim().Length > 0)
-                {
-                    string[] info = S.Split('=');
-                    if (info[0].Equals(key))
-                    {
-                        outString += key + "=" + value;
-                        added = true;
-                    }
-                    else 
-                    {
-                        outString += S;
-                    }
-                }
-                S = SR.ReadLine();
-                outString += "\r\n";
-            }
-            SR.Close();
-            if (!added)
-            {
-                outString += key + "=" + value + "\r\n";
-            }
-            File.WriteAllText(Constants.ConfigFileLocation, outString);
-        }
 
 		private void TranslationChanged(object sender, EventArgs e)
 		{
@@ -164,10 +77,6 @@ namespace Topical_Memory_System
 					if (item == sender)
 					{
 						item.Checked = true;
-                        if (e != null)
-                        {
-                            UpdateConfigFile("translation", item.Name);
-                        }
 					}
 					if ((item != null) && (item != sender))
 					{
@@ -202,10 +111,6 @@ namespace Topical_Memory_System
                     if (item == sender)
                     {
                         item.Checked = true;
-                        if (e != null)
-                        {
-                            UpdateConfigFile("voice", item.Name);
-                        }
                     }
                     if ((item != null) && (item != sender))
                     {
