@@ -14,6 +14,7 @@ namespace Topical_Memory_System
         public ViewInContextPanel(string url)
         {
             InitializeComponent();
+            MenuExit.loadingBox.Visible = true;
             webBrowser.Navigate(url);
         }
 
@@ -22,9 +23,12 @@ namespace Topical_Memory_System
             MenuExit.CloseVerseInContext(this);
         }
 
-        private void FinishedLoading(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
         {
-            
+            if (e.CurrentProgress.Equals(e.MaximumProgress))
+            {
+                MenuExit.loadingBox.Visible = false;
+            }
         }
     }
 }

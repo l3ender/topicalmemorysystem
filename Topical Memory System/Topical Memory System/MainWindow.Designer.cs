@@ -37,13 +37,15 @@ namespace Topical_Memory_System
             this.esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nivStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            blueLetterBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueLetterBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             bibleGatewayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             esvOnlineStudyBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            mainPanel = new System.Windows.Forms.Panel();
             openBibleInApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openBibleInWebBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mainPanel = new System.Windows.Forms.Panel();
+            loadingBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(loadingBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -111,7 +113,7 @@ namespace Topical_Memory_System
             // onlineBibleToolStripMenuItem
             // 
             this.onlineBibleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            blueLetterBibleToolStripMenuItem,
+            this.blueLetterBibleToolStripMenuItem,
             bibleGatewayToolStripMenuItem,
             esvOnlineStudyBibleToolStripMenuItem,
             new ToolStripSeparator(),
@@ -123,13 +125,13 @@ namespace Topical_Memory_System
             // 
             // blueLetterBibleToolStripMenuItem
             // 
-            blueLetterBibleToolStripMenuItem.Checked = true;
-            blueLetterBibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            blueLetterBibleToolStripMenuItem.Name = "blueLetterBibleToolStripMenuItem";
-            blueLetterBibleToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            blueLetterBibleToolStripMenuItem.Tag = "one";
-            blueLetterBibleToolStripMenuItem.Text = "Blue Letter Bible";
-            blueLetterBibleToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
+            this.blueLetterBibleToolStripMenuItem.Checked = true;
+            this.blueLetterBibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.blueLetterBibleToolStripMenuItem.Name = "blueLetterBibleToolStripMenuItem";
+            this.blueLetterBibleToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.blueLetterBibleToolStripMenuItem.Tag = "one";
+            this.blueLetterBibleToolStripMenuItem.Text = "Blue Letter Bible";
+            this.blueLetterBibleToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
             // 
             // bibleGatewayToolStripMenuItem
             // 
@@ -146,13 +148,6 @@ namespace Topical_Memory_System
             esvOnlineStudyBibleToolStripMenuItem.Tag = "one";
             esvOnlineStudyBibleToolStripMenuItem.Text = "ESV Online Study Bible";
             esvOnlineStudyBibleToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
-            // 
-            // mainPanel
-            // 
-            mainPanel.Location = new System.Drawing.Point(12, 27);
-            mainPanel.Name = "mainPanel";
-            mainPanel.Size = new System.Drawing.Size(637, 411);
-            mainPanel.TabIndex = 1;
             // 
             // openBibleInApplicationToolStripMenuItem
             // 
@@ -172,11 +167,30 @@ namespace Topical_Memory_System
             this.openBibleInWebBrowserToolStripMenuItem.Text = "Open bible in web browser";
             this.openBibleInWebBrowserToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
             // 
+            // mainPanel
+            // 
+            mainPanel.Location = new System.Drawing.Point(12, 27);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new System.Drawing.Size(637, 411);
+            mainPanel.TabIndex = 1;
+            // 
+            // loadingBox
+            // 
+            loadingBox.Image = global::Topical_Memory_System.Properties.Resources.loading;
+            loadingBox.InitialImage = global::Topical_Memory_System.Properties.Resources.loading;
+            loadingBox.Location = new System.Drawing.Point(630, 4);
+            loadingBox.Name = "loadingBox";
+            loadingBox.Size = new System.Drawing.Size(18, 18);
+            loadingBox.TabIndex = 2;
+            loadingBox.TabStop = false;
+            loadingBox.Visible = false;
+            // 
             // MenuExit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 450);
+            this.Controls.Add(loadingBox);
             this.Controls.Add(mainPanel);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -187,6 +201,7 @@ namespace Topical_Memory_System
             this.Text = "TMS Assistant";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(loadingBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,11 +217,12 @@ namespace Topical_Memory_System
         private System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem onlineBibleToolStripMenuItem;
-        private static System.Windows.Forms.ToolStripMenuItem blueLetterBibleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openBibleInWebBrowserToolStripMenuItem;
+        public static System.Windows.Forms.PictureBox loadingBox;
+        private System.Windows.Forms.ToolStripMenuItem blueLetterBibleToolStripMenuItem;
         private static System.Windows.Forms.ToolStripMenuItem bibleGatewayToolStripMenuItem;
         private static System.Windows.Forms.ToolStripMenuItem esvOnlineStudyBibleToolStripMenuItem;
         private static System.Windows.Forms.ToolStripMenuItem openBibleInApplicationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openBibleInWebBrowserToolStripMenuItem;
         private static System.Windows.Forms.ToolStripMenuItem translationToolStripMenuItem;
         private static Panel mainPanel;
     }
