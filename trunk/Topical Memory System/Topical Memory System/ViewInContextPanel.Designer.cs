@@ -50,6 +50,7 @@
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.Size = new System.Drawing.Size(637, 382);
             this.webBrowser.TabIndex = 0;
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.FinishedLoading);
             // 
             // closeButton
             // 

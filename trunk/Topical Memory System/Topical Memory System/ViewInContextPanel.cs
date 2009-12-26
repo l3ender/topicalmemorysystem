@@ -21,5 +21,10 @@ namespace Topical_Memory_System
         {
             MenuExit.CloseVerseInContext(this);
         }
+
+        private void FinishedLoading(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            
+        }
     }
 }
