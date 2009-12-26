@@ -123,7 +123,7 @@ namespace Topical_Memory_System
 		public static void ReviewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new reviewVersesOptionsPanel("review"));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review"));
 		}
 
         public static void MatchVersesHandler(object sender)
@@ -137,11 +137,11 @@ namespace Topical_Memory_System
             mainPanel.Controls.Remove((Control)sender);
             if (verseToReference)
             {
-                mainPanel.Controls.Add(new reviewVersesOptionsPanel("vr"));
+                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr"));
             }
             else
             {
-                mainPanel.Controls.Add(new reviewVersesOptionsPanel("rv"));
+                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv"));
             }
         }
 

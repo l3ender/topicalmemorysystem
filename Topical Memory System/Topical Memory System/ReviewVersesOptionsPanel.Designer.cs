@@ -1,6 +1,6 @@
 ﻿namespace Topical_Memory_System
 {
-	partial class reviewVersesOptionsPanel
+	partial class ReviewVersesOptionsPanel
 	{
 		/// <summary> 
 		/// Required designer variable.

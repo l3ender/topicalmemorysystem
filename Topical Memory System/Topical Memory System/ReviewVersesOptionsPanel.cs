@@ -10,11 +10,11 @@ using System.Diagnostics;
 
 namespace Topical_Memory_System
 {
-	public partial class reviewVersesOptionsPanel : UserControl
+	public partial class ReviewVersesOptionsPanel : UserControl
 	{
         private string caller;
 
-        public reviewVersesOptionsPanel(string incomingCaller)
+        public ReviewVersesOptionsPanel(string incomingCaller)
 		{
 			InitializeComponent();
             this.caller = incomingCaller;
