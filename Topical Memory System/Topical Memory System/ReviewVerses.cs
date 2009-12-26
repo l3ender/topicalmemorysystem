@@ -279,7 +279,7 @@ namespace Topical_Memory_System
 
         private void ViewVerseInContextButton_Click(object sender, EventArgs e)
         {
-            MenuExit.ViewVerseInContext(verses[currentVerseIndex], translation.Text);
+            MenuExit.ViewVerseInContext(verses[currentVerseIndex], MenuExit.SelectedTranslationName());
         }
 
         private void MainUnfocus(object sender, EventArgs e)

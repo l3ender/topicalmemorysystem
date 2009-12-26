@@ -149,11 +149,7 @@ namespace Topical_Memory_System
 		{
 			mainPanel.Controls.Remove((Control)sender);
             List<Verse> versesToReview = ReadInDesiredVerses(packs);
-			string translation = "NIV";
-			if (esvStripMenuItem.Checked)
-			{
-				translation = "ESV";
-			}
+            string translation = SelectedTranslationName();
 			Hashtable topics = ReadInTopics();
 			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation, topics));
 		}
@@ -162,11 +158,7 @@ namespace Topical_Memory_System
         {
             mainPanel.Controls.Remove((Control)sender);
             List<Verse> versesToReview = ReadInDesiredVerses(packs);
-            string translation = "NIV";
-            if (esvStripMenuItem.Checked)
-            {
-                translation = "ESV";
-            }
+            string translation = SelectedTranslationName();
             Hashtable topics = ReadInTopics();
 
             mainPanel.Controls.Add(new MatchVerses(versesToReview, translation, topics, verseToReference));
@@ -266,18 +258,41 @@ namespace Topical_Memory_System
 
         public static void ViewVerseInContext(Verse v, string translation)
         {
-            //example URL: http://www.blueletterbible.org/Bible.cfm?b=1%20Peter&c=5&v=7&t=NIV#7
             string verse = v.getVerseNumbers().Split(',')[0];
-            string url = "http://www.blueletterbible.org/Bible.cfm?b=" + v.getBook() + "&c=" + v.getChapter().ToString() +
-                "&v=" + verse + "&t=" + translation + "#" + verse;
-            mainPanel.Controls.Add(new ViewInContextPanel(url));
-            //disable other controls so the one we just added is visible
-            foreach (Control c in mainPanel.Controls)
+            string url = "";
+            if (bibleGatewayToolStripMenuItem.Checked)
             {
-                if (!(c is ViewInContextPanel))
+                //URL: http://www.biblegateway.com/passage/?search=1 peter 3&version=NIV
+                url = "http://www.biblegateway.com/passage/?search=" + v.getBook() + " " + v.getChapter().ToString() +
+                    "&version=" + translation;
+            }
+            else if (esvOnlineStudyBibleToolStripMenuItem.Checked)
+            {
+                //URL: http://www.esvstudybible.org/search?q=1+peter+3
+                url = "http://www.esvstudybible.org/search?q=" + v.getBook().Replace(" ", "+") + " " + v.getChapter();
+            }
+            else
+            {
+                //URL: http://www.blueletterbible.org/Bible.cfm?b=1 Peter&c=5&v=7&t=NIV#7
+                url = "http://www.blueletterbible.org/Bible.cfm?b=" + v.getBook() + "&c=" + v.getChapter().ToString() +
+                "&v=" + verse + "&t=" + translation + "#" + verse;
+            }
+            bool openInApplication = openBibleInApplicationToolStripMenuItem.Checked;
+            if (openInApplication)
+            {
+                mainPanel.Controls.Add(new ViewInContextPanel(url));
+                //disable other controls so the one we just added is visible
+                foreach (Control c in mainPanel.Controls)
                 {
-                    c.Visible = false;
+                    if (!(c is ViewInContextPanel))
+                    {
+                        c.Visible = false;
+                    }
                 }
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(url);
             }
         }
 
@@ -285,6 +300,23 @@ namespace Topical_Memory_System
         {
             mainPanel.Controls.Remove((Control)sender);
             mainPanel.Controls[0].Visible = true;
+        }
+
+        public static string SelectedTranslationName()
+        {
+            string translation = "";
+            bool found = false;
+            int i = 0;
+            while (!found && i < translationToolStripMenuItem.DropDownItems.Count)
+            {
+                if (((ToolStripMenuItem)translationToolStripMenuItem.DropDownItems[i]).Checked)
+                {
+                    found = true;
+                    translation = translationToolStripMenuItem.DropDownItems[i].Tag.ToString();
+                }
+                i++;
+            }
+            return translation;
         }
 
         public static string SelectedVoiceName()
@@ -302,6 +334,37 @@ namespace Topical_Memory_System
                 i++;
             }
             return voice;
+        }
+
+        private void BibleSelected(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem)
+            {
+                int i = 0;
+                while (i < onlineBibleToolStripMenuItem.DropDownItems.Count)
+                {
+                    ToolStripMenuItem item = null;
+                    try
+                    {
+                        item = (ToolStripMenuItem)onlineBibleToolStripMenuItem.DropDownItems[i];
+                    } catch (InvalidCastException exception)
+                    {
+                        exception.ToString();
+                    }
+                    if (item != null && item.Tag.ToString().Equals(((ToolStripMenuItem)sender).Tag.ToString()))
+                    {
+                        if (item == sender)
+                        {
+                            item.Checked = true;
+                        }
+                        if ((item != null) && (item != sender))
+                        {
+                            item.Checked = false;
+                        }
+                    }
+                    i++;
+                }
+            }
         }
 	}
 }
