@@ -60,6 +60,13 @@ namespace Topical_Memory_System.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap bible {
+            get {
+                object obj = ResourceManager.GetObject("bible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap loading {
             get {
                 object obj = ResourceManager.GetObject("loading", resourceCulture);

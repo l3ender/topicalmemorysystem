@@ -213,6 +213,7 @@ namespace Topical_Memory_System
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private static System.Windows.Forms.ToolStripMenuItem voiceToolStripMenuItem;
+        private static System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
