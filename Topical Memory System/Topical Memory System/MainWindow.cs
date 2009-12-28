@@ -20,6 +20,7 @@ namespace Topical_Memory_System
 		{
 			InitializeComponent();
             FindInstalledVoices();
+            AddAboutStrip();    //add this last manually so it is the right-most strip
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
 
@@ -61,6 +62,30 @@ namespace Topical_Memory_System
                 voiceToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
                 voiceToolStripMenuItem.Text = "Voice";
             }
+        }
+
+        private void AddAboutStrip()
+        {
+            aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.Items.Add(aboutToolStripMenuItem);
+
+            ToolStripMenuItem infoStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            infoStripMenuItem.Name = "infoStripMenuItem";
+            infoStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            infoStripMenuItem.Text = "Project Homepage";
+            infoStripMenuItem.Click += new System.EventHandler(this.AboutInfo);
+            aboutToolStripMenuItem.DropDownItems.Add(infoStripMenuItem);
+
+            ToolStripMenuItem contactStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            contactStripMenuItem.Name = "contactStripMenuItem";
+            contactStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            contactStripMenuItem.Text = "About TMS Assistant";
+            contactStripMenuItem.Click += new System.EventHandler(this.ContactInfo);
+            aboutToolStripMenuItem.DropDownItems.Add(contactStripMenuItem);
+
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            aboutToolStripMenuItem.Text = "Help";
         }
 
 		private void MenuExitClick(object sender, EventArgs e)
@@ -118,6 +143,17 @@ namespace Topical_Memory_System
                     }
                 }
             }
+        }
+
+        private void AboutInfo(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://code.google.com/p/topicalmemorysystem/");
+        }
+
+        private void ContactInfo(object sender, EventArgs e)
+        {
+            AboutApplication ab = new AboutApplication();
+            ab.Show();
         }
 
 		public static void ReviewVersesHandler(object sender)
