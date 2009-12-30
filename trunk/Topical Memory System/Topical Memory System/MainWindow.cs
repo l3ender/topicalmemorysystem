@@ -16,11 +16,14 @@ namespace Topical_Memory_System
 {
 	public partial class MenuExit : Form
 	{
+        private static Hashtable CustomVerses;
+
 		public MenuExit()
 		{
 			InitializeComponent();
             FindInstalledVoices();
             AddAboutStrip();    //add this last manually so it is the right-most strip
+            CustomVerses = LoadCustomVerses();
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
 
@@ -86,6 +89,49 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             aboutToolStripMenuItem.Text = "Help";
+        }
+
+        private Hashtable LoadCustomVerses()
+        {   //key (string) - name of file~custom verse title
+                //ex - customVerses1~Psalms
+            //value (list) - list of verses
+            Hashtable hash = new Hashtable();
+
+            for (int i = 0; i < Constants.CustomVerseLocations.Length; i++)
+            {
+                StreamReader SR;
+                string S;
+                SR = File.OpenText(Constants.CustomVerseLocations[i]);
+                S = SR.ReadLine();
+                int index = 0;
+                string title = Constants.CustomVerseLocations[i].Replace(".txt", "");
+                List<Verse> verses = new List<Verse>();
+                while (S != null)
+                {
+                    if (S.Trim().Length > 0)
+                    {
+                        if (index == 0)
+                        {   //title line
+                            title = title + "~" + S;
+                        }
+                        else
+                        {
+                            string[] info = S.Split('/');
+                            Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
+                                info[2].Split(' ')[0], Convert.ToInt32(info[2].Split(' ')[1]), info[3]);
+                            verses.Add(v);
+                        }
+                    }
+                    S = SR.ReadLine();
+                    index++;
+                }
+                SR.Close();
+                if (verses.Count > 0)
+                {
+                    hash.Add(title, verses);
+                }
+            }
+            return hash;
         }
 
 		private void MenuExitClick(object sender, EventArgs e)
@@ -159,7 +205,7 @@ namespace Topical_Memory_System
 		public static void ReviewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review"));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", CustomVerses));
 		}
 
         public static void MatchVersesHandler(object sender)
@@ -173,11 +219,11 @@ namespace Topical_Memory_System
             mainPanel.Controls.Remove((Control)sender);
             if (verseToReference)
             {
-                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr"));
+                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", CustomVerses));
             }
             else
             {
-                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv"));
+                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", CustomVerses));
             }
         }
 
@@ -215,6 +261,17 @@ namespace Topical_Memory_System
                     if (packs.Contains(v.getPackLetter()))
                     {
                         versesToReview.Add(v);
+                    }
+                }
+                foreach (DictionaryEntry obj in CustomVerses)
+                {
+                    if (packs.Contains(((string)obj.Key).Split('~')[0]))
+                    {
+                        List<Verse> verses = ((List<Verse>)obj.Value);
+                        foreach (Verse v in verses)
+                        {
+                            versesToReview.Add(v);
+                        }
                     }
                 }
             }
@@ -401,6 +458,17 @@ namespace Topical_Memory_System
                     i++;
                 }
             }
+        }
+
+        private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddCustomVerses obj = new AddCustomVerses(CustomVerses);
+            obj.Show();
+        }
+
+        private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("test");
         }
 	}
 }

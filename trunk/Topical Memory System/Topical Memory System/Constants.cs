@@ -7,9 +7,14 @@ namespace Topical_Memory_System
 {
 	static class Constants
 	{
-		public const string TmsTopicsFileLocation = "tmsTopics.txt";
-		public const string NivFileLocation = "tmsVerses-NIV.txt";
-		public const string EsvFileLocation = "tmsVerses-ESV.txt";
-		public const string TAB = "\t";
+		public static string TmsTopicsFileLocation = "tmsTopics.txt";
+        public static string NivFileLocation = "tmsVerses-NIV.txt";
+        public static string EsvFileLocation = "tmsVerses-ESV.txt";
+        public static string TAB = "\t";
+        public static string[] CustomVerseLocations = {"customVerses1.txt", "customVerses2.txt", "customVerses3.txt",
+                                                      "customVerses4.txt", "customVerses5.txt"};
+        public static int MinimumAllowedForMatching = 12;
+        public static int MaximumCharactersForCustomGroupName = 20;
+        public static string FileDelimiter = "/";
 	}
 }

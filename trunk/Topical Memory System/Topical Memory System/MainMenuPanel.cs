@@ -6,13 +6,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Topical_Memory_System
 {
 	public partial class MainMenuPanel : UserControl
 	{
 
-		public MainMenuPanel()
+        public MainMenuPanel()
 		{
 			InitializeComponent();
 		}
