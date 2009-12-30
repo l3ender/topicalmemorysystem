@@ -7,26 +7,73 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Collections;
 
 namespace Topical_Memory_System
 {
 	public partial class ReviewVersesOptionsPanel : UserControl
 	{
         private string caller;
+        private Hashtable CustomVerses;
 
-        public ReviewVersesOptionsPanel(string incomingCaller)
+        public ReviewVersesOptionsPanel(string incomingCaller, Hashtable IncomingCustomVerses)
 		{
 			InitializeComponent();
+            this.CustomVerses = IncomingCustomVerses;
+            List<CheckBox> checks = GetOrderedCheckBoxes(CustomVerses.Count);
+            foreach (DictionaryEntry obj in CustomVerses)
+            {
+                CheckBox c = checks[0];
+                checks.RemoveAt(0);
+                c.Visible = true;
+                c.Text = ((string)obj.Key).Split('~')[1];
+            }
             this.caller = incomingCaller;
             allPacksCheck.Checked = true;
 		}
+
+        private List<CheckBox> GetOrderedCheckBoxes(int numChecks)
+        {
+            List<CheckBox> checks = new List<CheckBox>(numChecks);
+            if (numChecks == 1)
+            {
+                checks.Add(custom3Check);
+            }
+            else if (numChecks == 2)
+            {
+                checks.Add(custom1Check);
+                checks.Add(custom2Check);
+            }
+            else if (numChecks == 3)
+            {
+                checks.Add(custom1Check);
+                checks.Add(custom2Check);
+                checks.Add(custom3Check);
+            }
+            else if (numChecks == 4)
+            {
+                checks.Add(custom1Check);
+                checks.Add(custom2Check);
+                checks.Add(custom4Check);
+                checks.Add(custom5Check);
+            }
+            else if (numChecks == 5)
+            {
+                checks.Add(custom1Check);
+                checks.Add(custom2Check);
+                checks.Add(custom3Check);
+                checks.Add(custom4Check);
+                checks.Add(custom5Check);
+            }
+            return checks;
+        }
 
 		private void PaintMethod(object sender, PaintEventArgs e)
 		{
 			Pen myPen;
 			myPen = new Pen(Color.Black, 1);
 			Graphics formGraphics = this.CreateGraphics();
-			formGraphics.DrawRectangle(myPen, 185, 25, 250, 300);
+			formGraphics.DrawRectangle(myPen, 155, 15, 337, 335);
 			myPen.Dispose();
 			formGraphics.Dispose();
 		}
@@ -43,6 +90,11 @@ namespace Topical_Memory_System
 					cPackCheck.Checked = false;
 					dPackCheck.Checked = false;
 					ePackCheck.Checked = false;
+                    custom1Check.Checked = false;
+                    custom2Check.Checked = false;
+                    custom3Check.Checked = false;
+                    custom4Check.Checked = false;
+                    custom5Check.Checked = false;
 				}
 			}
 			else
@@ -52,7 +104,94 @@ namespace Topical_Memory_System
 					allPacksCheck.Checked = false;
 				}
 			}
+            if (caller.Equals("vr") || caller.Equals("rv"))
+            {
+                Total();
+            }
 		}
+
+        private void Total()
+        {
+            int total = 0;
+            foreach (DictionaryEntry obj in CustomVerses)
+            {
+                if (((string)obj.Key).Contains("customVerses1"))
+                {
+                    if (custom1Check.Checked)
+                    {
+                        total += (((List<Verse>)obj.Value).Count);
+                    }
+                }
+                else if (((string)obj.Key).Contains("customVerses2"))
+                {
+                    if (custom2Check.Checked)
+                    {
+                        total += (((List<Verse>)obj.Value).Count);
+                    }
+                }
+                else if (((string)obj.Key).Contains("customVerses3"))
+                {
+                    if (custom3Check.Checked)
+                    {
+                        total += (((List<Verse>)obj.Value).Count);
+                    }
+                }
+                else if (((string)obj.Key).Contains("customVerses4"))
+                {
+                    if (custom4Check.Checked)
+                    {
+                        total += (((List<Verse>)obj.Value).Count);
+                    }
+                }
+                else if (((string)obj.Key).Contains("customVerses5"))
+                {
+                    if (custom5Check.Checked)
+                    {
+                        total += (((List<Verse>)obj.Value).Count);
+                    }
+                }
+            }
+            if (allPacksCheck.Checked)
+            {
+                total += 60;
+            }
+            else
+            {
+                if (aPackCheck.Checked)
+                {
+                    total += 12;
+                }
+                if (bPackCheck.Checked)
+                {
+                    total += 12;
+                }
+                if (cPackCheck.Checked)
+                {
+                    total += 12;
+                }
+                if (dPackCheck.Checked)
+                {
+                    total += 12;
+                }
+                if (ePackCheck.Checked)
+                {
+                    total += 12;
+                }
+            }
+
+            if (total < Constants.MinimumAllowedForMatching)
+            {
+                errorLabel.Text = "Need at least " + Constants.MinimumAllowedForMatching.ToString() + 
+                    " verses for matching.  You have selected " + total.ToString() + ".";
+                errorLabel.Visible = true;
+                startButton.Enabled = false;
+            }
+            else
+            {
+                errorLabel.Visible = false;
+                startButton.Enabled = true;
+            }
+        }
 
 		private void StartButton_Click(object sender, EventArgs e)
 		{
@@ -83,6 +222,26 @@ namespace Topical_Memory_System
 				{
 					packs.Add("E");
 				}
+                if (custom1Check.Checked)
+                {
+                    packs.Add("customVerses1");
+                }
+                if (custom2Check.Checked)
+                {
+                    packs.Add("customVerses2");
+                }
+                if (custom3Check.Checked)
+                {
+                    packs.Add("customVerses3");
+                }
+                if (custom4Check.Checked)
+                {
+                    packs.Add("customVerses4");
+                }
+                if (custom5Check.Checked)
+                {
+                    packs.Add("customVerses5");
+                }
 			}
 			//defaults to all
 			if (packs.Count() == 0)

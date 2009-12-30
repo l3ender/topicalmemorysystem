@@ -24,6 +24,10 @@ namespace Topical_Memory_System
 		public ReviewVerses(List<Verse> incomingVerses, string incomingTranslation, Hashtable incomingTopics)
 		{
 			InitializeComponent();
+            if (incomingVerses.Count == 1)
+            {
+                nextVerseButton.Enabled = false;
+            }
 			this.translationText = incomingTranslation;
 			topics = incomingTopics;
 			frontOfCard = true;
