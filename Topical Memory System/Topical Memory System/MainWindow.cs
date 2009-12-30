@@ -468,7 +468,8 @@ namespace Topical_Memory_System
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("test");
+            EditCustomVerses obj = new EditCustomVerses(CustomVerses);
+            obj.Show();
         }
 	}
 }

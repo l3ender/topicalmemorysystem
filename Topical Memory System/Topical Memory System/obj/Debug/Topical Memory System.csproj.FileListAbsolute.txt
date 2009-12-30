@@ -33,3 +33,4 @@ C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System
 C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ViewInContextPanel.resources
 C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AboutApplication.resources
 C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AddCustomVerses.resources
+C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.EditCustomVerses.resources
