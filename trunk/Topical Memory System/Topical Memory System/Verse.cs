@@ -11,21 +11,21 @@ namespace Topical_Memory_System
 		private string book;
 		private int chapter;
 		private string verseNumbers;	//can be multiple verses
-		private string packLetter;
-		private int packNumber;
+        private string packInformation; //like "A-1" or "Meditation Verses"
 		private string nivVerseData;
 		private string esvVerseData;
-		private int translation;	//0 == niv, 1 == esv
+		private string translation;     //ESV, NIV, etc
+        private bool isTMSVerse;        //only TMS verses have pack numbers, etc
 
-		public Verse(string book, int chapter, string verseNumbers, string packLetter, int packNumber, string nivVerseData)
+		public Verse(string book, int chapter, string verseNumbers, string packInformation, string nivVerseData, bool isTMS)
 		{
-			this.translation = 0;
+			this.translation = "NIV";
 			this.book = book;
 			this.chapter = chapter;
 			this.verseNumbers = verseNumbers;
-			this.packLetter = packLetter;
-			this.packNumber = packNumber;
+            this.packInformation = packInformation;
 			this.nivVerseData = nivVerseData;
+            this.isTMSVerse = isTMS;
 		}
 
 		public override int GetHashCode()
@@ -59,38 +59,35 @@ namespace Topical_Memory_System
 		{
 			return getBook() + " " + getChapter().ToString() + ":" + getVerseNumbers().ToString();
 		}
-		public string getPackLetter()
+		public string getPackInformation()
 		{
-			return packLetter;
-		}
-		public int getPackNumber()
-		{
-			return packNumber;
+            return packInformation;
 		}
 		public string getTranslation()
 		{
-			if (translation == 1)
-			{
-				return "ESV";
-			}
-			else
-			{
-				return "NIV";
-			}
+            return translation;
 		}
-		public void setTranslation(int translation)
+		public void setTranslation(string translation)
 		{
 			this.translation = translation;
 		}
 		public string getVerseData()
 		{
-			if (translation == 1)
-			{
-				return getEsvVerseData();
-			} else
-			{
-				return getNivVerseData();
-			}
+            if (isTMSVerse)
+            {
+                if (translation.Equals("ESV"))
+                {
+                    return getEsvVerseData();
+                }
+                else
+                {
+                    return getNivVerseData();
+                }
+            }
+            else
+            {
+                return getNivVerseData();
+            }
 		}
 		public string getNivVerseData()
 		{
@@ -104,6 +101,10 @@ namespace Topical_Memory_System
 		{
 			return esvVerseData;
 		}
+        public bool isTmsVerse()
+        {
+            return isTMSVerse;
+        }
 	}
 
 

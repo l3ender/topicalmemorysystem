@@ -39,10 +39,9 @@ namespace Topical_Memory_System
             {
                 if (groupNames.Text.Equals(((string)obj.Key).Split('~')[1]))
                 {
-                    //2 Corinthians/5:17/A 1/Therefore, if anyone is in Christ, he is a new creation.
+                    //2 Corinthians/5:17/Therefore, if anyone is in Christ, he is a new creation.
                     File.AppendAllText(((string)obj.Key).Split('~')[0] + ".txt", "\r\n" + bookBox.Text +
-                        Constants.FileDelimiter + referenceBox.Text + Constants.FileDelimiter +
-                        "Custom 1" + Constants.FileDelimiter + verseDataBox.Text);
+                        Constants.FileDelimiter + referenceBox.Text + Constants.FileDelimiter + verseDataBox.Text);
                     break;
                 }
             }

@@ -17,6 +17,7 @@ namespace Topical_Memory_System
 	public partial class MenuExit : Form
 	{
         private static Hashtable CustomVerses;
+        private static List<Verse> allVerses;
 
 		public MenuExit()
 		{
@@ -91,7 +92,7 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem.Text = "Help";
         }
 
-        private Hashtable LoadCustomVerses()
+        public static Hashtable LoadCustomVerses()
         {   //key (string) - name of file~custom verse title
                 //ex - customVerses1~Psalms
             //value (list) - list of verses
@@ -117,8 +118,9 @@ namespace Topical_Memory_System
                         else
                         {
                             string[] info = S.Split('/');
+                            //2 Corinthians/5:17/Therefore, if anyone is in Christ, he is a new creation
                             Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
-                                info[2].Split(' ')[0], Convert.ToInt32(info[2].Split(' ')[1]), info[3]);
+                                title.Split('~')[1], info[2], false);
                             verses.Add(v);
                         }
                     }
@@ -131,6 +133,7 @@ namespace Topical_Memory_System
                     hash.Add(title, verses);
                 }
             }
+            CustomVerses = hash;
             return hash;
         }
 
@@ -155,20 +158,15 @@ namespace Topical_Memory_System
 					}
 				}
 			}
-            int translation = 0;
-            if (esvStripMenuItem.Checked)
-            {
-                translation = 1;
-            }
             if (mainPanel.Controls.Count > 0)
             {
                 if (mainPanel.Controls[0] is ReviewVerses)
                 {
-                    ReviewVerses.ChangeTranslation(translation);
+                    ReviewVerses.ChangeTranslation(SelectedTranslationName());
                 }
                 else if (mainPanel.Controls[0] is MatchVerses)
                 {
-                    MatchVerses.ChangeTranslation(translation);
+                    MatchVerses.ChangeTranslation(SelectedTranslationName());
                 }
             }
 		}
@@ -243,12 +241,12 @@ namespace Topical_Memory_System
             string translation = SelectedTranslationName();
             Hashtable topics = ReadInTopics();
 
-            mainPanel.Controls.Add(new MatchVerses(versesToReview, translation, topics, verseToReference));
+            mainPanel.Controls.Add(new MatchVerses(versesToReview, translation, topics, verseToReference, allVerses, CustomVerses));
         }
 
         private static List<Verse> ReadInDesiredVerses(List<string> packs)
         {
-            List<Verse> allVerses = ReadInVerses();
+            allVerses = ReadInVerses();
             List<Verse> versesToReview = new List<Verse>();
             if (packs.Contains("all"))
             {
@@ -258,7 +256,7 @@ namespace Topical_Memory_System
             {
                 foreach (Verse v in allVerses)
                 {
-                    if (packs.Contains(v.getPackLetter()))
+                    if (packs.Contains(v.getPackInformation().Split('-')[0]) && !versesToReview.Contains(v))
                     {
                         versesToReview.Add(v);
                     }
@@ -270,7 +268,10 @@ namespace Topical_Memory_System
                         List<Verse> verses = ((List<Verse>)obj.Value);
                         foreach (Verse v in verses)
                         {
-                            versesToReview.Add(v);
+                            if (!versesToReview.Contains(v))
+                            {
+                                versesToReview.Add(v);
+                            }
                         }
                     }
                 }
@@ -291,7 +292,7 @@ namespace Topical_Memory_System
 				{
 					string[] info = S.Split('/');
 					Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
-						info[2].Split(' ')[0], Convert.ToInt32(info[2].Split(' ')[1]), info[3]);
+						info[2].Replace(" ", "-"), info[3], true);
 					allVerses.Add(v);
 				}
 				S = SR.ReadLine();

@@ -12,9 +12,10 @@ namespace Topical_Memory_System
 {
     public partial class MatchVerses : UserControl
     {
-        private static List<Verse> undeletableAllVerses;
-        private static List<Verse> allVerses;
-        private static List<Verse> verses;
+        private static List<Verse> undeletableAllVerses;    //the ones we need to match - kept for multiple rounds
+        private static List<Verse> allVerses;               //the ones we need to match
+        private static List<Verse> verses;                  //the ones we match against
+        private static List<Verse> undeletableVerses;
 		private string translationText;
 		private static Hashtable topics;
         private static bool verseToReference;
@@ -30,7 +31,8 @@ namespace Topical_Memory_System
         private int versesLeft;
         private int incorrectAnswersForRound;
 
-        public MatchVerses(List<Verse> incomingVerses, string incomingTranslation, Hashtable incomingTopics, bool incomingVerseToReference)
+        public MatchVerses(List<Verse> incomingVerses, string incomingTranslation, Hashtable incomingTopics, 
+            bool incomingVerseToReference, List<Verse> incomingAllVerses, Hashtable customVerses)
         {
             InitializeComponent();
             totalVerses = incomingVerses.Count;
@@ -41,16 +43,28 @@ namespace Topical_Memory_System
             versesLeftLabel.Text = versesLeft.ToString() + " verses left";
             nextVerseButton.Enabled = false;
             undeletableAllVerses = new List<Verse>(incomingVerses.Count);
-            verses = new List<Verse>(incomingVerses.Count);
+            verses = new List<Verse>();
+            undeletableVerses = new List<Verse>();
             allVerses = new List<Verse>(incomingVerses.Count);
             Random r = new Random();
             while (incomingVerses.Count > 0)
             {
                 int random = r.Next(incomingVerses.Count);
-                verses.Add(incomingVerses[random]);
                 allVerses.Add(incomingVerses[random]);
                 undeletableAllVerses.Add(incomingVerses[random]);
                 incomingVerses.RemoveAt(random);
+            }
+            foreach (Verse v in incomingAllVerses)
+            {
+                verses.Add(v);
+                undeletableVerses.Add(v);
+            }
+            foreach (DictionaryEntry obj in customVerses)
+            {
+                foreach (Verse v in ((List<Verse>)obj.Value))
+                {
+                    undeletableVerses.Add(v);
+                }
             }
             this.translationText = incomingTranslation;
             topics = incomingTopics;
@@ -285,17 +299,19 @@ namespace Topical_Memory_System
             while (incomingVerses.Count > 0)
             {
                 int random = r.Next(incomingVerses.Count);
-                verses.Add(incomingVerses[random]);
                 allVerses.Add(incomingVerses[random]);
                 incomingVerses.RemoveAt(random);
             }
-
+            foreach (Verse v in undeletableVerses)
+            {
+                verses.Add(v);
+            }
             currentMatching = new List<Verse>(5);
             correctMatch = -1;
             SetFields(verseToReference);
         }
 
-        public static void ChangeTranslation(int translation)
+        public static void ChangeTranslation(string translation)
         {
             foreach (Verse v in undeletableAllVerses)
             {
