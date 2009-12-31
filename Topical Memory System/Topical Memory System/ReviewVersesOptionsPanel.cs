@@ -104,94 +104,7 @@ namespace Topical_Memory_System
 					allPacksCheck.Checked = false;
 				}
 			}
-            if (caller.Equals("vr") || caller.Equals("rv"))
-            {
-                Total();
-            }
 		}
-
-        private void Total()
-        {
-            int total = 0;
-            foreach (DictionaryEntry obj in CustomVerses)
-            {
-                if (((string)obj.Key).Contains("customVerses1"))
-                {
-                    if (custom1Check.Checked)
-                    {
-                        total += (((List<Verse>)obj.Value).Count);
-                    }
-                }
-                else if (((string)obj.Key).Contains("customVerses2"))
-                {
-                    if (custom2Check.Checked)
-                    {
-                        total += (((List<Verse>)obj.Value).Count);
-                    }
-                }
-                else if (((string)obj.Key).Contains("customVerses3"))
-                {
-                    if (custom3Check.Checked)
-                    {
-                        total += (((List<Verse>)obj.Value).Count);
-                    }
-                }
-                else if (((string)obj.Key).Contains("customVerses4"))
-                {
-                    if (custom4Check.Checked)
-                    {
-                        total += (((List<Verse>)obj.Value).Count);
-                    }
-                }
-                else if (((string)obj.Key).Contains("customVerses5"))
-                {
-                    if (custom5Check.Checked)
-                    {
-                        total += (((List<Verse>)obj.Value).Count);
-                    }
-                }
-            }
-            if (allPacksCheck.Checked)
-            {
-                total += 60;
-            }
-            else
-            {
-                if (aPackCheck.Checked)
-                {
-                    total += 12;
-                }
-                if (bPackCheck.Checked)
-                {
-                    total += 12;
-                }
-                if (cPackCheck.Checked)
-                {
-                    total += 12;
-                }
-                if (dPackCheck.Checked)
-                {
-                    total += 12;
-                }
-                if (ePackCheck.Checked)
-                {
-                    total += 12;
-                }
-            }
-
-            if (total < Constants.MinimumAllowedForMatching)
-            {
-                errorLabel.Text = "Need at least " + Constants.MinimumAllowedForMatching.ToString() + 
-                    " verses for matching.  You have selected " + total.ToString() + ".";
-                errorLabel.Visible = true;
-                startButton.Enabled = false;
-            }
-            else
-            {
-                errorLabel.Visible = false;
-                startButton.Enabled = true;
-            }
-        }
 
 		private void StartButton_Click(object sender, EventArgs e)
 		{
@@ -244,7 +157,7 @@ namespace Topical_Memory_System
                 }
 			}
 			//defaults to all
-			if (packs.Count() == 0)
+			if (packs.Count == 0)
 			{
 				packs.Add("all");
 			}

@@ -41,7 +41,6 @@
             this.custom5Check = new System.Windows.Forms.CheckBox();
             this.custom4Check = new System.Windows.Forms.CheckBox();
             this.custom3Check = new System.Windows.Forms.CheckBox();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // chooseVersesLabel
@@ -122,7 +121,7 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(269, 375);
+            this.startButton.Location = new System.Drawing.Point(269, 371);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(98, 30);
             this.startButton.TabIndex = 7;
@@ -190,23 +189,10 @@
             this.custom3Check.Visible = false;
             this.custom3Check.Click += new System.EventHandler(this.CheckBoxClicked);
             // 
-            // errorLabel
-            // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(153, 356);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(356, 13);
-            this.errorLabel.TabIndex = 13;
-            this.errorLabel.Text = "Need at least 12 verses for matching.  You have selected 10.";
-            this.errorLabel.Visible = false;
-            // 
             // ReviewVersesOptionsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.custom3Check);
             this.Controls.Add(this.custom5Check);
             this.Controls.Add(this.custom4Check);
@@ -243,7 +229,6 @@
         private System.Windows.Forms.CheckBox custom5Check;
         private System.Windows.Forms.CheckBox custom4Check;
         private System.Windows.Forms.CheckBox custom3Check;
-        private System.Windows.Forms.Label errorLabel;
 
 
 
