@@ -34,3 +34,9 @@ C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System
 C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AboutApplication.resources
 C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AddCustomVerses.resources
 C:\Documents and Settings\Ross\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.EditCustomVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AboutApplication.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AddCustomVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.EditCustomVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.MatchVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.MatchVersesOptionPanel.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ViewInContextPanel.resources

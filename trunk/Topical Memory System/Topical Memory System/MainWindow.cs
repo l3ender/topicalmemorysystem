@@ -238,10 +238,21 @@ namespace Topical_Memory_System
         {
             mainPanel.Controls.Remove((Control)sender);
             List<Verse> versesToReview = ReadInDesiredVerses(packs);
-            string translation = SelectedTranslationName();
             Hashtable topics = ReadInTopics();
+			List<Verse> versesToMatchAgainst = new List<Verse>();
+			foreach (Verse v in allVerses)
+			{
+				versesToMatchAgainst.Add(v);
+			}
+			foreach (DictionaryEntry obj in CustomVerses)
+			{
+				foreach (Verse v in ((List<Verse>)obj.Value))
+				{
+					versesToMatchAgainst.Add(v);
+				}
+			}
 
-            mainPanel.Controls.Add(new MatchVerses(versesToReview, translation, topics, verseToReference, allVerses, CustomVerses));
+			mainPanel.Controls.Add(new MatchVerses(versesToReview, SelectedTranslationName(), topics, verseToReference, versesToMatchAgainst));
         }
 
         private static List<Verse> ReadInDesiredVerses(List<string> packs)

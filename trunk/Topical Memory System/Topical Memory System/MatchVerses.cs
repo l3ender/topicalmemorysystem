@@ -12,18 +12,19 @@ namespace Topical_Memory_System
 {
     public partial class MatchVerses : UserControl
     {
-        private static List<Verse> undeletableAllVerses;    //the ones we need to match - kept for multiple rounds
-        private static List<Verse> allVerses;               //the ones we need to match
-        private static List<Verse> verses;                  //the ones we match against
-        private static List<Verse> undeletableVerses;
+		private static List<Verse> undeletableVersesToMatch;    //the ones we need to match - kept for multiple rounds
+		private static List<Verse> versesToMatch;
+
+		private static List<Verse> undeletableVersesToMatchAgainst;
+		private static List<Verse> versesToMatchAgainst;
+
 		private string translationText;
 		private static Hashtable topics;
         private static bool verseToReference;
 
         private static Verse currentToMatch;
-        private static List<Verse> currentMatching;
-        private int correctMatch;
-        private static int random;
+        private static List<Verse> currentMatching;				//a list of the five verses to put in the answer panes
+        private static int correctMatch;
 
         private int totalVerses;
         private int correctAnswers;
@@ -31,46 +32,44 @@ namespace Topical_Memory_System
         private int versesLeft;
         private int incorrectAnswersForRound;
 
-        public MatchVerses(List<Verse> incomingVerses, string incomingTranslation, Hashtable incomingTopics, 
-            bool incomingVerseToReference, List<Verse> incomingAllVerses, Hashtable customVerses)
+		private Random rNum;
+
+        public MatchVerses(List<Verse> incomingVersesToMatch, string incomingTranslation, Hashtable incomingTopics, 
+            bool incomingVerseToReference, List<Verse> incomingVersesToMatchAgainst)
         {
             InitializeComponent();
-            totalVerses = incomingVerses.Count;
+			rNum = new Random();
+			totalVerses = incomingVersesToMatch.Count;
             correctAnswers = 0;
             incorrectAnswers = 0;
             incorrectAnswersForRound = 0;
-            versesLeft = incomingVerses.Count - 1;
+			versesLeft = incomingVersesToMatch.Count - 1;
             versesLeftLabel.Text = versesLeft.ToString() + " verses left";
             nextVerseButton.Enabled = false;
-            undeletableAllVerses = new List<Verse>(incomingVerses.Count);
-            verses = new List<Verse>();
-            undeletableVerses = new List<Verse>();
-            allVerses = new List<Verse>(incomingVerses.Count);
+			undeletableVersesToMatch = new List<Verse>(incomingVersesToMatch.Count);
+			versesToMatch = new List<Verse>(incomingVersesToMatch.Count);
+			undeletableVersesToMatchAgainst = new List<Verse>(incomingVersesToMatchAgainst.Count);
+			versesToMatchAgainst = new List<Verse>(incomingVersesToMatchAgainst.Count);
             Random r = new Random();
-            while (incomingVerses.Count > 0)
+			while (incomingVersesToMatch.Count > 0)
             {
-                int random = r.Next(incomingVerses.Count);
-                allVerses.Add(incomingVerses[random]);
-                undeletableAllVerses.Add(incomingVerses[random]);
-                incomingVerses.RemoveAt(random);
+				int random = r.Next(incomingVersesToMatch.Count);
+				undeletableVersesToMatch.Add(incomingVersesToMatch[random]);
+				versesToMatch.Add(incomingVersesToMatch[random]);
+				incomingVersesToMatch.RemoveAt(random);
             }
-            foreach (Verse v in incomingAllVerses)
-            {
-                verses.Add(v);
-                undeletableVerses.Add(v);
-            }
-            foreach (DictionaryEntry obj in customVerses)
-            {
-                foreach (Verse v in ((List<Verse>)obj.Value))
-                {
-                    undeletableVerses.Add(v);
-                }
-            }
+			while (incomingVersesToMatchAgainst.Count > 0)
+			{
+				int random = r.Next(incomingVersesToMatchAgainst.Count);
+				undeletableVersesToMatchAgainst.Add(incomingVersesToMatchAgainst[random]);
+				versesToMatchAgainst.Add(incomingVersesToMatchAgainst[random]);
+				incomingVersesToMatchAgainst.RemoveAt(random);
+			}
             this.translationText = incomingTranslation;
             topics = incomingTopics;
             verseToReference = incomingVerseToReference;
 
-            currentMatching = new List<Verse>(5);
+            currentMatching = new List<Verse>(4);
             correctMatch = -1;
             SetFields(verseToReference);
         }
@@ -78,37 +77,48 @@ namespace Topical_Memory_System
         private void SetFields(bool verseToReference)
         {
             currentMatching.Clear();
-            currentToMatch = allVerses[0];
-            allVerses.RemoveAt(0);
+			currentToMatch = versesToMatch[0];
+			versesToMatch.RemoveAt(0);
             nextVerseButton.Enabled = false;
-            Random rNum = new Random();
-            bool done = false;
-            int count = 0;
-            while (!done)
-            {
-                int rand = rNum.Next(verses.Count);
-                if (!currentMatching.Contains(verses[rand]) && !verses[rand].Equals(currentToMatch))
-                {
-                    currentMatching.Add(verses[rand]);
-                    count++;
-                    if (count == 4)
-                    {
-                        done = true;
-                    }
-                }
-            }
-            Random r = new Random();
-            random = r.Next(5) + 1; //returns numbers 1-5
-            correctMatch = random;
-            DisplayVerses();
+
+			//try first to match using verses that are in the same pack (also being matched against)
+			if (versesToMatch.Count > 0)
+			{
+				foreach (Verse v in versesToMatch)
+				{
+					currentMatching.Add(v);
+					if (currentMatching.Count == 4)		//have all the matches we need
+					{
+						break;
+					}
+				}
+			}
+			while (currentMatching.Count < 4)
+			{
+				int rand = rNum.Next(versesToMatchAgainst.Count);
+				if (!currentMatching.Contains(versesToMatchAgainst[rand]) && !versesToMatchAgainst[rand].Equals(currentToMatch))
+				{
+					currentMatching.Add(versesToMatchAgainst[rand]);
+					versesToMatchAgainst.RemoveAt(rand);
+					if (versesToMatchAgainst.Count == 0)
+					{
+						foreach (Verse v in undeletableVersesToMatchAgainst)
+						{
+							versesToMatchAgainst.Add(v);
+						}
+					}
+				}
+			}
+			correctMatch = rNum.Next(5) + 1; //returns numbers 1-5
+			DisplayVerses();
         }
 
-        private static void DisplayVerses()
+		private static void DisplayVerses()
         {
             if (verseToReference)
             {
                 toMatchBox.Text = currentToMatch.getVerseData();
-                if (random == 1)
+				if (correctMatch == 1)
                 {
                     match1.Text = currentToMatch.getReference();
                     match2.Text = currentMatching[0].getReference();
@@ -116,7 +126,7 @@ namespace Topical_Memory_System
                     match4.Text = currentMatching[2].getReference();
                     match5.Text = currentMatching[3].getReference();
                 }
-                else if (random == 2)
+				else if (correctMatch == 2)
                 {
                     match2.Text = currentToMatch.getReference();
                     match1.Text = currentMatching[0].getReference();
@@ -124,7 +134,7 @@ namespace Topical_Memory_System
                     match4.Text = currentMatching[2].getReference();
                     match5.Text = currentMatching[3].getReference();
                 }
-                else if (random == 3)
+				else if (correctMatch == 3)
                 {
                     match3.Text = currentToMatch.getReference();
                     match1.Text = currentMatching[0].getReference();
@@ -132,7 +142,7 @@ namespace Topical_Memory_System
                     match4.Text = currentMatching[2].getReference();
                     match5.Text = currentMatching[3].getReference();
                 }
-                else if (random == 4)
+				else if (correctMatch == 4)
                 {
                     match4.Text = currentToMatch.getReference();
                     match1.Text = currentMatching[0].getReference();
@@ -140,7 +150,7 @@ namespace Topical_Memory_System
                     match3.Text = currentMatching[2].getReference();
                     match5.Text = currentMatching[3].getReference();
                 }
-                else if (random == 5)
+				else if (correctMatch == 5)
                 {
                     match5.Text = currentToMatch.getReference();
                     match1.Text = currentMatching[0].getReference();
@@ -152,7 +162,7 @@ namespace Topical_Memory_System
             else
             {
                 toMatchBox.Text = currentToMatch.getReference();
-                if (random == 1)
+				if (correctMatch == 1)
                 {
                     match1.Text = currentToMatch.getVerseData();
                     match2.Text = currentMatching[0].getVerseData();
@@ -160,7 +170,7 @@ namespace Topical_Memory_System
                     match4.Text = currentMatching[2].getVerseData();
                     match5.Text = currentMatching[3].getVerseData();
                 }
-                else if (random == 2)
+				else if (correctMatch == 2)
                 {
                     match2.Text = currentToMatch.getVerseData();
                     match1.Text = currentMatching[0].getVerseData();
@@ -168,7 +178,7 @@ namespace Topical_Memory_System
                     match4.Text = currentMatching[2].getVerseData();
                     match5.Text = currentMatching[3].getVerseData();
                 }
-                else if (random == 3)
+				else if (correctMatch == 3)
                 {
                     match3.Text = currentToMatch.getVerseData();
                     match1.Text = currentMatching[0].getVerseData();
@@ -176,7 +186,7 @@ namespace Topical_Memory_System
                     match4.Text = currentMatching[2].getVerseData();
                     match5.Text = currentMatching[3].getVerseData();
                 }
-                else if (random == 4)
+				else if (correctMatch == 4)
                 {
                     match4.Text = currentToMatch.getVerseData();
                     match1.Text = currentMatching[0].getVerseData();
@@ -184,7 +194,7 @@ namespace Topical_Memory_System
                     match3.Text = currentMatching[2].getVerseData();
                     match5.Text = currentMatching[3].getVerseData();
                 }
-                else if (random == 5)
+				else if (correctMatch == 5)
                 {
                     match5.Text = currentToMatch.getVerseData();
                     match1.Text = currentMatching[0].getVerseData();
@@ -276,59 +286,50 @@ namespace Topical_Memory_System
             match3.BackColor = System.Drawing.SystemColors.Control;
             match4.BackColor = System.Drawing.SystemColors.Control;
             match5.BackColor = System.Drawing.SystemColors.Control;
-            List<Verse> incomingVerses = new List<Verse>();
-            totalVerses = undeletableAllVerses.Count;
-            verses.Clear();
-            foreach (Verse v in undeletableAllVerses)
-            {
-                incomingVerses.Add(v);
-            }
-            correctAnswers = 0;
-            incorrectAnswers = 0;
-            incorrectAnswersForRound = 0;
-            versesLeft = incomingVerses.Count - 1;
-            versesLeftLabel.Text = versesLeft.ToString() + " verses left";
             nextVerseButton.Enabled = false;
             viewStatsButton.Enabled = false;
             viewStatsButton.Visible = false;
             restartButton.Enabled = false;
             restartButton.Visible = false;
-            verses = new List<Verse>(incomingVerses.Count);
-            allVerses = new List<Verse>(incomingVerses.Count);
-            Random r = new Random();
-            while (incomingVerses.Count > 0)
-            {
-                int random = r.Next(incomingVerses.Count);
-                allVerses.Add(incomingVerses[random]);
-                incomingVerses.RemoveAt(random);
-            }
-            foreach (Verse v in undeletableVerses)
-            {
-                verses.Add(v);
-            }
-            currentMatching = new List<Verse>(5);
-            correctMatch = -1;
-            SetFields(verseToReference);
+			totalVerses = undeletableVersesToMatch.Count;
+			correctAnswers = 0;
+			incorrectAnswers = 0;
+			incorrectAnswersForRound = 0;
+			versesLeft = undeletableVersesToMatch.Count - 1;
+			versesLeftLabel.Text = versesLeft.ToString() + " verses left";
+			nextVerseButton.Enabled = false;
+
+			foreach (Verse v in undeletableVersesToMatch)
+			{
+				versesToMatch.Add(v);
+			}
+			foreach (Verse v in undeletableVersesToMatchAgainst)
+			{
+				versesToMatchAgainst.Add(v);
+			}
+			currentMatching.Clear();
+			correctMatch = -1;
+			SetFields(verseToReference);
         }
 
         public static void ChangeTranslation(string translation)
         {
-            foreach (Verse v in undeletableAllVerses)
+            foreach (Verse v in undeletableVersesToMatch)
             {
                 v.setTranslation(translation);
             }
-            foreach (Verse v in allVerses)
+            foreach (Verse v in versesToMatch)
             {
                 v.setTranslation(translation);
             }
-            foreach (Verse v in currentMatching)
-            {
-                v.setTranslation(translation);
-            }
-            foreach (Verse v in verses)
-            {
-                v.setTranslation(translation);
-            }
+			foreach (Verse v in undeletableVersesToMatchAgainst)
+			{
+				v.setTranslation(translation);
+			}
+			foreach (Verse v in versesToMatchAgainst)
+			{
+				v.setTranslation(translation);
+			}
             DisplayVerses();
         }
     }
