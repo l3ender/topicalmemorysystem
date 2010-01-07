@@ -172,7 +172,11 @@ namespace Topical_Memory_System
             else if (caller.Equals("rv"))
             {
                 MenuExit.MatchVersesHandler(packs, false, this);
-            }
+			}
+			else if (caller.Equals("learn"))
+			{
+				MenuExit.LearnVersesHandler(packs, this);
+			}
 		}
 	}
 }

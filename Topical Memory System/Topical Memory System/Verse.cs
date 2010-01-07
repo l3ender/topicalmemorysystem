@@ -14,6 +14,10 @@ namespace Topical_Memory_System
         private string packInformation; //like "A-1" or "Meditation Verses"
 		private string nivVerseData;
 		private string esvVerseData;
+		private string nbvVerseData;
+		private string nbvBook;
+		private int nbvChapter;
+		private string nbvVerseNumbers;
 		private string translation;     //ESV, NIV, etc
         private bool isTMSVerse;        //only TMS verses have pack numbers, etc
 
@@ -57,7 +61,14 @@ namespace Topical_Memory_System
 		}
 		public string getReference()
 		{
-			return getBook() + " " + getChapter().ToString() + ":" + getVerseNumbers().ToString();
+			if (translation.Equals("NBV"))
+			{
+				return nbvBook + " " + nbvChapter.ToString() + ":" + nbvVerseNumbers.ToString();
+			}
+			else
+			{
+				return getBook() + " " + getChapter().ToString() + ":" + getVerseNumbers().ToString();
+			}
 		}
 		public string getPackInformation()
 		{
@@ -79,10 +90,14 @@ namespace Topical_Memory_System
                 {
                     return getEsvVerseData();
                 }
-                else
-                {
-                    return getNivVerseData();
-                }
+				else if (translation.Equals("NBV"))
+				{
+					return getNbvVerseData();
+				}
+				else
+				{
+					return getNivVerseData();
+				}
             }
             else
             {
@@ -100,6 +115,32 @@ namespace Topical_Memory_System
 		public string getEsvVerseData()
 		{
 			return esvVerseData;
+		}
+		public void setNbvVerseData(string nbvVerseData)
+		{
+			this.nbvVerseData = nbvVerseData;
+		}
+		public string getNbvVerseData()
+		{
+			return nbvVerseData;
+		}
+		public void setNbvReference(string nbvBook, int nbvChapter, string nbvVerseNumbers)
+		{
+			this.nbvBook = nbvBook;
+			this.nbvChapter = nbvChapter;
+			this.nbvVerseNumbers = nbvVerseNumbers;
+		}
+		public string getNbvBook()
+		{
+			return nbvBook;
+		}
+		public int getNbvChapter()
+		{
+			return nbvChapter;
+		}
+		public string getNbvVerseNumbers()
+		{
+			return nbvVerseNumbers;
 		}
         public bool isTmsVerse()
         {
