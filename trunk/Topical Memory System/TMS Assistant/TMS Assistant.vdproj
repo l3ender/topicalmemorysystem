@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_786EF45B2D3A4AFD820FE9E99D28ECA1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_88E128F951CE48A682F8BD92D41728F2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -222,6 +228,26 @@
             {
             "SourcePath" = "8:..\\Topical Memory System\\bin\\Debug\\customVerses3.txt"
             "TargetName" = "8:customVerses3.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_A456694850774FBBA9665735CBCDBCE1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_786EF45B2D3A4AFD820FE9E99D28ECA1"
+            {
+            "SourcePath" = "8:..\\Topical Memory System\\bin\\Debug\\tmsVerses-NBV.txt"
+            "TargetName" = "8:tmsVerses-NBV.txt"
             "Tag" = "8:"
             "Folder" = "8:_A456694850774FBBA9665735CBCDBCE1"
             "Condition" = "8:"

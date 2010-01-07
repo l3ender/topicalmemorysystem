@@ -151,6 +151,10 @@ namespace Topical_Memory_System
 					if (item == sender)
 					{
 						item.Checked = true;
+						if (item.Tag.Equals("NBV"))
+						{	//also automatically switch browser viewing, too
+							BibleSelected(biblijaToolStripMenuItem, null);
+						}
 					}
 					if ((item != null) && (item != sender))
 					{
@@ -167,7 +171,11 @@ namespace Topical_Memory_System
                 else if (mainPanel.Controls[0] is MatchVerses)
                 {
                     MatchVerses.ChangeTranslation(SelectedTranslationName());
-                }
+				}
+				else if (mainPanel.Controls[0] is LearnVerses)
+				{
+					LearnVerses.ChangeTranslation(SelectedTranslationName());
+				}
             }
 		}
 
@@ -212,6 +220,12 @@ namespace Topical_Memory_System
             mainPanel.Controls.Add(new MatchVersesOptionPanel());
         }
 
+		public static void LearnVersesHandler(object sender)
+		{
+			mainPanel.Controls.Remove((Control)sender);
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learn", CustomVerses));
+		}
+
         public static void MatchVersesHandler(object sender, bool verseToReference)
         {
             mainPanel.Controls.Remove((Control)sender);
@@ -255,6 +269,13 @@ namespace Topical_Memory_System
 			mainPanel.Controls.Add(new MatchVerses(versesToReview, SelectedTranslationName(), topics, verseToReference, versesToMatchAgainst));
         }
 
+		public static void LearnVersesHandler(List<string> packs, object sender)
+		{
+			mainPanel.Controls.Remove((Control)sender);
+			List<Verse> versesToReview = ReadInDesiredVerses(packs);
+			mainPanel.Controls.Add(new LearnVerses(versesToReview));
+		}
+
         private static List<Verse> ReadInDesiredVerses(List<string> packs)
         {
             allVerses = ReadInVerses();
@@ -287,6 +308,10 @@ namespace Topical_Memory_System
                     }
                 }
             }
+			foreach (Verse v in versesToReview)
+			{
+				v.setTranslation(SelectedTranslationName());
+			}
             return versesToReview;
         }
 
@@ -295,6 +320,8 @@ namespace Topical_Memory_System
 			List<Verse> allVerses = new List<Verse>();
 			StreamReader SR;
 			string S;
+
+			//NIV
 			SR = File.OpenText(Constants.NivFileLocation);
 			S = SR.ReadLine();
 			while (S != null)
@@ -309,7 +336,7 @@ namespace Topical_Memory_System
 				S = SR.ReadLine();
 			}
 			SR.Close();
-
+			//ESV
 			SR = File.OpenText(Constants.EsvFileLocation);
 			S = SR.ReadLine();
 			int i = 0;
@@ -319,6 +346,22 @@ namespace Topical_Memory_System
 				{
 					string[] info = S.Split('/');
 					allVerses[i].setEsvVerseData(info[3]);
+					i++;
+				}
+				S = SR.ReadLine();
+			}
+			SR.Close();
+			//NBV
+			SR = File.OpenText(Constants.NbvFileLocation);
+			S = SR.ReadLine();
+			i = 0;
+			while (S != null)
+			{
+				if (S.Trim().Length > 0)
+				{
+					string[] info = S.Split('/');
+					allVerses[i].setNbvReference(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1]);
+					allVerses[i].setNbvVerseData(info[3]);
 					i++;
 				}
 				S = SR.ReadLine();
@@ -365,23 +408,29 @@ namespace Topical_Memory_System
         {
             string verse = v.getVerseNumbers().Split(',')[0];
             string url = "";
-            if (bibleGatewayToolStripMenuItem.Checked)
-            {
-                //URL: http://www.biblegateway.com/passage/?search=1 peter 3&version=NIV
-                url = "http://www.biblegateway.com/passage/?search=" + v.getBook() + " " + v.getChapter().ToString() +
-                    "&version=" + translation;
-            }
-            else if (esvOnlineStudyBibleToolStripMenuItem.Checked)
-            {
-                //URL: http://www.esvstudybible.org/search?q=1+peter+3
-                url = "http://www.esvstudybible.org/search?q=" + v.getBook().Replace(" ", "+") + " " + v.getChapter();
-            }
-            else
-            {
-                //URL: http://www.blueletterbible.org/Bible.cfm?b=1 Peter&c=5&v=7&t=NIV#7
-                url = "http://www.blueletterbible.org/Bible.cfm?b=" + v.getBook() + "&c=" + v.getChapter().ToString() +
-                "&v=" + verse + "&t=" + translation + "#" + verse;
-            }
+			if (biblijaToolStripMenuItem.Checked)
+			{
+				//URL: http://www.biblija.net/biblija.cgi?m=galatians+2&id42=0&id18=1&pos=0&l=nl&set=10
+				url = "http://www.biblija.net/biblija.cgi?m=" + v.getNbvBook() + "+" + v.getNbvChapter().ToString() + 
+					"&id42=0&id18=1&pos=0&l=nl&set=10";
+			}
+			else if (bibleGatewayToolStripMenuItem.Checked)
+			{
+				//URL: http://www.biblegateway.com/passage/?search=1 peter 3&version=NIV
+				url = "http://www.biblegateway.com/passage/?search=" + v.getBook() + " " + v.getChapter().ToString() +
+					"&version=" + translation;
+			}
+			else if (esvOnlineStudyBibleToolStripMenuItem.Checked)
+			{
+				//URL: http://www.esvstudybible.org/search?q=1+peter+3
+				url = "http://www.esvstudybible.org/search?q=" + v.getBook().Replace(" ", "+") + " " + v.getChapter();
+			}
+			else
+			{
+				//URL: http://www.blueletterbible.org/Bible.cfm?b=1 Peter&c=5&v=7&t=NIV#7
+				url = "http://www.blueletterbible.org/Bible.cfm?b=" + v.getBook() + "&c=" + v.getChapter().ToString() +
+				"&v=" + verse + "&t=" + translation + "#" + verse;
+			}
             bool openInApplication = openBibleInApplicationToolStripMenuItem.Checked;
             if (openInApplication)
             {
@@ -453,7 +502,7 @@ namespace Topical_Memory_System
                     {
                         item = (ToolStripMenuItem)onlineBibleToolStripMenuItem.DropDownItems[i];
                     } catch (InvalidCastException exception)
-                    {
+                    {	//need because of tool strip separators
                         exception.ToString();
                     }
                     if (item != null && item.Tag.ToString().Equals(((ToolStripMenuItem)sender).Tag.ToString()))

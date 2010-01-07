@@ -27,5 +27,10 @@ namespace Topical_Memory_System
         {
             MenuExit.MatchVersesHandler(this);
         }
+
+		private void LearnVersesButton_Click(object sender, EventArgs e)
+		{
+			MenuExit.LearnVersesHandler(this);
+		}
 	}
 }

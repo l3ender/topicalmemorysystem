@@ -76,6 +76,14 @@ namespace Topical_Memory_System
                 translation.Text = "";
             }
 			verseData.Text = Constants.TAB + incomingVerseData;
+			if (verseData.Text.Length > 320)
+			{
+				verseData.ScrollBars = ScrollBars.Vertical;
+			}
+			else
+			{
+				verseData.ScrollBars = ScrollBars.None;
+			}
 			packInformation.Text = incomingPackInformation;
 			frontReference.Text = incomingReference;
 		}
@@ -300,7 +308,7 @@ namespace Topical_Memory_System
 				v.setTranslation(translation);
 			}
 			Verse verse = verses[currentVerseIndex];
-            SetVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackInformation() + "  " + GetPackTheme(verse), verse.isTmsVerse());
+			SetVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackInformation() + "  " + GetPackTheme(verse), verse.isTmsVerse());
 		}
 
         private void ViewVerseInContextButton_Click(object sender, EventArgs e)
