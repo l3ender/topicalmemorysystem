@@ -14,12 +14,14 @@ namespace Topical_Memory_System
 		private static List<Verse> Verses;
 		private static Verse CurrentVerse;
 		private int CurrentVerseIndex;
+		private int CurrentHintWordIndex;
 
 		public LearnVerses(List<Verse> incomingVersesToReview)
 		{
 			InitializeComponent();
 			VerseEntryBox.Focus();
 			Verses = incomingVersesToReview;
+			CurrentHintWordIndex = 0;
 			CurrentVerseIndex = 0;
 			CurrentVerse = Verses[CurrentVerseIndex];
 			LoadVerse(CurrentVerse);
@@ -126,6 +128,8 @@ namespace Topical_Memory_System
 			CompareButton.Enabled = false;
 			RedLabel.Visible = false;
 			GreenLabel.Visible = false;
+			HintButton.Enabled = true;
+			CurrentHintWordIndex = 0;
 			BlankLabel.Focus();
 		}
 
@@ -137,6 +141,16 @@ namespace Topical_Memory_System
 			}
 			CurrentVerse.setTranslation(translation);
 			LoadVerse(CurrentVerse);
+		}
+
+		private void HintButton_Click(object sender, EventArgs e)
+		{
+			string[] words = CurrentVerse.getVerseData().Split(' ');
+			OriginalVerseBox.Text += words[CurrentHintWordIndex++] + " ";
+			if (CurrentHintWordIndex >= CurrentVerse.getVerseData().Split(' ').Length)
+			{
+				HintButton.Enabled = false;
+			}
 		}
 	}
 }
