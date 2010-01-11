@@ -40,13 +40,14 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.BlankLabel = new System.Windows.Forms.Label();
+			this.HintButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// VerseLabel
 			// 
 			VerseLabel.AutoSize = true;
 			VerseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			VerseLabel.Location = new System.Drawing.Point(76, 19);
+			VerseLabel.Location = new System.Drawing.Point(76, 9);
 			VerseLabel.Name = "VerseLabel";
 			VerseLabel.Size = new System.Drawing.Size(58, 18);
 			VerseLabel.TabIndex = 0;
@@ -54,7 +55,7 @@
 			// 
 			// VerseEntryBox
 			// 
-			this.VerseEntryBox.Location = new System.Drawing.Point(79, 52);
+			this.VerseEntryBox.Location = new System.Drawing.Point(79, 35);
 			this.VerseEntryBox.Multiline = true;
 			this.VerseEntryBox.Name = "VerseEntryBox";
 			this.VerseEntryBox.Size = new System.Drawing.Size(479, 83);
@@ -66,7 +67,7 @@
 			// CompareButton
 			// 
 			this.CompareButton.Enabled = false;
-			this.CompareButton.Location = new System.Drawing.Point(405, 17);
+			this.CompareButton.Location = new System.Drawing.Point(242, 127);
 			this.CompareButton.Name = "CompareButton";
 			this.CompareButton.Size = new System.Drawing.Size(153, 25);
 			this.CompareButton.TabIndex = 4;
@@ -78,7 +79,7 @@
 			// 
 			this.MatchingBox.BackColor = System.Drawing.SystemColors.Control;
 			this.MatchingBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.MatchingBox.Location = new System.Drawing.Point(79, 279);
+			this.MatchingBox.Location = new System.Drawing.Point(79, 284);
 			this.MatchingBox.Name = "MatchingBox";
 			this.MatchingBox.ReadOnly = true;
 			this.MatchingBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
@@ -90,7 +91,7 @@
 			// 
 			this.OriginalVerseBox.BackColor = System.Drawing.SystemColors.Control;
 			this.OriginalVerseBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.OriginalVerseBox.Location = new System.Drawing.Point(79, 166);
+			this.OriginalVerseBox.Location = new System.Drawing.Point(79, 174);
 			this.OriginalVerseBox.Name = "OriginalVerseBox";
 			this.OriginalVerseBox.ReadOnly = true;
 			this.OriginalVerseBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
@@ -146,7 +147,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(227, 258);
+			this.label3.Location = new System.Drawing.Point(227, 269);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(182, 13);
 			this.label3.TabIndex = 11;
@@ -155,7 +156,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(281, 143);
+			this.label4.Location = new System.Drawing.Point(281, 159);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(74, 13);
 			this.label4.TabIndex = 12;
@@ -169,10 +170,21 @@
 			this.BlankLabel.Size = new System.Drawing.Size(0, 13);
 			this.BlankLabel.TabIndex = 13;
 			// 
+			// HintButton
+			// 
+			this.HintButton.Location = new System.Drawing.Point(506, 6);
+			this.HintButton.Name = "HintButton";
+			this.HintButton.Size = new System.Drawing.Size(52, 23);
+			this.HintButton.TabIndex = 14;
+			this.HintButton.Text = "Hint";
+			this.HintButton.UseVisualStyleBackColor = true;
+			this.HintButton.Click += new System.EventHandler(this.HintButton_Click);
+			// 
 			// LearnVerses
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.HintButton);
 			this.Controls.Add(this.BlankLabel);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
@@ -194,7 +206,6 @@
 
 		#endregion
 
-		private static System.Windows.Forms.Label VerseLabel;
 		private System.Windows.Forms.TextBox VerseEntryBox;
 		private System.Windows.Forms.Button CompareButton;
 		private System.Windows.Forms.RichTextBox MatchingBox;
@@ -206,6 +217,8 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label BlankLabel;
+		private System.Windows.Forms.Button HintButton;
+		private static System.Windows.Forms.Label VerseLabel;
 
 	}
 }
