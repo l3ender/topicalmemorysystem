@@ -61,12 +61,15 @@ namespace Topical_Memory_System
 
         private void VerseSelected(object sender, EventArgs e)
         {
-            currentVerse = verses[versesListBox.SelectedIndex];
-            verseNameBox.Text = currentVerse.getBook();
-            verseReferenceBox.Text = currentVerse.getChapter() + ":" + currentVerse.getVerseNumbers();
-            verseDataBox.Text = currentVerse.getVerseData();
-            DeleteVerseButton.Enabled = true;
-            UpdateVerseButton.Enabled = false;
+			if (versesListBox.SelectedIndex > -1)
+			{
+				currentVerse = verses[versesListBox.SelectedIndex];
+				verseNameBox.Text = currentVerse.getBook();
+				verseReferenceBox.Text = currentVerse.getChapter() + ":" + currentVerse.getVerseNumbers();
+				verseDataBox.Text = currentVerse.getVerseData();
+				DeleteVerseButton.Enabled = true;
+				UpdateVerseButton.Enabled = false;
+			}
         }
 
         private void VerseValueChanged(object sender, EventArgs e)
