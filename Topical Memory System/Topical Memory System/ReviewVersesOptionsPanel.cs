@@ -23,10 +23,13 @@ namespace Topical_Memory_System
             List<CheckBox> checks = GetOrderedCheckBoxes(CustomVerses.Count);
             foreach (DictionaryEntry obj in CustomVerses)
             {
-                CheckBox c = checks[0];
-                checks.RemoveAt(0);
-                c.Visible = true;
-                c.Text = ((string)obj.Key).Split('~')[1];
+				if (((List<Verse>)obj.Value).Count > 0)
+				{
+					CheckBox c = checks[0];
+					checks.RemoveAt(0);
+					c.Visible = true;
+					c.Text = ((string)obj.Key).Split('~')[1];
+				}
             }
             this.caller = incomingCaller;
             allPacksCheck.Checked = true;
