@@ -29,6 +29,7 @@ namespace Topical_Memory_System
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuExit));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,11 +44,11 @@ namespace Topical_Memory_System
 			this.blueLetterBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			bibleGatewayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			esvOnlineStudyBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			biblijaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			openBibleInApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openBibleInWebBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			mainPanel = new System.Windows.Forms.Panel();
 			loadingBox = new System.Windows.Forms.PictureBox();
-			biblijaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(loadingBox)).BeginInit();
 			this.SuspendLayout();
@@ -181,6 +182,14 @@ namespace Topical_Memory_System
 			esvOnlineStudyBibleToolStripMenuItem.Text = "ESV Online Study Bible";
 			esvOnlineStudyBibleToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
 			// 
+			// biblijaToolStripMenuItem
+			// 
+			biblijaToolStripMenuItem.Name = "biblijaToolStripMenuItem";
+			biblijaToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+			biblijaToolStripMenuItem.Tag = "one";
+			biblijaToolStripMenuItem.Text = "Biblija.net";
+			biblijaToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
+			// 
 			// openBibleInApplicationToolStripMenuItem
 			// 
 			openBibleInApplicationToolStripMenuItem.Checked = true;
@@ -217,14 +226,6 @@ namespace Topical_Memory_System
 			loadingBox.TabStop = false;
 			loadingBox.Visible = false;
 			// 
-			// biblijaToolStripMenuItem
-			// 
-			biblijaToolStripMenuItem.Name = "biblijaToolStripMenuItem";
-			biblijaToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-			biblijaToolStripMenuItem.Text = "Biblija.net";
-			biblijaToolStripMenuItem.Tag = "one";
-			biblijaToolStripMenuItem.Click += new System.EventHandler(this.BibleSelected);
-			// 
 			// MenuExit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,6 +235,7 @@ namespace Topical_Memory_System
 			this.Controls.Add(mainPanel);
 			this.Controls.Add(this.menuStrip1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.Name = "MenuExit";
