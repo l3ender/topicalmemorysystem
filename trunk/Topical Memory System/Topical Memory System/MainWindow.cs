@@ -128,10 +128,7 @@ namespace Topical_Memory_System
                     index++;
                 }
                 SR.Close();
-                if (verses.Count > 0)
-                {
-                    hash.Add(title, verses);
-                }
+                hash.Add(title, verses);
             }
             CustomVerses = hash;
             return hash;
@@ -529,6 +526,7 @@ namespace Topical_Memory_System
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+			LoadCustomVerses();
             EditCustomVerses obj = new EditCustomVerses(CustomVerses);
             obj.Show();
         }
