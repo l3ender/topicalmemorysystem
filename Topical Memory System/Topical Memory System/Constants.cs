@@ -17,5 +17,7 @@ namespace Topical_Memory_System
         public static int MinimumAllowedForMatching = 12;
         public static int MaximumCharactersForCustomGroupName = 20;
         public static string FileDelimiter = "/";
+		public static string[] VerseTopics = {"A - Live The New Life", "B - Proclaim Christ", "C - Rely On God's Resources",
+                                                      "D - Be Christ's Disciple", "E - Grow In Christlikeness"};
 	}
 }

@@ -18,6 +18,11 @@ namespace Topical_Memory_System
 			InitializeComponent();
 		}
 
+		private void ViewVersesButton_Click(object sender, EventArgs e)
+		{
+			MenuExit.ViewVersesHandler(this);
+		}
+
 		private void ReviewVersesButton_Click(object sender, EventArgs e)
 		{
 			MenuExit.ReviewVersesHandler(this);
@@ -31,6 +36,11 @@ namespace Topical_Memory_System
 		private void LearnVersesButton_Click(object sender, EventArgs e)
 		{
 			MenuExit.LearnVersesHandler(this);
+		}
+
+		private void Refocus(object sender, EventArgs e)
+		{
+			BlankLabel.Focus();
 		}
 	}
 }

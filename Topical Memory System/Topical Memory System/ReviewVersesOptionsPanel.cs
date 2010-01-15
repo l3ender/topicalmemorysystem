@@ -71,16 +71,6 @@ namespace Topical_Memory_System
             return checks;
         }
 
-		private void PaintMethod(object sender, PaintEventArgs e)
-		{
-			Pen myPen;
-			myPen = new Pen(Color.Black, 1);
-			Graphics formGraphics = this.CreateGraphics();
-			formGraphics.DrawRectangle(myPen, 155, 15, 337, 335);
-			myPen.Dispose();
-			formGraphics.Dispose();
-		}
-
 		private void CheckBoxClicked(object sender, EventArgs e)
 		{
 			if (((CheckBox)sender).Name.ToString().Equals("allPacksCheck"))

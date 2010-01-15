@@ -71,7 +71,7 @@
 			this.viewVerseInContextButton.Size = new System.Drawing.Size(87, 23);
 			this.viewVerseInContextButton.TabIndex = 7;
 			this.viewVerseInContextButton.Text = "View in context";
-			this.viewVerseInContextButton.UseVisualStyleBackColor = false;
+			this.viewVerseInContextButton.UseVisualStyleBackColor = true;
 			this.viewVerseInContextButton.Visible = false;
 			this.viewVerseInContextButton.Click += new System.EventHandler(this.ViewVerseInContextButton_Click);
 			// 
@@ -99,7 +99,7 @@
 			this.hearButton.Size = new System.Drawing.Size(53, 23);
 			this.hearButton.TabIndex = 5;
 			this.hearButton.Text = "Hear it";
-			this.hearButton.UseVisualStyleBackColor = false;
+			this.hearButton.UseVisualStyleBackColor = true;
 			this.hearButton.Click += new System.EventHandler(this.HearButton_Click);
 			// 
 			// verseData

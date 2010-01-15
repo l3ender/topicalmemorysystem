@@ -159,6 +159,10 @@
       <DependentUpon>ViewInContextPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewVerses.resx">
+      <DependentUpon>ViewVerses.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -198,11 +202,18 @@
       <DependentUpon>MatchVersesOptionPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Verse.cs" />
+    <Compile Include="VersePack.cs" />
     <Compile Include="ViewInContextPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ViewInContextPanel.Designer.cs">
       <DependentUpon>ViewInContextPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewVerses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewVerses.Designer.cs">
+      <DependentUpon>ViewVerses.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
