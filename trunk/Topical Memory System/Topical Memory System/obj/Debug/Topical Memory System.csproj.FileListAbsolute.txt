@@ -41,3 +41,4 @@ C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memor
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.MatchVersesOptionPanel.resources
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ViewInContextPanel.resources
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.LearnVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ViewVerses.resources

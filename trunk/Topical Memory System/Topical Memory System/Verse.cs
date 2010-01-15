@@ -49,7 +49,14 @@ namespace Topical_Memory_System
 
 		public string getBook()
 		{
-			return book;
+			if (translation.Equals("NBV"))
+			{
+				return nbvBook;
+			}
+			else
+			{
+				return book;
+			}
 		}
 		public int getChapter()
 		{

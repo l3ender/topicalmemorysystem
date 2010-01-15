@@ -17,7 +17,7 @@ namespace Topical_Memory_System
 	public partial class MenuExit : Form
 	{
         private static Hashtable CustomVerses;
-        private static List<Verse> allVerses;
+        private static List<Verse> AllVerses;
 
 		public MenuExit()
 		{
@@ -152,6 +152,10 @@ namespace Topical_Memory_System
 						{	//also automatically switch browser viewing, too
 							BibleSelected(biblijaToolStripMenuItem, null);
 						}
+						else
+						{
+							BibleSelected(blueLetterBibleToolStripMenuItem, null);
+						}
 					}
 					if ((item != null) && (item != sender))
 					{
@@ -172,6 +176,10 @@ namespace Topical_Memory_System
 				else if (mainPanel.Controls[0] is LearnVerses)
 				{
 					LearnVerses.ChangeTranslation(SelectedTranslationName());
+				}
+				else if (mainPanel.Controls[0] is ViewVerses)
+				{
+					ViewVerses.ChangeTranslation(SelectedTranslationName());
 				}
             }
 		}
@@ -204,6 +212,12 @@ namespace Topical_Memory_System
             AboutApplication ab = new AboutApplication();
             ab.Show();
         }
+
+		public static void ViewVersesHandler(object sender)
+		{
+			mainPanel.Controls.Remove((Control)sender);
+			mainPanel.Controls.Add(new ViewVerses(ReadInVersePacks()));
+		}
 
 		public static void ReviewVersesHandler(object sender)
 		{
@@ -251,7 +265,7 @@ namespace Topical_Memory_System
             List<Verse> versesToReview = ReadInDesiredVerses(packs);
             Hashtable topics = ReadInTopics();
 			List<Verse> versesToMatchAgainst = new List<Verse>();
-			foreach (Verse v in allVerses)
+			foreach (Verse v in AllVerses)
 			{
 				versesToMatchAgainst.Add(v);
 			}
@@ -275,15 +289,15 @@ namespace Topical_Memory_System
 
         private static List<Verse> ReadInDesiredVerses(List<string> packs)
         {
-            allVerses = ReadInVerses();
+            AllVerses = ReadInVerses();
             List<Verse> versesToReview = new List<Verse>();
             if (packs.Contains("all"))
             {
-                versesToReview = allVerses;
+				versesToReview = AllVerses;
             }
             else
             {
-                foreach (Verse v in allVerses)
+				foreach (Verse v in AllVerses)
                 {
                     if (packs.Contains(v.getPackInformation().Split('-')[0]) && !versesToReview.Contains(v))
                     {
@@ -311,6 +325,23 @@ namespace Topical_Memory_System
 			}
             return versesToReview;
         }
+
+		private static List<VersePack> ReadInVersePacks()
+		{
+			List<Verse> allVerses = ReadInVerses();
+			List<VersePack> Verses = new List<VersePack>(5);
+			for (int n = 0; n < 5; n++)
+			{
+				VersePack vp = new VersePack();
+				vp.SetName(Constants.VerseTopics[n]);
+				for (int j = 0; j < 12; j++)
+				{
+					vp.AddVerse(allVerses[(n * 12) + j]);
+				}
+				Verses.Add(vp);
+			}
+			return Verses;
+		}
 
 		private static List<Verse> ReadInVerses()
 		{
