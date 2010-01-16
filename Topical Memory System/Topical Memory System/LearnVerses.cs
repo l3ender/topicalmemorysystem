@@ -34,39 +34,47 @@ namespace Topical_Memory_System
 
 		private void CompareButton_Click(object sender, EventArgs e)
 		{
-			OriginalVerseBox.Text = CurrentVerse.getVerseData();
-			MatchingBox.ResetText();
-
-			string s1 = VerseEntryBox.Text;
-			string s2 = CurrentVerse.getVerseData();
-			
-			if (s1.Equals(s2, StringComparison.OrdinalIgnoreCase))
+			if (VerseEntryBox.Text.Length >= Constants.MinimumAllowedForMatching)
 			{
-				MatchingBox.Text = "Verse was 100% correct!  Congratulations!";
-				RedLabel.Visible = false;
-				GreenLabel.Visible = false;
+				OriginalVerseBox.Text = CurrentVerse.getVerseData();
+				MatchingBox.ResetText();
+				HintButton.Enabled = false;
+
+				string s1 = VerseEntryBox.Text;
+				string s2 = CurrentVerse.getVerseData();
+
+				if (s1.Equals(s2, StringComparison.OrdinalIgnoreCase))
+				{
+					MatchingBox.Text = "Verse was 100% correct!  Congratulations!";
+					RedLabel.Visible = false;
+					GreenLabel.Visible = false;
+				}
+				else
+				{
+					ComparedString cs = Diff.DiffText(s1, s2);
+					MatchingBox.Text = cs.FinalString;
+
+					foreach (Selection s in cs.Selections)
+					{
+						MatchingBox.Select(s.Start, (s.End - s.Start));
+						string text = MatchingBox.SelectedText;
+						if (text.Equals(" "))
+						{
+							MatchingBox.SelectionBackColor = s.TextColor;
+						}
+						else
+						{
+							MatchingBox.SelectionColor = s.TextColor;
+						}
+						MatchingBox.SelectionFont = new Font(MatchingBox.SelectionFont, FontStyle.Bold);
+					}
+					RedLabel.Visible = true;
+					GreenLabel.Visible = true;
+				}
 			}
 			else
 			{
-				ComparedString cs = Diff.DiffText(s1, s2);
-				MatchingBox.Text = cs.FinalString;
-
-				foreach (Selection s in cs.Selections)
-				{
-					MatchingBox.Select(s.Start, (s.End - s.Start));
-					string text = MatchingBox.SelectedText;
-					if (text.Equals(" "))
-					{
-						MatchingBox.SelectionBackColor = s.TextColor;
-					}
-					else
-					{
-						MatchingBox.SelectionColor = s.TextColor;
-					}
-					MatchingBox.SelectionFont = new Font(MatchingBox.SelectionFont, FontStyle.Bold);
-				}
-				RedLabel.Visible = true;
-				GreenLabel.Visible = true;
+				MessageBox.Show("Please enter at least some of the verse.  If you need help, hit the hint button!");
 			}
 		}
 
@@ -151,6 +159,11 @@ namespace Topical_Memory_System
 			{
 				HintButton.Enabled = false;
 			}
+		}
+
+		private void ClearButton_Click(object sender, EventArgs e)
+		{
+			ResetFields();
 		}
 	}
 }

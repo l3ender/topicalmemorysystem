@@ -201,6 +201,7 @@
     <Compile Include="MatchVersesOptionPanel.Designer.cs">
       <DependentUpon>MatchVersesOptionPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="TMSVerses.cs" />
     <Compile Include="Verse.cs" />
     <Compile Include="VersePack.cs" />
     <Compile Include="ViewInContextPanel.cs">

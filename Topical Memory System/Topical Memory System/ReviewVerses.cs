@@ -17,11 +17,10 @@ namespace Topical_Memory_System
 	{
 		private static List<Verse> verses;
 		private string translationText;
-		private static Hashtable topics;
 		private static int currentVerseIndex;
 		private bool frontOfCard;
 
-		public ReviewVerses(List<Verse> incomingVerses, string incomingTranslation, Hashtable incomingTopics)
+		public ReviewVerses(List<Verse> incomingVerses, string incomingTranslation)
 		{
 			InitializeComponent();
             if (incomingVerses.Count == 1)
@@ -29,7 +28,6 @@ namespace Topical_Memory_System
                 nextVerseButton.Enabled = false;
             }
 			this.translationText = incomingTranslation;
-			topics = incomingTopics;
 			frontOfCard = true;
 			verses = new List<Verse>(incomingVerses.Count);
 			Random r = new Random();
@@ -60,7 +58,7 @@ namespace Topical_Memory_System
 			this.previousVerseButton.Enabled = false;
 
 			Verse v = verses[currentVerseIndex];
-			SetVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackInformation() + "  " + GetPackTheme(v), v.isTmsVerse());
+			SetVerseFields(v.getTmsMainTopic(), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackInformation() + "  " + v.getTmsSubTopic(), v.isTmsVerse());
 		}
 
 		private static void SetVerseFields(string incomingTheme, string incomingReference, string incomingTranslation, string incomingVerseData, string incomingPackInformation, bool isTMS)
@@ -202,7 +200,7 @@ namespace Topical_Memory_System
 				nextVerseButton.Enabled = false;
 			}
 			Verse v = verses[currentVerseIndex];
-			SetVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackInformation() + "  " + GetPackTheme(v), v.isTmsVerse());
+			SetVerseFields(v.getTmsMainTopic(), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackInformation() + "  " + v.getTmsSubTopic(), v.isTmsVerse());
 		}
 
 		private void PreviousVerseButton_Click(object sender, EventArgs e)
@@ -222,83 +220,7 @@ namespace Topical_Memory_System
 				nextVerseButton.Enabled = true;
 			}
 			Verse v = verses[currentVerseIndex];
-            SetVerseFields(GetVerseTheme(v), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackInformation() + "  " + GetPackTheme(v), v.isTmsVerse());
-		}
-
-		private static string GetVerseTheme(Verse v)
-		{
-            if (v.isTmsVerse())
-            {
-                int mainThemeIndex = 0;
-                if (v.getPackInformation()[0] == 'A')
-                {
-                    mainThemeIndex = 1;
-                }
-                else if (v.getPackInformation()[0] == 'B')
-                {
-                    mainThemeIndex = 2;
-                }
-                else if (v.getPackInformation()[0] == 'C')
-                {
-                    mainThemeIndex = 3;
-                }
-                else if (v.getPackInformation()[0] == 'D')
-                {
-                    mainThemeIndex = 4;
-                }
-                else if (v.getPackInformation()[0] == 'E')
-                {
-                    mainThemeIndex = 5;
-                }
-                int verseThemeIndex = 0;
-                int packNumber = Convert.ToInt32(v.getPackInformation().Split('-')[1]);
-                if ((packNumber % 2) != 0)	//if odd
-                {
-                    verseThemeIndex = (packNumber + 1) / 2;
-                }
-                else
-                {
-                    verseThemeIndex = packNumber / 2;
-                }
-                return ((string)((Hashtable)topics[mainThemeIndex])[verseThemeIndex]);
-            }
-            else
-            {
-                return v.getPackInformation();
-            }
-		}
-
-		private static string GetPackTheme(Verse v)
-		{
-            if (v.isTmsVerse())
-            {
-                int mainThemeIndex = 0;
-                if (v.getPackInformation()[0] == 'A')
-                {
-                    mainThemeIndex = 1;
-                }
-                else if (v.getPackInformation()[0] == 'B')
-                {
-                    mainThemeIndex = 2;
-                }
-                else if (v.getPackInformation()[0] == 'C')
-                {
-                    mainThemeIndex = 3;
-                }
-                else if (v.getPackInformation()[0] == 'D')
-                {
-                    mainThemeIndex = 4;
-                }
-                else if (v.getPackInformation()[0] == 'E')
-                {
-                    mainThemeIndex = 5;
-                }
-                return ((string)((Hashtable)topics[mainThemeIndex])[0]);
-            }
-            else
-            {
-                return "";
-            }
+			SetVerseFields(v.getTmsMainTopic(), v.getReference(), v.getTranslation(), v.getVerseData(), v.getPackInformation() + "  " + v.getTmsSubTopic(), v.isTmsVerse());
 		}
 
 		public static void ChangeTranslation(string translation)
@@ -308,7 +230,7 @@ namespace Topical_Memory_System
 				v.setTranslation(translation);
 			}
 			Verse verse = verses[currentVerseIndex];
-			SetVerseFields(GetVerseTheme(verse), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackInformation() + "  " + GetPackTheme(verse), verse.isTmsVerse());
+			SetVerseFields(verse.getTmsMainTopic(), verse.getReference(), verse.getTranslation(), verse.getVerseData(), verse.getPackInformation() + "  " + verse.getTmsSubTopic(), verse.isTmsVerse());
 		}
 
         private void ViewVerseInContextButton_Click(object sender, EventArgs e)

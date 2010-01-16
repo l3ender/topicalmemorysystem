@@ -40,7 +40,7 @@
             this.UpdateVerseButton = new System.Windows.Forms.Button();
             this.DeleteVerseButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.verseDataBox = new System.Windows.Forms.TextBox();
+            verseDataBox = new System.Windows.Forms.TextBox();
             this.verseReferenceBox = new System.Windows.Forms.TextBox();
             this.verseNameBox = new System.Windows.Forms.TextBox();
             this.versesListBox = new System.Windows.Forms.ListBox();
@@ -137,7 +137,7 @@
             this.panel3.Controls.Add(this.UpdateVerseButton);
             this.panel3.Controls.Add(this.DeleteVerseButton);
             this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.verseDataBox);
+            this.panel3.Controls.Add(verseDataBox);
             this.panel3.Controls.Add(this.verseReferenceBox);
             this.panel3.Controls.Add(this.verseNameBox);
             this.panel3.Controls.Add(this.versesListBox);
@@ -179,12 +179,12 @@
             // 
             // verseDataBox
             // 
-            this.verseDataBox.Location = new System.Drawing.Point(157, 67);
-            this.verseDataBox.Multiline = true;
-            this.verseDataBox.Name = "verseDataBox";
-            this.verseDataBox.Size = new System.Drawing.Size(292, 88);
-            this.verseDataBox.TabIndex = 6;
-            this.verseDataBox.TextChanged += new System.EventHandler(this.VerseValueChanged);
+            verseDataBox.Location = new System.Drawing.Point(157, 67);
+            verseDataBox.Multiline = true;
+            verseDataBox.Name = "verseDataBox";
+            verseDataBox.Size = new System.Drawing.Size(292, 88);
+            verseDataBox.TabIndex = 6;
+            verseDataBox.TextChanged += new System.EventHandler(this.VerseValueChanged);
             // 
             // verseReferenceBox
             // 

@@ -12,23 +12,29 @@ namespace Topical_Memory_System
 		private int chapter;
 		private string verseNumbers;	//can be multiple verses
         private string packInformation; //like "A-1" or "Meditation Verses"
+		private string tmsMainTopic;		//like "Live The New Life"
+		private string tmsSubTopic;			//like "Christ the Center"
 		private string nivVerseData;
 		private string esvVerseData;
 		private string nbvVerseData;
 		private string nbvBook;
-		private int nbvChapter;
-		private string nbvVerseNumbers;
 		private string translation;     //ESV, NIV, etc
         private bool isTMSVerse;        //only TMS verses have pack numbers, etc
 
-		public Verse(string book, int chapter, string verseNumbers, string packInformation, string nivVerseData, bool isTMS)
+		public Verse(string book, int chapter, string verseNumbers, string packInformation, string tmsMainTopic, string tmsSubTopic,
+			string nivVerseData, string esvVerseData, string nbvBook, string nbvVerseData, bool isTMS)
 		{
 			this.translation = "NIV";
 			this.book = book;
 			this.chapter = chapter;
 			this.verseNumbers = verseNumbers;
             this.packInformation = packInformation;
+			this.tmsMainTopic = tmsMainTopic;
+			this.tmsSubTopic = tmsSubTopic;
 			this.nivVerseData = nivVerseData;
+			this.esvVerseData = esvVerseData;
+			this.nbvVerseData = nbvVerseData;
+			this.nbvBook = nbvBook;
             this.isTMSVerse = isTMS;
 		}
 
@@ -49,7 +55,7 @@ namespace Topical_Memory_System
 
 		public string getBook()
 		{
-			if (translation.Equals("NBV"))
+			if (translation.Equals("NBV") && isTMSVerse)
 			{
 				return nbvBook;
 			}
@@ -68,9 +74,9 @@ namespace Topical_Memory_System
 		}
 		public string getReference()
 		{
-			if (translation.Equals("NBV"))
+			if (translation.Equals("NBV") && isTMSVerse)
 			{
-				return nbvBook + " " + nbvChapter.ToString() + ":" + nbvVerseNumbers.ToString();
+				return nbvBook + " " + getChapter().ToString() + ":" + getVerseNumbers().ToString();
 			}
 			else
 			{
@@ -80,6 +86,14 @@ namespace Topical_Memory_System
 		public string getPackInformation()
 		{
             return packInformation;
+		}
+		public string getTmsMainTopic()
+		{
+			return tmsMainTopic;
+		}
+		public string getTmsSubTopic()
+		{
+			return tmsSubTopic;
 		}
 		public string getTranslation()
 		{
@@ -131,29 +145,13 @@ namespace Topical_Memory_System
 		{
 			return nbvVerseData;
 		}
-		public void setNbvReference(string nbvBook, int nbvChapter, string nbvVerseNumbers)
-		{
-			this.nbvBook = nbvBook;
-			this.nbvChapter = nbvChapter;
-			this.nbvVerseNumbers = nbvVerseNumbers;
-		}
 		public string getNbvBook()
 		{
 			return nbvBook;
-		}
-		public int getNbvChapter()
-		{
-			return nbvChapter;
-		}
-		public string getNbvVerseNumbers()
-		{
-			return nbvVerseNumbers;
 		}
         public bool isTmsVerse()
         {
             return isTMSVerse;
         }
 	}
-
-
 }

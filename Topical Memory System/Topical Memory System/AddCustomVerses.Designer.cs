@@ -40,7 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.verseDataBox = new System.Windows.Forms.TextBox();
+            verseDataBox = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -77,7 +77,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.verseDataBox);
+            this.panel2.Controls.Add(verseDataBox);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
@@ -167,12 +167,12 @@
             // 
             // verseDataBox
             // 
-            this.verseDataBox.Location = new System.Drawing.Point(28, 137);
-            this.verseDataBox.Multiline = true;
-            this.verseDataBox.Name = "verseDataBox";
-            this.verseDataBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.verseDataBox.Size = new System.Drawing.Size(355, 92);
-            this.verseDataBox.TabIndex = 10;
+            verseDataBox.Location = new System.Drawing.Point(28, 137);
+            verseDataBox.Multiline = true;
+            verseDataBox.Name = "verseDataBox";
+            verseDataBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            verseDataBox.Size = new System.Drawing.Size(355, 92);
+            verseDataBox.TabIndex = 10;
             // 
             // saveButton
             // 

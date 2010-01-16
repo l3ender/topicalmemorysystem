@@ -6,10 +6,12 @@ namespace Topical_Memory_System
 	public class VersePack
 	{
 		public string Name;
+		public string FileLocation;	//for custom verses
 		public List<Verse> Verses;
 
-		public VersePack()
+		public VersePack(string IncomingFileLocation)
 		{
+			this.FileLocation = IncomingFileLocation;
 			Verses = new List<Verse>();
 		}
 
