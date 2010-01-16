@@ -41,6 +41,7 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.BlankLabel = new System.Windows.Forms.Label();
 			this.HintButton = new System.Windows.Forms.Button();
+			this.ClearButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// VerseLabel
@@ -180,10 +181,21 @@
 			this.HintButton.UseVisualStyleBackColor = true;
 			this.HintButton.Click += new System.EventHandler(this.HintButton_Click);
 			// 
+			// ClearButton
+			// 
+			this.ClearButton.Location = new System.Drawing.Point(448, 6);
+			this.ClearButton.Name = "ClearButton";
+			this.ClearButton.Size = new System.Drawing.Size(52, 23);
+			this.ClearButton.TabIndex = 15;
+			this.ClearButton.Text = "Clear";
+			this.ClearButton.UseVisualStyleBackColor = true;
+			this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+			// 
 			// LearnVerses
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.ClearButton);
 			this.Controls.Add(this.HintButton);
 			this.Controls.Add(this.BlankLabel);
 			this.Controls.Add(this.label4);
@@ -218,6 +230,7 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label BlankLabel;
 		private System.Windows.Forms.Button HintButton;
+		private System.Windows.Forms.Button ClearButton;
 		private static System.Windows.Forms.Label VerseLabel;
 
 	}

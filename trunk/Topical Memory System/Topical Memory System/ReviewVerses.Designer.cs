@@ -81,10 +81,11 @@
 			frontReference.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			frontReference.Cursor = System.Windows.Forms.Cursors.Default;
 			frontReference.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			frontReference.Location = new System.Drawing.Point(82, 113);
+			frontReference.Location = new System.Drawing.Point(43, 99);
+			frontReference.Multiline = true;
 			frontReference.Name = "frontReference";
 			frontReference.ReadOnly = true;
-			frontReference.Size = new System.Drawing.Size(175, 17);
+			frontReference.Size = new System.Drawing.Size(253, 32);
 			frontReference.TabIndex = 6;
 			frontReference.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			frontReference.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Unfocus);

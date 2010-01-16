@@ -19,7 +19,6 @@ namespace Topical_Memory_System
 		private static List<Verse> versesToMatchAgainst;
 
 		private string translationText;
-		private static Hashtable topics;
         private static bool verseToReference;
 
         private static Verse currentToMatch;
@@ -34,7 +33,7 @@ namespace Topical_Memory_System
 
 		private Random rNum;
 
-        public MatchVerses(List<Verse> incomingVersesToMatch, string incomingTranslation, Hashtable incomingTopics, 
+        public MatchVerses(List<Verse> incomingVersesToMatch, string incomingTranslation, 
             bool incomingVerseToReference, List<Verse> incomingVersesToMatchAgainst)
         {
             InitializeComponent();
@@ -66,7 +65,6 @@ namespace Topical_Memory_System
 				incomingVersesToMatchAgainst.RemoveAt(random);
 			}
             this.translationText = incomingTranslation;
-            topics = incomingTopics;
             verseToReference = incomingVerseToReference;
 
             currentMatching = new List<Verse>(4);

@@ -16,15 +16,15 @@ namespace Topical_Memory_System
 {
 	public partial class MenuExit : Form
 	{
-        private static Hashtable CustomVerses;
-        private static List<Verse> AllVerses;
+
+		private static List<VersePack> AllVerses;
 
 		public MenuExit()
 		{
 			InitializeComponent();
+			AllVerses = ReadInVerses();
             FindInstalledVoices();
             AddAboutStrip();    //add this last manually so it is the right-most strip
-            CustomVerses = LoadCustomVerses();
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
 
@@ -69,7 +69,7 @@ namespace Topical_Memory_System
         }
 
         private void AddAboutStrip()
-        {
+        {	//done so that it is on the furthest right of the strip
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.Items.Add(aboutToolStripMenuItem);
 
@@ -92,12 +92,9 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem.Text = "Help";
         }
 
-        public static Hashtable LoadCustomVerses()
-        {   //key (string) - name of file~custom verse title
-                //ex - customVerses1~Psalms
-            //value (list) - list of verses
-            Hashtable hash = new Hashtable();
-
+        public static List<VersePack> LoadCustomVerses()
+        {
+			List<VersePack> versePacks = new List<VersePack>();
             for (int i = 0; i < Constants.CustomVerseLocations.Length; i++)
             {
                 StreamReader SR;
@@ -105,33 +102,31 @@ namespace Topical_Memory_System
                 SR = File.OpenText(Constants.CustomVerseLocations[i]);
                 S = SR.ReadLine();
                 int index = 0;
-                string title = Constants.CustomVerseLocations[i].Replace(".txt", "");
-                List<Verse> verses = new List<Verse>();
+				VersePack vp = new VersePack(Constants.CustomVerseLocations[i]);
                 while (S != null)
                 {
                     if (S.Trim().Length > 0)
                     {
                         if (index == 0)
                         {   //title line
-                            title = title + "~" + S;
+                            vp.Name = S;
                         }
                         else
                         {
                             string[] info = S.Split('/');
                             //2 Corinthians/5:17/Therefore, if anyone is in Christ, he is a new creation
                             Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
-                                title.Split('~')[1], info[2], false);
-                            verses.Add(v);
+                                vp.Name, "", "", info[2], "", "", "", false);
+							vp.AddVerse(v);
                         }
                     }
                     S = SR.ReadLine();
                     index++;
                 }
                 SR.Close();
-                hash.Add(title, verses);
+				versePacks.Add(vp);
             }
-            CustomVerses = hash;
-            return hash;
+			return versePacks;
         }
 
 		private void MenuExitClick(object sender, EventArgs e)
@@ -216,13 +211,22 @@ namespace Topical_Memory_System
 		public static void ViewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ViewVerses(ReadInVersePacks()));
+			List<VersePack> verses = AllVerses;
+			List<VersePack> customVerses = LoadCustomVerses();
+			foreach (VersePack vp in customVerses)
+			{
+				if (vp.Verses.Count > 0)
+				{
+					verses.Add(vp);
+				}
+			}
+			mainPanel.Controls.Add(new ViewVerses(verses));
 		}
 
 		public static void ReviewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", CustomVerses));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", LoadCustomVerses()));
 		}
 
         public static void MatchVersesHandler(object sender)
@@ -234,7 +238,7 @@ namespace Topical_Memory_System
 		public static void LearnVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learn", CustomVerses));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learn", LoadCustomVerses()));
 		}
 
         public static void MatchVersesHandler(object sender, bool verseToReference)
@@ -242,79 +246,75 @@ namespace Topical_Memory_System
             mainPanel.Controls.Remove((Control)sender);
             if (verseToReference)
             {
-                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", CustomVerses));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", LoadCustomVerses()));
             }
             else
             {
-                mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", CustomVerses));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", LoadCustomVerses()));
             }
         }
 
-		public static void ReviewVersesHandler(List<string> packs, object sender)
+		public static void ReviewVersesHandler(List<VersePack> CustomVerses, List<string> packs, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-            List<Verse> versesToReview = ReadInDesiredVerses(packs);
+			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
             string translation = SelectedTranslationName();
-			Hashtable topics = ReadInTopics();
-			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation, topics));
+			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation));
 		}
 
-        public static void MatchVersesHandler(List<string> packs, bool verseToReference, object sender)
+		public static void MatchVersesHandler(List<VersePack> CustomVerses, List<string> packs, bool verseToReference, object sender)
         {
             mainPanel.Controls.Remove((Control)sender);
-            List<Verse> versesToReview = ReadInDesiredVerses(packs);
-            Hashtable topics = ReadInTopics();
+			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
 			List<Verse> versesToMatchAgainst = new List<Verse>();
-			foreach (Verse v in AllVerses)
+
+			foreach (VersePack vp in AllVerses)
 			{
-				versesToMatchAgainst.Add(v);
+				foreach (Verse v in vp.Verses)
+				{
+					versesToMatchAgainst.Add(v);
+				}
 			}
-			foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
 			{
-				foreach (Verse v in ((List<Verse>)obj.Value))
+				foreach (Verse v in vp.Verses)
 				{
 					versesToMatchAgainst.Add(v);
 				}
 			}
 
-			mainPanel.Controls.Add(new MatchVerses(versesToReview, SelectedTranslationName(), topics, verseToReference, versesToMatchAgainst));
+			mainPanel.Controls.Add(new MatchVerses(versesToReview, SelectedTranslationName(), verseToReference, versesToMatchAgainst));
         }
 
-		public static void LearnVersesHandler(List<string> packs, object sender)
+		public static void LearnVersesHandler(List<VersePack> CustomVerses, List<string> packs, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			List<Verse> versesToReview = ReadInDesiredVerses(packs);
+			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
 			mainPanel.Controls.Add(new LearnVerses(versesToReview));
 		}
 
-        private static List<Verse> ReadInDesiredVerses(List<string> packs)
+		private static List<Verse> GetDesiredVerses(List<string> packs, List<VersePack> CustomVerses)
         {
-            AllVerses = ReadInVerses();
             List<Verse> versesToReview = new List<Verse>();
-            if (packs.Contains("all"))
+			foreach (VersePack vp in AllVerses)
             {
-				versesToReview = AllVerses;
+				if (packs.Contains(vp.Name))
+				{
+					foreach (Verse v in vp.Verses)
+					{
+						versesToReview.Add(v);
+					}
+				}
             }
-            else
+			foreach (VersePack vp in CustomVerses)
             {
-				foreach (Verse v in AllVerses)
+				if (packs.Contains(vp.Name))
                 {
-                    if (packs.Contains(v.getPackInformation().Split('-')[0]) && !versesToReview.Contains(v))
+                    foreach (Verse v in vp.Verses)
                     {
-                        versesToReview.Add(v);
-                    }
-                }
-                foreach (DictionaryEntry obj in CustomVerses)
-                {
-                    if (packs.Contains(((string)obj.Key).Split('~')[0]))
-                    {
-                        List<Verse> verses = ((List<Verse>)obj.Value);
-                        foreach (Verse v in verses)
+                        if (!versesToReview.Contains(v))
                         {
-                            if (!versesToReview.Contains(v))
-                            {
-                                versesToReview.Add(v);
-                            }
+                            versesToReview.Add(v);
                         }
                     }
                 }
@@ -326,101 +326,15 @@ namespace Topical_Memory_System
             return versesToReview;
         }
 
-		private static List<VersePack> ReadInVersePacks()
+		private static List<VersePack> ReadInVerses()
 		{
-			List<Verse> allVerses = ReadInVerses();
-			List<VersePack> Verses = new List<VersePack>(5);
-			for (int n = 0; n < 5; n++)
-			{
-				VersePack vp = new VersePack();
-				vp.SetName(Constants.VerseTopics[n]);
-				for (int j = 0; j < 12; j++)
-				{
-					vp.AddVerse(allVerses[(n * 12) + j]);
-				}
-				Verses.Add(vp);
-			}
-			return Verses;
-		}
-
-		private static List<Verse> ReadInVerses()
-		{
-			List<Verse> allVerses = new List<Verse>();
-			StreamReader SR;
-			string S;
-
-			//NIV
-			SR = File.OpenText(Constants.NivFileLocation);
-			S = SR.ReadLine();
-			while (S != null)
-			{
-				if (S.Trim().Length > 0)
-				{
-					string[] info = S.Split('/');
-					Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
-						info[2].Replace(" ", "-"), info[3], true);
-					allVerses.Add(v);
-				}
-				S = SR.ReadLine();
-			}
-			SR.Close();
-			//ESV
-			SR = File.OpenText(Constants.EsvFileLocation);
-			S = SR.ReadLine();
-			int i = 0;
-			while (S != null)
-			{
-				if (S.Trim().Length > 0)
-				{
-					string[] info = S.Split('/');
-					allVerses[i].setEsvVerseData(info[3]);
-					i++;
-				}
-				S = SR.ReadLine();
-			}
-			SR.Close();
-			//NBV
-			SR = File.OpenText(Constants.NbvFileLocation);
-			S = SR.ReadLine();
-			i = 0;
-			while (S != null)
-			{
-				if (S.Trim().Length > 0)
-				{
-					string[] info = S.Split('/');
-					allVerses[i].setNbvReference(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1]);
-					allVerses[i].setNbvVerseData(info[3]);
-					i++;
-				}
-				S = SR.ReadLine();
-			}
-			SR.Close();
-			return allVerses;
-		}
-
-		private static Hashtable ReadInTopics()
-		{
-			Hashtable topics = new Hashtable();		//stored as <pack#, hashtable<pack#, topics>>
-			string fileLocation = Constants.TmsTopicsFileLocation;
-			StreamReader SR;
-			string S;
-			SR = File.OpenText(fileLocation);
-			S = SR.ReadLine();
-			for (int i = 0; i < 5; i++)
-			{
-				Hashtable inner = new Hashtable();
-				for (int j = 0; j < 7; j++)
-				{
-					if (S != null && S.Trim().Length > 0)
-					{
-						inner.Add(j, S.Trim());
-					}
-					S = SR.ReadLine();
-				}
-				topics.Add((i + 1), inner);
-			}
-			SR.Close();
-			return topics;
+			List<VersePack> verses = new List<VersePack>();
+			verses.Add(TMSVerses.A_PACK());
+			verses.Add(TMSVerses.B_PACK());
+			verses.Add(TMSVerses.C_PACK());
+			verses.Add(TMSVerses.D_PACK());
+			verses.Add(TMSVerses.E_PACK());
+			return verses;
 		}
 
 		private void MainMenuStripClick(object sender, EventArgs e)
@@ -439,7 +353,7 @@ namespace Topical_Memory_System
 			if (biblijaToolStripMenuItem.Checked)
 			{
 				//URL: http://www.biblija.net/biblija.cgi?m=galatians+2&id42=0&id18=1&pos=0&l=nl&set=10
-				url = "http://www.biblija.net/biblija.cgi?m=" + v.getNbvBook() + "+" + v.getNbvChapter().ToString() + 
+				url = "http://www.biblija.net/biblija.cgi?m=" + v.getNbvBook() + "+" + v.getChapter().ToString() + 
 					"&id42=0&id18=1&pos=0&l=nl&set=10";
 			}
 			else if (bibleGatewayToolStripMenuItem.Checked)
@@ -551,15 +465,16 @@ namespace Topical_Memory_System
 
         private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddCustomVerses obj = new AddCustomVerses(CustomVerses);
-            obj.Show();
+			MessageBox.Show("This feature is temporarily disabled.");
+            //AddCustomVerses obj = new AddCustomVerses(LoadCustomVerses());
+            //obj.Show();
         }
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			LoadCustomVerses();
-            EditCustomVerses obj = new EditCustomVerses(CustomVerses);
-            obj.Show();
+			MessageBox.Show("This feature is temporarily disabled.");
+			//EditCustomVerses obj = new EditCustomVerses(LoadCustomVerses());
+            //obj.Show();
         }
 	}
 }

@@ -14,11 +14,11 @@ namespace Topical_Memory_System
     public partial class EditCustomVerses : Form
     {
 
-        private Hashtable CustomVerses;
+        private List<VersePack> CustomVerses;
         private List<Verse> verses;      //verses for the currently selected custom group in the drop down
         private Verse currentVerse;
 
-        public EditCustomVerses(Hashtable IncomingCustomVerses)
+        public EditCustomVerses(List<VersePack> IncomingCustomVerses)
         {
             this.CustomVerses = IncomingCustomVerses;
             InitializeComponent();
@@ -28,22 +28,22 @@ namespace Topical_Memory_System
         private void UpdateGroupNames(object sender, EventArgs e)
         {
             groupNames.Items.Clear();
-            foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
             {
-                groupNames.Items.Add(((string)obj.Key).Split('~')[1]);
+				groupNames.Items.Add(vp.Name);
             }
-            groupNames.SelectedIndex = 0;
+			groupNames.SelectedIndex = 0;
         }
 
         private void SelectedIndexChanged(object sender, EventArgs e)
         {
             groupName.Text = groupNames.Text;
             versesListBox.Items.Clear();
-            foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
             {
-                if (((string)obj.Key).Split('~')[1].Equals(groupNames.Text))
+				if (vp.Name == groupNames.Text)
                 {
-                    verses = ((List<Verse>)obj.Value);
+					verses = vp.Verses;
                     foreach (Verse v in verses)
                     {
                         versesListBox.Items.Add(v.getReference());
@@ -133,7 +133,7 @@ namespace Topical_Memory_System
             else
             {
                 Verse newVerse = new Verse(verseNameBox.Text, Convert.ToInt32(verseReferenceBox.Text.Split(':')[0]),
-                    verseReferenceBox.Text.Split(':')[1], "", verseDataBox.Text, false);
+                    verseReferenceBox.Text.Split(':')[1], "", "", "", verseDataBox.Text, "", "", "", false);
                 UpdateVerse(currentVerse, newVerse, groupNames.Text);
             }
         }
@@ -141,17 +141,17 @@ namespace Topical_Memory_System
         private void UpdateGroupName(string oldName, string newName)
         {
             string fileName = "";
-            foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
             {
-                if (((string)obj.Key).Split('~')[1].Equals(oldName))
+				if (vp.Name == oldName)
                 {
-                    fileName = ((string)obj.Key).Split('~')[0];
+					fileName = vp.FileLocation;
                     break;
                 }
             }
             StreamReader SR;
             string S;
-            SR = File.OpenText(fileName + ".txt");
+            SR = File.OpenText(fileName);
             S = SR.ReadLine();
             string outString = "";
             int index = 0;
@@ -170,7 +170,7 @@ namespace Topical_Memory_System
                 index++;
             }
             SR.Close();
-            File.WriteAllText(fileName + ".txt", outString);
+            File.WriteAllText(fileName, outString);
             CustomVerses = MenuExit.LoadCustomVerses();
             UpdateGroupNames(null, null);
             MessageBox.Show("Name updated!");
@@ -179,17 +179,17 @@ namespace Topical_Memory_System
         private void UpdateVerse(Verse oldVerse, Verse newVerse, string packName)
         {
             string fileName = "";
-            foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
             {
-                if (((string)obj.Key).Split('~')[1].Equals(packName))
+				if (vp.Name == packName)
                 {
-                    fileName = ((string)obj.Key).Split('~')[0];
+					fileName = vp.FileLocation;
                     break;
                 }
             }
             StreamReader SR;
             string S;
-            SR = File.OpenText(fileName + ".txt");
+            SR = File.OpenText(fileName);
             S = SR.ReadLine();
             string outString = "";
             while (S != null)
@@ -210,7 +210,7 @@ namespace Topical_Memory_System
                 S = SR.ReadLine();
             }
             SR.Close();
-            File.WriteAllText(fileName + ".txt", outString);
+            File.WriteAllText(fileName, outString);
             CustomVerses = MenuExit.LoadCustomVerses();
             UpdateGroupNames(null, null);
             MessageBox.Show("Verse updated!");
@@ -219,36 +219,37 @@ namespace Topical_Memory_System
         private void DeleteVerse(Verse oldVerse, string packName)
         {
             string fileName = "";
-            foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
             {
-                if (((string)obj.Key).Split('~')[1].Equals(packName))
+				if (vp.Name == packName)
                 {
-                    fileName = ((string)obj.Key).Split('~')[0];
+					fileName = vp.FileLocation;
                     break;
                 }
             }
             StreamReader SR;
             string S;
-            SR = File.OpenText(fileName + ".txt");
+            SR = File.OpenText(fileName);
             S = SR.ReadLine();
             string outString = "";
+			bool deleted = false;
             while (S != null)
             {
                 if ((oldVerse.getBook() + Constants.FileDelimiter + oldVerse.getChapter().ToString() +
                     ":" + oldVerse.getVerseNumbers() + Constants.FileDelimiter +
-                    oldVerse.getVerseData()).Equals(S))
+                    oldVerse.getVerseData()).Equals(S) && !deleted)
                 {
-                    //do nothing
+					deleted = true;
                 }
                 else
                 {
                     outString += S;
+					outString += "\r\n";
                 }
-                outString += "\r\n";
                 S = SR.ReadLine();
             }
             SR.Close();
-            File.WriteAllText(fileName + ".txt", outString);
+            File.WriteAllText(fileName, outString);
             CustomVerses = MenuExit.LoadCustomVerses();
             UpdateGroupNames(null, null);
             MessageBox.Show("Verse deleted!");

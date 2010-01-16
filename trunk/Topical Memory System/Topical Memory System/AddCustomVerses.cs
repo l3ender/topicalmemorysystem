@@ -14,9 +14,9 @@ namespace Topical_Memory_System
     public partial class AddCustomVerses : Form
     {
 
-        private Hashtable CustomVerses;
+        private List<VersePack> CustomVerses;
 
-        public AddCustomVerses(Hashtable IncomingCustomVerses)
+        public AddCustomVerses(List<VersePack> IncomingCustomVerses)
         {
             this.CustomVerses = IncomingCustomVerses;
             InitializeComponent();
@@ -26,9 +26,9 @@ namespace Topical_Memory_System
         private void UpdateGroupNames(object sender, EventArgs e)
         {
             groupNames.Items.Clear();
-            foreach (DictionaryEntry obj in CustomVerses)
+			foreach (VersePack vp in CustomVerses)
             {
-                groupNames.Items.Add(((string)obj.Key).Split('~')[1]);
+				groupNames.Items.Add(vp.Name);
             }
 			groupNames.SelectedIndex = 0;
         }
@@ -43,12 +43,12 @@ namespace Topical_Memory_System
 			}
 			if (okay)
 			{
-				foreach (DictionaryEntry obj in CustomVerses)
+				foreach (VersePack vp in CustomVerses)
 				{
-					if (groupNames.Text.Equals(((string)obj.Key).Split('~')[1]))
+					if (groupNames.Text == vp.Name)
 					{
 						//2 Corinthians/5:17/Therefore, if anyone is in Christ, he is a new creation.
-						File.AppendAllText(((string)obj.Key).Split('~')[0] + ".txt", "\r\n" + bookBox.Text +
+						File.AppendAllText(vp.FileLocation, "\r\n" + bookBox.Text +
 							Constants.FileDelimiter + referenceBox.Text + Constants.FileDelimiter + verseDataBox.Text);
 						break;
 					}
