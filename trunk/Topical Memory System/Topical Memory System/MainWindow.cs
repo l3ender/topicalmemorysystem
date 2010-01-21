@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.Speech.Synthesis;
 using System.Globalization;
 using System.Collections;
+using System.Data.SQLite;
+using System.Configuration;
 
 namespace Topical_Memory_System
 {
@@ -26,6 +28,16 @@ namespace Topical_Memory_System
             FindInstalledVoices();
             AddAboutStrip();    //add this last manually so it is the right-most strip
 			mainPanel.Controls.Add(new MainMenuPanel());
+		}
+
+		public static List<VersePack> CopyVersePackList(List<VersePack> oldList)
+		{
+			List<VersePack> newList = new List<VersePack>();
+			foreach (VersePack vp in oldList)
+			{
+				newList.Add(vp);
+			}
+			return newList;
 		}
 
         private void FindInstalledVoices()
@@ -92,42 +104,77 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem.Text = "Help";
         }
 
-        public static List<VersePack> LoadCustomVerses()
-        {
-			List<VersePack> versePacks = new List<VersePack>();
-            for (int i = 0; i < Constants.CustomVerseLocations.Length; i++)
-            {
-                StreamReader SR;
-                string S;
-                SR = File.OpenText(Constants.CustomVerseLocations[i]);
-                S = SR.ReadLine();
-                int index = 0;
-				VersePack vp = new VersePack(Constants.CustomVerseLocations[i]);
-                while (S != null)
-                {
-                    if (S.Trim().Length > 0)
-                    {
-                        if (index == 0)
-                        {   //title line
-                            vp.Name = S;
-                        }
-                        else
-                        {
-                            string[] info = S.Split('/');
-                            //2 Corinthians/5:17/Therefore, if anyone is in Christ, he is a new creation
-                            Verse v = new Verse(info[0], Convert.ToInt32(info[1].Split(':')[0]), info[1].Split(':')[1],
-                                vp.Name, "", "", info[2], "", "", "", false);
-							vp.AddVerse(v);
-                        }
-                    }
-                    S = SR.ReadLine();
-                    index++;
-                }
-                SR.Close();
-				versePacks.Add(vp);
-            }
-			return versePacks;
-        }
+		public static List<string> LoadCustomGroupNames()
+		{
+			List<string> names = new List<string>();
+
+			SQLiteConnection conn;
+			SQLiteCommand cmd;
+			SQLiteDataReader dataReader;
+
+			//set up connection
+			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+			conn.Open();
+			cmd = conn.CreateCommand();
+
+			//select statement
+			cmd.CommandText = "SELECT Name FROM CustomGroups;";
+			dataReader = cmd.ExecuteReader();
+
+			int numColumns = dataReader.FieldCount;
+			while (dataReader.Read())
+			{
+				names.Add(dataReader[0].ToString());
+			}
+			conn.Close();
+
+			return names;
+		}
+
+		public static List<VersePack> LoadCustomVerses()
+		{
+			List<string> groupNames = LoadCustomGroupNames();
+
+			List<VersePack> vps = new List<VersePack>();
+			foreach (string name in groupNames)
+			{
+				vps.Add(LoadCustomVersesByGroupName(name));
+			}
+
+			return vps;
+		}
+
+		public static VersePack LoadCustomVersesByGroupName(string groupName)
+		{
+			VersePack vp = new VersePack();
+			vp.SetName(groupName);
+
+			SQLiteConnection conn;
+			SQLiteCommand cmd;
+			SQLiteDataReader dataReader;
+
+			//set up connection
+			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+			conn.Open();
+			cmd = conn.CreateCommand();
+
+			//select statement
+			cmd.CommandText = "SELECT V.Book, V.Chapter, V.VerseNumbers, V.VerseData, G.Name FROM CustomVerses V " +
+				"INNER JOIN CustomGroups G ON V.GroupNameID = G.ID " +
+				"WHERE (G.Name = '" + groupName.Replace("'", "''") + "');";
+			dataReader = cmd.ExecuteReader();
+
+			int numColumns = dataReader.FieldCount;
+			while (dataReader.Read())
+			{
+				Verse v = new Verse(dataReader[0].ToString(), Convert.ToInt32(dataReader[1]), dataReader[2].ToString(),
+					dataReader[4].ToString(), "", "", dataReader[3].ToString(), "", "", "", false);
+				vp.AddVerse(v);
+			}
+			conn.Close();
+
+			return vp;
+		}
 
 		private void MenuExitClick(object sender, EventArgs e)
 		{
@@ -211,7 +258,7 @@ namespace Topical_Memory_System
 		public static void ViewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			List<VersePack> verses = AllVerses;
+			List<VersePack> verses = CopyVersePackList(AllVerses);
 			List<VersePack> customVerses = LoadCustomVerses();
 			foreach (VersePack vp in customVerses)
 			{
@@ -341,7 +388,8 @@ namespace Topical_Memory_System
 		{
 			while (mainPanel.Controls.Count > 0)
 			{
-				mainPanel.Controls.RemoveAt(0);
+				mainPanel.Controls[0].Dispose();
+				//mainPanel.Controls.RemoveAt(0);
 			}
 			mainPanel.Controls.Add(new MainMenuPanel());
 		}
@@ -465,16 +513,14 @@ namespace Topical_Memory_System
 
         private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			MessageBox.Show("This feature is temporarily disabled.");
-            //AddCustomVerses obj = new AddCustomVerses(LoadCustomVerses());
-            //obj.Show();
+			AddCustomVerses obj = new AddCustomVerses(LoadCustomGroupNames());
+            obj.Show();
         }
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			MessageBox.Show("This feature is temporarily disabled.");
-			//EditCustomVerses obj = new EditCustomVerses(LoadCustomVerses());
-            //obj.Show();
+			EditCustomVerses obj = new EditCustomVerses(LoadCustomVerses());
+            obj.Show();
         }
 	}
 }

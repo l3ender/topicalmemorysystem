@@ -8,17 +8,18 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using System.Data.SQLite;
 
 namespace Topical_Memory_System
 {
     public partial class AddCustomVerses : Form
     {
 
-        private List<VersePack> CustomVerses;
+        private List<string> CustomGroupNames;
 
-        public AddCustomVerses(List<VersePack> IncomingCustomVerses)
+		public AddCustomVerses(List<string> IncomingCustomGroupNames)
         {
-            this.CustomVerses = IncomingCustomVerses;
+			this.CustomGroupNames = IncomingCustomGroupNames;
             InitializeComponent();
             UpdateGroupNames(null, null);
         }
@@ -26,9 +27,9 @@ namespace Topical_Memory_System
         private void UpdateGroupNames(object sender, EventArgs e)
         {
             groupNames.Items.Clear();
-			foreach (VersePack vp in CustomVerses)
+			foreach (string name in CustomGroupNames)
             {
-				groupNames.Items.Add(vp.Name);
+				groupNames.Items.Add(name);
             }
 			groupNames.SelectedIndex = 0;
         }
@@ -41,24 +42,45 @@ namespace Topical_Memory_System
 				MessageBox.Show("You must enter the book, reference, and verse!");
 				okay = false;
 			}
+			if (okay && !referenceBox.Text.Contains(':'))
+			{
+				MessageBox.Show("Please enter the reference in the correct form.  Example:  15:3");
+				okay = false;
+			}
 			if (okay)
 			{
-				foreach (VersePack vp in CustomVerses)
-				{
-					if (groupNames.Text == vp.Name)
-					{
-						//2 Corinthians/5:17/Therefore, if anyone is in Christ, he is a new creation.
-						File.AppendAllText(vp.FileLocation, "\r\n" + bookBox.Text +
-							Constants.FileDelimiter + referenceBox.Text + Constants.FileDelimiter + verseDataBox.Text);
-						break;
-					}
-				}
-				MessageBox.Show("Verse saved!");
+				string book = bookBox.Text.Trim();
+				int chapter = Convert.ToInt32(referenceBox.Text.Split(':')[0].Trim());
+				string verseNumbers = referenceBox.Text.Split(':')[1].Trim();
+				string verseData = verseDataBox.Text.Trim().Replace("'", "''");
+				string groupName = groupNames.Text;
+				SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
 				groupNames.SelectedIndex = 0;
 				bookBox.Text = "";
 				referenceBox.Text = "";
 				verseDataBox.Text = "";
 			}
         }
+
+		private void SaveVerseToDatabase(string book, int chapter, string verseNumbers, string verseData, string groupName)
+		{
+			SQLiteConnection conn;
+			SQLiteCommand cmd;
+
+			//set up connection
+			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+			conn.Open();
+			cmd = conn.CreateCommand();
+
+			//insert statement
+			cmd.CommandText = "INSERT INTO CustomVerses (Book, Chapter, VerseNumbers, VerseData, GroupNameID) VALUES (" +
+				"'" + book + "', " + chapter.ToString() + ", '" + verseNumbers + "', '" + verseData + "', " +
+				"(SELECT ID FROM CustomGroups WHERE (Name  = '" + groupName + "') LIMIT 0, 1));";
+
+			int result = cmd.ExecuteNonQuery();
+			MessageBox.Show("Verse saved!");
+
+			conn.Close();
+		}
     }
 }

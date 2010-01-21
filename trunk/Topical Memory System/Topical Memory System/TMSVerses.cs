@@ -9,7 +9,7 @@ namespace Topical_Memory_System
 	{
 		public static VersePack A_PACK()
 		{
-			VersePack vp = new VersePack("");
+			VersePack vp = new VersePack();
 			vp.Name = "A - Live The New Life";
 			vp.AddVerse(new Verse("2 Corinthians", 5, "17", "A-1", "Live The New Life", "Christ the Center",
 				"Therefore, if anyone is in Christ, he is a new creation; the old has gone, the new has come!",
@@ -76,7 +76,7 @@ namespace Topical_Memory_System
 
 		public static VersePack B_PACK()
 		{
-			VersePack vp = new VersePack("");
+			VersePack vp = new VersePack();
 			vp.Name = "B - Proclaim Christ";
 			vp.AddVerse(new Verse("Romans", 3, "23", "B-1", "Proclaim Christ", "All Have Sinned",
 				"For all have sinned and fall short of the glory of God",
@@ -143,7 +143,7 @@ namespace Topical_Memory_System
 
 		public static VersePack C_PACK()
 		{
-			VersePack vp = new VersePack("");
+			VersePack vp = new VersePack();
 			vp.Name = "C - Rely On God's Resources";
 			vp.AddVerse(new Verse("1 Corinthians", 3, "16", "C-1", "Rely On God's Resources", "His Spirit",
 				"Don't you know that you yourselves are God's temple and that God's Spirit lives in you?",
@@ -210,7 +210,7 @@ namespace Topical_Memory_System
 
 		public static VersePack D_PACK()
 		{
-			VersePack vp = new VersePack("");
+			VersePack vp = new VersePack();
 			vp.Name = "D - Be Christ's Disciple";
 			vp.AddVerse(new Verse("Matthew", 6, "33", "D-1", "Be Christ's Disciple", "Put Christ First",
 				"But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
@@ -277,7 +277,7 @@ namespace Topical_Memory_System
 
 		public static VersePack E_PACK()
 		{
-			VersePack vp = new VersePack("");
+			VersePack vp = new VersePack();
 			vp.Name = "E - Grow In Christlikeness";
 			vp.AddVerse(new Verse("John", 13, "34,35", "E-1", "Grow In Christlikeness", "Love",
 				"\"A new command I give you: Love one another. As I have loved you, so you must love one another.  By this all men will know that you are my disciples, if you love one another.\"",

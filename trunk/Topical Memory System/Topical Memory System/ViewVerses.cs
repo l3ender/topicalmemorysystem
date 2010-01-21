@@ -22,6 +22,7 @@ namespace Topical_Memory_System
 		{
 			InitializeComponent();
 			Verses = IncomingVerses;
+			VersePacksBox.Items.Clear();
 			foreach (VersePack vp in Verses)
 			{
 				VersePacksBox.Items.Add(vp.Name);
