@@ -13,5 +13,7 @@ namespace Topical_Memory_System
         public static int MinimumAllowedForMatching = 12;
         public static int MaximumCharactersForCustomGroupName = 20;
         public static string FileDelimiter = "/";
+		public static string DatabaseConnectionString = "data source=" +
+			Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TMS\\" + "CustomVerses.db;";
 	}
 }

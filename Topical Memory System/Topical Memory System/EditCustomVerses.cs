@@ -8,12 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
+using System.Data.SQLite;
 
 namespace Topical_Memory_System
 {
     public partial class EditCustomVerses : Form
     {
-
         private List<VersePack> CustomVerses;
         private List<Verse> verses;      //verses for the currently selected custom group in the drop down
         private Verse currentVerse;
@@ -103,7 +103,7 @@ namespace Topical_Memory_System
             }
             else
             {
-                UpdateGroupName(groupNames.Text, groupName.Text);
+                UpdateGroupName(groupNames.Text, groupName.Text.Trim());
             }
         }
 
@@ -112,7 +112,7 @@ namespace Topical_Memory_System
             if (MessageBox.Show("Are you sure you want to delete this verse?", "Delete Verse Confirmation", MessageBoxButtons.YesNo)
                 == DialogResult.Yes)
             {
-                DeleteVerse(currentVerse, groupNames.Text);
+                DeleteVerse(currentVerse);
             }
         }
 
@@ -132,127 +132,82 @@ namespace Topical_Memory_System
             }
             else
             {
-                Verse newVerse = new Verse(verseNameBox.Text, Convert.ToInt32(verseReferenceBox.Text.Split(':')[0]),
-                    verseReferenceBox.Text.Split(':')[1], "", "", "", verseDataBox.Text, "", "", "", false);
-                UpdateVerse(currentVerse, newVerse, groupNames.Text);
+                Verse newVerse = new Verse(verseNameBox.Text.Trim(), Convert.ToInt32(verseReferenceBox.Text.Split(':')[0].Trim()),
+                    verseReferenceBox.Text.Split(':')[1].Trim(), "", "", "", verseDataBox.Text.Trim().Replace("'", "''"), "", "", "", false);
+				UpdateVerse(currentVerse, newVerse);
             }
         }
 
         private void UpdateGroupName(string oldName, string newName)
         {
-            string fileName = "";
-			foreach (VersePack vp in CustomVerses)
-            {
-				if (vp.Name == oldName)
-                {
-					fileName = vp.FileLocation;
-                    break;
-                }
-            }
-            StreamReader SR;
-            string S;
-            SR = File.OpenText(fileName);
-            S = SR.ReadLine();
-            string outString = "";
-            int index = 0;
-            while (S != null)
-            {
-                if (index == 0)
-                {   //title line
-                    outString += newName;
-                }
-                else
-                {
-                    outString += S;
-                }
-                outString += "\r\n";
-                S = SR.ReadLine();
-                index++;
-            }
-            SR.Close();
-            File.WriteAllText(fileName, outString);
-            CustomVerses = MenuExit.LoadCustomVerses();
-            UpdateGroupNames(null, null);
-            MessageBox.Show("Name updated!");
+			SQLiteConnection conn;
+			SQLiteCommand cmd;
+
+			//set up connection
+			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+			conn.Open();
+			cmd = conn.CreateCommand();
+
+			//insert statement
+			cmd.CommandText = "UPDATE CustomGroups SET Name = '" + newName.Replace("'", "''") + "' WHERE (CustomGroups.Name = '" + oldName.Replace("'", "''") + "');";
+			cmd.ExecuteNonQuery();
+
+			int result = cmd.ExecuteNonQuery();
+			conn.Close();
+
+			CustomVerses = MenuExit.LoadCustomVerses();
+			UpdateGroupNames(null, null);
+			MessageBox.Show("Group name updated!");
         }
 
-        private void UpdateVerse(Verse oldVerse, Verse newVerse, string packName)
-        {
-            string fileName = "";
-			foreach (VersePack vp in CustomVerses)
-            {
-				if (vp.Name == packName)
-                {
-					fileName = vp.FileLocation;
-                    break;
-                }
-            }
-            StreamReader SR;
-            string S;
-            SR = File.OpenText(fileName);
-            S = SR.ReadLine();
-            string outString = "";
-            while (S != null)
-            {
-                if ((oldVerse.getBook() + Constants.FileDelimiter + oldVerse.getChapter().ToString() +
-                    ":" + oldVerse.getVerseNumbers() + Constants.FileDelimiter + 
-                    oldVerse.getVerseData()).Equals(S))
-                {
-                    outString += newVerse.getBook() + Constants.FileDelimiter + newVerse.getChapter().ToString() +
-                        ":" + newVerse.getVerseNumbers() + Constants.FileDelimiter +
-                        newVerse.getVerseData();
-                }
-                else
-                {
-                    outString += S;
-                }
-                outString += "\r\n";
-                S = SR.ReadLine();
-            }
-            SR.Close();
-            File.WriteAllText(fileName, outString);
-            CustomVerses = MenuExit.LoadCustomVerses();
-            UpdateGroupNames(null, null);
-            MessageBox.Show("Verse updated!");
-        }
+		private void UpdateVerse(Verse oldVerse, Verse newVerse)
+		{
+			SQLiteConnection conn;
+			SQLiteCommand cmd;
 
-        private void DeleteVerse(Verse oldVerse, string packName)
-        {
-            string fileName = "";
-			foreach (VersePack vp in CustomVerses)
-            {
-				if (vp.Name == packName)
-                {
-					fileName = vp.FileLocation;
-                    break;
-                }
-            }
-            StreamReader SR;
-            string S;
-            SR = File.OpenText(fileName);
-            S = SR.ReadLine();
-            string outString = "";
-			bool deleted = false;
-            while (S != null)
-            {
-                if ((oldVerse.getBook() + Constants.FileDelimiter + oldVerse.getChapter().ToString() +
-                    ":" + oldVerse.getVerseNumbers() + Constants.FileDelimiter +
-                    oldVerse.getVerseData()).Equals(S) && !deleted)
-                {
-					deleted = true;
-                }
-                else
-                {
-                    outString += S;
-					outString += "\r\n";
-                }
-                S = SR.ReadLine();
-            }
-            SR.Close();
-            File.WriteAllText(fileName, outString);
-            CustomVerses = MenuExit.LoadCustomVerses();
-            UpdateGroupNames(null, null);
-            MessageBox.Show("Verse deleted!");
-        }
+			//set up connection
+			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+			conn.Open();
+			cmd = conn.CreateCommand();
+
+			//insert statement
+			cmd.CommandText = "UPDATE CustomVerses " +
+				"SET Book = '" + newVerse.getBook() + "', Chapter = " + newVerse.getChapter() +
+					", VerseNumbers = '" + newVerse.getVerseNumbers() + "', VerseData = '" + newVerse.getVerseData() + "' " +
+				"WHERE (CustomVerses.Book = '" + oldVerse.getBook() + "') AND (CustomVerses.Chapter = " + oldVerse.getChapter() + ") AND " +
+					"(CustomVerses.VerseNumbers = '" + oldVerse.getVerseNumbers() + "') AND (CustomVerses.VerseData = '" + oldVerse.getVerseData().Replace("'", "''") + "');";
+			cmd.ExecuteNonQuery();
+
+			int result = cmd.ExecuteNonQuery();
+			conn.Close();
+
+			CustomVerses = MenuExit.LoadCustomVerses();
+			UpdateGroupNames(null, null);
+			MessageBox.Show("Verse updated!");
+		}
+
+		private void DeleteVerse(Verse oldVerse)
+		{
+			SQLiteConnection conn;
+			SQLiteCommand cmd;
+
+			//set up connection
+			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+			conn.Open();
+			cmd = conn.CreateCommand();
+
+			//insert statement
+			cmd.CommandText = "DELETE FROM CustomVerses " + 
+				"WHERE (CustomVerses.Book = '" + oldVerse.getBook() + "') AND (CustomVerses.Chapter = " + oldVerse.getChapter() + ") AND " +
+					"(CustomVerses.VerseNumbers = '" + oldVerse.getVerseNumbers() + "') AND (CustomVerses.VerseData = '" + oldVerse.getVerseData().Replace("'", "''") + "');";
+			cmd.ExecuteNonQuery();
+
+			int result = cmd.ExecuteNonQuery();
+			conn.Close();
+
+			CustomVerses = MenuExit.LoadCustomVerses();
+			UpdateGroupNames(null, null);
+			MessageBox.Show("Verse deleted.");
+		}
     }
 }
