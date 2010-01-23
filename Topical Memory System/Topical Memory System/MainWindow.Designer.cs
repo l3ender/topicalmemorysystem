@@ -39,6 +39,7 @@ namespace Topical_Memory_System
 			translationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nivStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.nkjvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nbvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.onlineBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.blueLetterBibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,6 +112,7 @@ namespace Topical_Memory_System
 			translationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.esvStripMenuItem,
             this.nivStripMenuItem,
+            this.nkjvStripMenuItem,
             this.nbvStripMenuItem});
 			translationToolStripMenuItem.Name = "translationToolStripMenuItem";
 			translationToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
@@ -133,6 +135,14 @@ namespace Topical_Memory_System
 			this.nivStripMenuItem.Tag = "NIV";
 			this.nivStripMenuItem.Text = "New International Version (NIV)";
 			this.nivStripMenuItem.Click += new System.EventHandler(this.TranslationChanged);
+			// 
+			// nkjvStripMenuItem
+			// 
+			this.nkjvStripMenuItem.Name = "nkjvStripMenuItem";
+			this.nkjvStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.nkjvStripMenuItem.Tag = "NKJV";
+			this.nkjvStripMenuItem.Text = "New King James Version (NKJV)";
+			this.nkjvStripMenuItem.Click += new System.EventHandler(this.TranslationChanged);
 			// 
 			// nbvStripMenuItem
 			// 
@@ -265,6 +275,7 @@ namespace Topical_Memory_System
         private ToolStripMenuItem addVerseToolStripMenuItem;
 		private ToolStripMenuItem editCustomVersesToolStripMenuItem;
 		private ToolStripMenuItem nbvStripMenuItem;
+		private ToolStripMenuItem nkjvStripMenuItem;
 		public static PictureBox loadingBox;
 		private static ToolStripMenuItem bibleGatewayToolStripMenuItem;
 		private static ToolStripMenuItem esvOnlineStudyBibleToolStripMenuItem;

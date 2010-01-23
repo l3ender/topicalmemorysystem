@@ -133,7 +133,7 @@ namespace Topical_Memory_System
             else
             {
                 Verse newVerse = new Verse(verseNameBox.Text.Trim(), Convert.ToInt32(verseReferenceBox.Text.Split(':')[0].Trim()),
-                    verseReferenceBox.Text.Split(':')[1].Trim(), "", "", "", verseDataBox.Text.Trim().Replace("'", "''"), "", "", "", false);
+                    verseReferenceBox.Text.Split(':')[1].Trim(), "", "", "", verseDataBox.Text.Trim().Replace("'", "''"), "", "", "", "", false);
 				UpdateVerse(currentVerse, newVerse);
             }
         }
