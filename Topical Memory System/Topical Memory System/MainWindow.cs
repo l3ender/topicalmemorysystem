@@ -93,7 +93,6 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.Items.Add(aboutToolStripMenuItem);
 
-			/*
 			ToolStripMenuItem checkForUpdatesStrip = new System.Windows.Forms.ToolStripMenuItem();
 			checkForUpdatesStrip.Name = "checkForUpdatesStrip";
 			checkForUpdatesStrip.Size = new System.Drawing.Size(237, 22);
@@ -102,7 +101,7 @@ namespace Topical_Memory_System
 			aboutToolStripMenuItem.DropDownItems.Add(checkForUpdatesStrip);
 
 			aboutToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
-			*/
+
             ToolStripMenuItem infoStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             infoStripMenuItem.Name = "infoStripMenuItem";
             infoStripMenuItem.Size = new System.Drawing.Size(237, 22);
@@ -270,7 +269,7 @@ namespace Topical_Memory_System
         private void ContactInfo(object sender, EventArgs e)
         {
             AboutApplication ab = new AboutApplication();
-            ab.Show();
+            ab.ShowDialog();
         }
 
 		public static void ViewVersesHandler(object sender)
@@ -532,13 +531,13 @@ namespace Topical_Memory_System
         private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			AddCustomVerses obj = new AddCustomVerses(LoadCustomGroupNames());
-            obj.Show();
+            obj.ShowDialog();
         }
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			EditCustomVerses obj = new EditCustomVerses(LoadCustomVerses());
-            obj.Show();
+			obj.ShowDialog();
         }
 
 		private void CheckForUpdate()
