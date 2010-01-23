@@ -108,24 +108,27 @@ namespace Topical_Memory_System
 					}
 				}
 				if (update == 0)
-				{
+				{	//no update needed, we are using the same version as the feed
 					if (currentVersion != latestVersion)
 					{	//something went wrong in our parsing :S
 						throw new Exception();
 					}
 					else
 					{
-						MessageBox.Show("You are using version " + currentVersion + ", which is the latest version!");
+						UpdateForm uf = new UpdateForm(false);
+						uf.ShowDialog();
 					}
 				}
 				else if (update == 1)
-				{
-					MessageBox.Show("A new version is available.");
+				{	//need an update
+					UpdateForm uf = new UpdateForm(true);
+					uf.ShowDialog();
 				}
 				else if (update == -1)
 				{	//shouldn't ever get here, but putting it in anyway
 					//this is hit when you are using a later version than the download feed shows
-					MessageBox.Show("You are using version " + currentVersion + ", which is the latest version!");
+					UpdateForm uf = new UpdateForm(false);
+					uf.ShowDialog();
 				}
 			}
 			catch (Exception)
