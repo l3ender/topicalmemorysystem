@@ -303,8 +303,8 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TMS Assistant"
-        "ProductCode" = "8:{9B282D8A-202C-4693-89CA-24186962F78D}"
-        "PackageCode" = "8:{F5972B72-14F3-4BC9-94D6-4D6F32CEEA00}"
+        "ProductCode" = "8:{24311ACD-C0FF-450B-91DE-2B7110658675}"
+        "PackageCode" = "8:{8EFC5D00-5FFF-4B1E-90FB-1AE4C77EF1EE}"
         "UpgradeCode" = "8:{EC9C93F5-CEB1-4408-BED7-7C2941E6597E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"

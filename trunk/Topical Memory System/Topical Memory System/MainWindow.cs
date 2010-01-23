@@ -13,6 +13,8 @@ using System.Globalization;
 using System.Collections;
 using System.Data.SQLite;
 using System.Configuration;
+using System.Threading;
+using System.Xml;
 
 namespace Topical_Memory_System
 {
@@ -28,10 +30,16 @@ namespace Topical_Memory_System
             FindInstalledVoices();
             AddAboutStrip();    //add this last manually so it is the right-most strip
 			mainPanel.Controls.Add(new MainMenuPanel());
+			mainPanel.Refresh();
+		}
+
+		private void CheckForUpdate(object sender, EventArgs e)
+		{
+			UpdateChecker.CheckForUpdate();
 		}
 
 		public static List<VersePack> CopyVersePackList(List<VersePack> oldList)
-		{
+		{	//deep copy for lists
 			List<VersePack> newList = new List<VersePack>();
 			foreach (VersePack vp in oldList)
 			{
@@ -85,6 +93,16 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.Items.Add(aboutToolStripMenuItem);
 
+			/*
+			ToolStripMenuItem checkForUpdatesStrip = new System.Windows.Forms.ToolStripMenuItem();
+			checkForUpdatesStrip.Name = "checkForUpdatesStrip";
+			checkForUpdatesStrip.Size = new System.Drawing.Size(237, 22);
+			checkForUpdatesStrip.Text = "Check for update";
+			checkForUpdatesStrip.Click += new System.EventHandler(this.CheckForUpdate);
+			aboutToolStripMenuItem.DropDownItems.Add(checkForUpdatesStrip);
+
+			aboutToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+			*/
             ToolStripMenuItem infoStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             infoStripMenuItem.Name = "infoStripMenuItem";
             infoStripMenuItem.Size = new System.Drawing.Size(237, 22);
@@ -168,7 +186,7 @@ namespace Topical_Memory_System
 			while (dataReader.Read())
 			{
 				Verse v = new Verse(dataReader[0].ToString(), Convert.ToInt32(dataReader[1]), dataReader[2].ToString(),
-					dataReader[4].ToString(), "", "", dataReader[3].ToString(), "", "", "", false);
+					dataReader[4].ToString(), "", "", dataReader[3].ToString(), "", "", "", "", false);
 				vp.AddVerse(v);
 			}
 			conn.Close();
@@ -522,5 +540,10 @@ namespace Topical_Memory_System
 			EditCustomVerses obj = new EditCustomVerses(LoadCustomVerses());
             obj.Show();
         }
+
+		private void CheckForUpdate()
+		{
+
+		}
 	}
 }

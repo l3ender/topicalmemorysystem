@@ -14,6 +14,7 @@ namespace Topical_Memory_System
         public AboutApplication()
         {
             InitializeComponent();
+			VersionBox.Text = "Version " + Constants.Version;
             richTextBox3.Focus();
         }
 

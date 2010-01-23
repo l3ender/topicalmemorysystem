@@ -18,11 +18,12 @@ namespace Topical_Memory_System
 		private string esvVerseData;
 		private string nbvVerseData;
 		private string nbvBook;
+		private string nkjvVerseData;
 		private string translation;     //ESV, NIV, etc
         private bool isTMSVerse;        //only TMS verses have pack numbers, etc
 
 		public Verse(string book, int chapter, string verseNumbers, string packInformation, string tmsMainTopic, string tmsSubTopic,
-			string nivVerseData, string esvVerseData, string nbvBook, string nbvVerseData, bool isTMS)
+			string nivVerseData, string esvVerseData, string nbvBook, string nbvVerseData, string nkjvVerseData, bool isTMS)
 		{
 			this.translation = "NIV";
 			this.book = book;
@@ -33,8 +34,9 @@ namespace Topical_Memory_System
 			this.tmsSubTopic = tmsSubTopic;
 			this.nivVerseData = nivVerseData;
 			this.esvVerseData = esvVerseData;
-			this.nbvVerseData = nbvVerseData;
 			this.nbvBook = nbvBook;
+			this.nbvVerseData = nbvVerseData;
+			this.nkjvVerseData = nkjvVerseData;
             this.isTMSVerse = isTMS;
 		}
 
@@ -115,6 +117,10 @@ namespace Topical_Memory_System
 				{
 					return getNbvVerseData();
 				}
+				else if (translation.Equals("NKJV"))
+				{
+					return getNkjvVerseData();
+				}
 				else
 				{
 					return getNivVerseData();
@@ -129,17 +135,9 @@ namespace Topical_Memory_System
 		{
 			return nivVerseData;
 		}
-		public void setEsvVerseData(string esvVerseData)
-		{
-			this.esvVerseData = esvVerseData;
-		}
 		public string getEsvVerseData()
 		{
 			return esvVerseData;
-		}
-		public void setNbvVerseData(string nbvVerseData)
-		{
-			this.nbvVerseData = nbvVerseData;
 		}
 		public string getNbvVerseData()
 		{
@@ -148,6 +146,10 @@ namespace Topical_Memory_System
 		public string getNbvBook()
 		{
 			return nbvBook;
+		}
+		public string getNkjvVerseData()
+		{
+			return nkjvVerseData;
 		}
         public bool isTmsVerse()
         {

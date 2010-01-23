@@ -30,6 +30,7 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.VersionBox = new System.Windows.Forms.RichTextBox();
 			this.richTextBox3 = new System.Windows.Forms.RichTextBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,14 +44,28 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.VersionBox);
 			this.panel1.Controls.Add(this.richTextBox3);
 			this.panel1.Controls.Add(this.richTextBox2);
 			this.panel1.Controls.Add(this.richTextBox1);
 			this.panel1.Controls.Add(this.pictureBox1);
 			this.panel1.Location = new System.Drawing.Point(12, 12);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(268, 300);
+			this.panel1.Size = new System.Drawing.Size(268, 320);
 			this.panel1.TabIndex = 0;
+			// 
+			// VersionBox
+			// 
+			this.VersionBox.BackColor = System.Drawing.SystemColors.Control;
+			this.VersionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.VersionBox.Cursor = System.Windows.Forms.Cursors.Default;
+			this.VersionBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.VersionBox.Location = new System.Drawing.Point(100, 307);
+			this.VersionBox.Name = "VersionBox";
+			this.VersionBox.ReadOnly = true;
+			this.VersionBox.Size = new System.Drawing.Size(68, 19);
+			this.VersionBox.TabIndex = 4;
+			this.VersionBox.Text = "Version ";
 			// 
 			// richTextBox3
 			// 
@@ -128,7 +143,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(292, 324);
+			this.ClientSize = new System.Drawing.Size(292, 344);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
 			this.MaximizeBox = false;
@@ -152,5 +167,6 @@
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+		private System.Windows.Forms.RichTextBox VersionBox;
     }
 }

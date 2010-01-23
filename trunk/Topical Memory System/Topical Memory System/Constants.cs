@@ -15,5 +15,7 @@ namespace Topical_Memory_System
         public static string FileDelimiter = "/";
 		public static string DatabaseConnectionString = "data source=" +
 			Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TMS\\" + "CustomVerses.db;";
+
+		public static string Version = "4.0.1";
 	}
 }
