@@ -73,7 +73,7 @@ namespace Topical_Memory_System
             {
                 translation.Text = "";
             }
-			verseData.Text = Constants.TAB + incomingVerseData;
+			verseData.Text = Constants.Tab + incomingVerseData;
 			if (verseData.Text.Length > 320)
 			{
 				verseData.ScrollBars = ScrollBars.Vertical;

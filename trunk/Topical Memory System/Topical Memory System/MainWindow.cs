@@ -105,7 +105,7 @@ namespace Topical_Memory_System
             ToolStripMenuItem infoStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             infoStripMenuItem.Name = "infoStripMenuItem";
             infoStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            infoStripMenuItem.Text = "Project Homepage";
+            infoStripMenuItem.Text = "Project homepage";
             infoStripMenuItem.Click += new System.EventHandler(this.AboutInfo);
             aboutToolStripMenuItem.DropDownItems.Add(infoStripMenuItem);
 
@@ -540,9 +540,24 @@ namespace Topical_Memory_System
 			obj.ShowDialog();
         }
 
-		private void CheckForUpdate()
+		private void importVersesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			OpenFileDialog dlg = new OpenFileDialog();
+			dlg.Multiselect = false;
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				MessageBox.Show(dlg.FileName);
+			}
+		}
 
+		private void exportVersesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			List<VersePack> vps = new List<VersePack>();
+			vps.Add(TMSVerses.A_PACK());
+			vps.Add(TMSVerses.B_PACK());
+			vps.Add(TMSVerses.C_PACK());
+			ExportVerses ev = new ExportVerses(vps);
+			ev.ShowDialog();
 		}
 	}
 }
