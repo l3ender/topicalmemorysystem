@@ -29,13 +29,17 @@ namespace Topical_Memory_System
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuExit));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.customVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addVerseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editCustomVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.importVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			translationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nivStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +54,7 @@ namespace Topical_Memory_System
 			this.openBibleInWebBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			mainPanel = new System.Windows.Forms.Panel();
 			loadingBox = new System.Windows.Forms.PictureBox();
+			this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(loadingBox)).BeginInit();
 			this.SuspendLayout();
@@ -58,6 +63,7 @@ namespace Topical_Memory_System
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.customVersesToolStripMenuItem,
             translationToolStripMenuItem,
             this.onlineBibleToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -70,10 +76,6 @@ namespace Topical_Memory_System
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainMenuStrip,
-			new ToolStripSeparator(),
-            this.addVerseToolStripMenuItem,
-            this.editCustomVersesToolStripMenuItem,
-			new ToolStripSeparator(),
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -82,30 +84,58 @@ namespace Topical_Memory_System
 			// mainMenuStrip
 			// 
 			this.mainMenuStrip.Name = "mainMenuStrip";
-			this.mainMenuStrip.Size = new System.Drawing.Size(175, 22);
-			this.mainMenuStrip.Text = "Main Menu";
+			this.mainMenuStrip.Size = new System.Drawing.Size(135, 22);
+			this.mainMenuStrip.Text = "Main menu";
 			this.mainMenuStrip.Click += new System.EventHandler(this.MainMenuStripClick);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExitClick);
+			// 
+			// customVersesToolStripMenuItem
+			// 
+			this.customVersesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addVerseToolStripMenuItem,
+            this.editCustomVersesToolStripMenuItem,
+			new ToolStripSeparator(),
+            this.importVersesToolStripMenuItem,
+            this.exportVersesToolStripMenuItem});
+			this.customVersesToolStripMenuItem.Name = "customVersesToolStripMenuItem";
+			this.customVersesToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+			this.customVersesToolStripMenuItem.Text = "Custom Verses";
 			// 
 			// addVerseToolStripMenuItem
 			// 
 			this.addVerseToolStripMenuItem.Name = "addVerseToolStripMenuItem";
-			this.addVerseToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-			this.addVerseToolStripMenuItem.Text = "Add Custom Verse";
+			this.addVerseToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.addVerseToolStripMenuItem.Text = "Add verses";
 			this.addVerseToolStripMenuItem.Click += new System.EventHandler(this.addVerseToolStripMenuItem_Click);
 			// 
 			// editCustomVersesToolStripMenuItem
 			// 
 			this.editCustomVersesToolStripMenuItem.Name = "editCustomVersesToolStripMenuItem";
-			this.editCustomVersesToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-			this.editCustomVersesToolStripMenuItem.Text = "Edit Custom Verses";
+			this.editCustomVersesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.editCustomVersesToolStripMenuItem.Text = "Edit groups and verses";
 			this.editCustomVersesToolStripMenuItem.Click += new System.EventHandler(this.editCustomVersesToolStripMenuItem_Click);
 			// 
-			// exitToolStripMenuItem
+			// importVersesToolStripMenuItem
 			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
-			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExitClick);
+			this.importVersesToolStripMenuItem.Name = "importVersesToolStripMenuItem";
+			this.importVersesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.importVersesToolStripMenuItem.Text = "Import verses";
+			this.importVersesToolStripMenuItem.ToolTipText = "Import verses from a file";
+			this.importVersesToolStripMenuItem.Click += new System.EventHandler(this.importVersesToolStripMenuItem_Click);
+			// 
+			// exportVersesToolStripMenuItem
+			// 
+			this.exportVersesToolStripMenuItem.Name = "exportVersesToolStripMenuItem";
+			this.exportVersesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.exportVersesToolStripMenuItem.Text = "Export verses";
+			this.exportVersesToolStripMenuItem.ToolTipText = "Save your verses to a file so you can use them on a different computer";
+			this.exportVersesToolStripMenuItem.Click += new System.EventHandler(this.exportVersesToolStripMenuItem_Click);
 			// 
 			// translationToolStripMenuItem
 			// 
@@ -271,11 +301,15 @@ namespace Topical_Memory_System
         private System.Windows.Forms.ToolStripMenuItem nivStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem onlineBibleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openBibleInWebBrowserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem blueLetterBibleToolStripMenuItem;
-        private ToolStripMenuItem addVerseToolStripMenuItem;
-		private ToolStripMenuItem editCustomVersesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem blueLetterBibleToolStripMenuItem;
 		private ToolStripMenuItem nbvStripMenuItem;
 		private ToolStripMenuItem nkjvStripMenuItem;
+		private ToolStripMenuItem customVersesToolStripMenuItem;
+		private ToolStripMenuItem addVerseToolStripMenuItem;
+		private ToolStripMenuItem editCustomVersesToolStripMenuItem;
+		private ToolStripMenuItem importVersesToolStripMenuItem;
+		private ToolStripMenuItem exportVersesToolStripMenuItem;
+		private ToolTip ToolTip;
 		public static PictureBox loadingBox;
 		private static ToolStripMenuItem bibleGatewayToolStripMenuItem;
 		private static ToolStripMenuItem esvOnlineStudyBibleToolStripMenuItem;

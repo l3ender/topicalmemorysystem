@@ -96,6 +96,12 @@
     <Compile Include="EditCustomVerses.Designer.cs">
       <DependentUpon>EditCustomVerses.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExportVerses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportVerses.Designer.cs">
+      <DependentUpon>ExportVerses.cs</DependentUpon>
+    </Compile>
     <Compile Include="LearnVerses.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,6 +133,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditCustomVerses.resx">
       <DependentUpon>EditCustomVerses.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportVerses.resx">
+      <DependentUpon>ExportVerses.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LearnVerses.resx">
