@@ -21,7 +21,10 @@ namespace Topical_Memory_System
 			this.CustomVerses = CustomVerses;
 			foreach (VersePack vp in CustomVerses)
 			{
-				VersePackBox.Items.Add(vp.Name);
+				if (vp.Verses.Count > 0)
+				{
+					VersePackBox.Items.Add(vp.Name);
+				}
 			}
 		}
 
@@ -108,6 +111,7 @@ namespace Topical_Memory_System
 			if (SelectedVersesBox.Items.Count < 1)
 			{
 				SaveSelectedButton.Enabled = false;
+				RemoveAllButton.Enabled = false;
 			}
 			RemoveVerseButton.Enabled = false;
 		}
