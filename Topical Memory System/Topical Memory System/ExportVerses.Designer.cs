@@ -29,28 +29,32 @@
 		private void InitializeComponent()
 		{
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.VersePackBox = new System.Windows.Forms.ListBox();
-			this.VersesBox = new System.Windows.Forms.ListBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.SelectedVersesBox = new System.Windows.Forms.ListBox();
-			this.label4 = new System.Windows.Forms.Label();
-			this.AddVerseButton = new System.Windows.Forms.Button();
-			this.AddAllButton = new System.Windows.Forms.Button();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.SaveSelectedButton = new System.Windows.Forms.Button();
 			this.RemoveVerseButton = new System.Windows.Forms.Button();
 			this.RemoveAllButton = new System.Windows.Forms.Button();
-			this.SaveButton = new System.Windows.Forms.Button();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
+			this.AddAllButton = new System.Windows.Forms.Button();
+			this.AddVerseButton = new System.Windows.Forms.Button();
+			this.label4 = new System.Windows.Forms.Label();
+			this.SelectedVersesBox = new System.Windows.Forms.ListBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.VersesBox = new System.Windows.Forms.ListBox();
+			this.VersePackBox = new System.Windows.Forms.ListBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.SaveAllButton = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.SaveAllButton);
+			this.panel1.Controls.Add(this.label7);
 			this.panel1.Controls.Add(this.label6);
 			this.panel1.Controls.Add(this.label5);
-			this.panel1.Controls.Add(this.SaveButton);
+			this.panel1.Controls.Add(this.SaveSelectedButton);
 			this.panel1.Controls.Add(this.RemoveVerseButton);
 			this.panel1.Controls.Add(this.RemoveAllButton);
 			this.panel1.Controls.Add(this.AddAllButton);
@@ -67,98 +71,36 @@
 			this.panel1.Size = new System.Drawing.Size(508, 395);
 			this.panel1.TabIndex = 0;
 			// 
-			// VersePackBox
+			// label6
 			// 
-			this.VersePackBox.FormattingEnabled = true;
-			this.VersePackBox.Location = new System.Drawing.Point(19, 44);
-			this.VersePackBox.Name = "VersePackBox";
-			this.VersePackBox.Size = new System.Drawing.Size(184, 108);
-			this.VersePackBox.TabIndex = 1;
-			this.VersePackBox.SelectedIndexChanged += new System.EventHandler(this.VersePackSelected);
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.Location = new System.Drawing.Point(380, 72);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(85, 15);
+			this.label6.TabIndex = 15;
+			this.label6.Text = "Verses to save";
 			// 
-			// VersesBox
+			// label5
 			// 
-			this.VersesBox.FormattingEnabled = true;
-			this.VersesBox.Location = new System.Drawing.Point(19, 207);
-			this.VersesBox.Name = "VersesBox";
-			this.VersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.VersesBox.Size = new System.Drawing.Size(184, 147);
-			this.VersesBox.TabIndex = 3;
-			this.VersesBox.SelectedIndexChanged += new System.EventHandler(this.VerseSelected);
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.Location = new System.Drawing.Point(304, 338);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(104, 16);
+			this.label5.TabIndex = 14;
+			this.label5.Text = "4) Export verses";
 			// 
-			// label1
+			// SaveSelectedButton
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(38, 22);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(144, 16);
-			this.label1.TabIndex = 4;
-			this.label1.Text = "1) Select custom group";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(55, 185);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(104, 16);
-			this.label2.TabIndex = 5;
-			this.label2.Text = "2) Select verses";
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(26, 360);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(168, 13);
-			this.label3.TabIndex = 6;
-			this.label3.Text = "(Hold Ctrl to select multiple verses)";
-			// 
-			// SelectedVersesBox
-			// 
-			this.SelectedVersesBox.FormattingEnabled = true;
-			this.SelectedVersesBox.Location = new System.Drawing.Point(361, 90);
-			this.SelectedVersesBox.Name = "SelectedVersesBox";
-			this.SelectedVersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.SelectedVersesBox.Size = new System.Drawing.Size(128, 212);
-			this.SelectedVersesBox.TabIndex = 7;
-			this.SelectedVersesBox.SelectedIndexChanged += new System.EventHandler(this.SelectedFromTotalBox);
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.Location = new System.Drawing.Point(233, 79);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(97, 16);
-			this.label4.TabIndex = 8;
-			this.label4.Text = "3) Add/remove";
-			// 
-			// AddVerseButton
-			// 
-			this.AddVerseButton.Enabled = false;
-			this.AddVerseButton.Location = new System.Drawing.Point(228, 226);
-			this.AddVerseButton.Name = "AddVerseButton";
-			this.AddVerseButton.Size = new System.Drawing.Size(107, 23);
-			this.AddVerseButton.TabIndex = 9;
-			this.AddVerseButton.Text = "Add Verses >>";
-			this.AddVerseButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.AddVerseButton.UseVisualStyleBackColor = true;
-			this.AddVerseButton.Click += new System.EventHandler(this.AddVerseButton_Click);
-			// 
-			// AddAllButton
-			// 
-			this.AddAllButton.Enabled = false;
-			this.AddAllButton.Location = new System.Drawing.Point(228, 265);
-			this.AddAllButton.Name = "AddAllButton";
-			this.AddAllButton.Size = new System.Drawing.Size(107, 23);
-			this.AddAllButton.TabIndex = 10;
-			this.AddAllButton.Text = "Add All >>";
-			this.AddAllButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.AddAllButton.UseVisualStyleBackColor = true;
-			this.AddAllButton.Click += new System.EventHandler(this.AddAllButton_Click);
+			this.SaveSelectedButton.Enabled = false;
+			this.SaveSelectedButton.Location = new System.Drawing.Point(298, 360);
+			this.SaveSelectedButton.Name = "SaveSelectedButton";
+			this.SaveSelectedButton.Size = new System.Drawing.Size(119, 30);
+			this.SaveSelectedButton.TabIndex = 13;
+			this.SaveSelectedButton.Text = "Save selected verses";
+			this.SaveSelectedButton.UseVisualStyleBackColor = true;
+			this.SaveSelectedButton.Click += new System.EventHandler(this.SaveButton_Click);
 			// 
 			// RemoveVerseButton
 			// 
@@ -184,36 +126,118 @@
 			this.RemoveAllButton.UseVisualStyleBackColor = true;
 			this.RemoveAllButton.Click += new System.EventHandler(this.RemoveAllButton_Click);
 			// 
-			// SaveButton
+			// AddAllButton
 			// 
-			this.SaveButton.Enabled = false;
-			this.SaveButton.Location = new System.Drawing.Point(310, 360);
-			this.SaveButton.Name = "SaveButton";
-			this.SaveButton.Size = new System.Drawing.Size(92, 30);
-			this.SaveButton.TabIndex = 13;
-			this.SaveButton.Text = "Save to file";
-			this.SaveButton.UseVisualStyleBackColor = true;
-			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+			this.AddAllButton.Enabled = false;
+			this.AddAllButton.Location = new System.Drawing.Point(228, 265);
+			this.AddAllButton.Name = "AddAllButton";
+			this.AddAllButton.Size = new System.Drawing.Size(107, 23);
+			this.AddAllButton.TabIndex = 10;
+			this.AddAllButton.Text = "Add All >>";
+			this.AddAllButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.AddAllButton.UseVisualStyleBackColor = true;
+			this.AddAllButton.Click += new System.EventHandler(this.AddAllButton_Click);
 			// 
-			// label5
+			// AddVerseButton
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(304, 338);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(104, 16);
-			this.label5.TabIndex = 14;
-			this.label5.Text = "4) Export verses";
+			this.AddVerseButton.Enabled = false;
+			this.AddVerseButton.Location = new System.Drawing.Point(228, 226);
+			this.AddVerseButton.Name = "AddVerseButton";
+			this.AddVerseButton.Size = new System.Drawing.Size(107, 23);
+			this.AddVerseButton.TabIndex = 9;
+			this.AddVerseButton.Text = "Add Verses >>";
+			this.AddVerseButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.AddVerseButton.UseVisualStyleBackColor = true;
+			this.AddVerseButton.Click += new System.EventHandler(this.AddVerseButton_Click);
 			// 
-			// label6
+			// label4
 			// 
-			this.label6.AutoSize = true;
-			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(380, 72);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(85, 15);
-			this.label6.TabIndex = 15;
-			this.label6.Text = "Verses to save";
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(233, 79);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(97, 16);
+			this.label4.TabIndex = 8;
+			this.label4.Text = "3) Add/remove";
+			// 
+			// SelectedVersesBox
+			// 
+			this.SelectedVersesBox.FormattingEnabled = true;
+			this.SelectedVersesBox.Location = new System.Drawing.Point(361, 90);
+			this.SelectedVersesBox.Name = "SelectedVersesBox";
+			this.SelectedVersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+			this.SelectedVersesBox.Size = new System.Drawing.Size(128, 212);
+			this.SelectedVersesBox.TabIndex = 7;
+			this.SelectedVersesBox.SelectedIndexChanged += new System.EventHandler(this.SelectedFromTotalBox);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(26, 360);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(168, 13);
+			this.label3.TabIndex = 6;
+			this.label3.Text = "(Hold Ctrl to select multiple verses)";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.Location = new System.Drawing.Point(55, 185);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(104, 16);
+			this.label2.TabIndex = 5;
+			this.label2.Text = "2) Select verses";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(38, 22);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(144, 16);
+			this.label1.TabIndex = 4;
+			this.label1.Text = "1) Select custom group";
+			// 
+			// VersesBox
+			// 
+			this.VersesBox.FormattingEnabled = true;
+			this.VersesBox.Location = new System.Drawing.Point(19, 207);
+			this.VersesBox.Name = "VersesBox";
+			this.VersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+			this.VersesBox.Size = new System.Drawing.Size(184, 147);
+			this.VersesBox.TabIndex = 3;
+			this.VersesBox.SelectedIndexChanged += new System.EventHandler(this.VerseSelected);
+			// 
+			// VersePackBox
+			// 
+			this.VersePackBox.FormattingEnabled = true;
+			this.VersePackBox.Location = new System.Drawing.Point(19, 44);
+			this.VersePackBox.Name = "VersePackBox";
+			this.VersePackBox.Size = new System.Drawing.Size(184, 108);
+			this.VersePackBox.TabIndex = 1;
+			this.VersePackBox.SelectedIndexChanged += new System.EventHandler(this.VersePackSelected);
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label7.Location = new System.Drawing.Point(188, 22);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(28, 16);
+			this.label7.TabIndex = 16;
+			this.label7.Text = "OR";
+			// 
+			// SaveAllButton
+			// 
+			this.SaveAllButton.Location = new System.Drawing.Point(228, 15);
+			this.SaveAllButton.Name = "SaveAllButton";
+			this.SaveAllButton.Size = new System.Drawing.Size(92, 30);
+			this.SaveAllButton.TabIndex = 17;
+			this.SaveAllButton.Text = "Save all verses";
+			this.SaveAllButton.UseVisualStyleBackColor = true;
+			this.SaveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
 			// 
 			// ExportVerses
 			// 
@@ -247,8 +271,10 @@
 		private System.Windows.Forms.Button RemoveVerseButton;
 		private System.Windows.Forms.Button RemoveAllButton;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Button SaveButton;
+		private System.Windows.Forms.Button SaveSelectedButton;
 		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Button SaveAllButton;
 
 	}
 }

@@ -52,7 +52,7 @@ namespace Topical_Memory_System
 				string book = bookBox.Text.Trim();
 				int chapter = Convert.ToInt32(referenceBox.Text.Split(':')[0].Trim());
 				string verseNumbers = referenceBox.Text.Split(':')[1].Trim();
-				string verseData = verseDataBox.Text.Trim().Replace("'", "''");
+				string verseData = verseDataBox.Text.Trim();
 				string groupName = groupNames.Text;
 				SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
 				groupNames.SelectedIndex = 0;
@@ -64,23 +64,8 @@ namespace Topical_Memory_System
 
 		private void SaveVerseToDatabase(string book, int chapter, string verseNumbers, string verseData, string groupName)
 		{
-			SQLiteConnection conn;
-			SQLiteCommand cmd;
-
-			//set up connection
-			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
-			conn.Open();
-			cmd = conn.CreateCommand();
-
-			//insert statement
-			cmd.CommandText = "INSERT INTO CustomVerses (Book, Chapter, VerseNumbers, VerseData, GroupNameID) VALUES (" +
-				"'" + book + "', " + chapter.ToString() + ", '" + verseNumbers + "', '" + verseData + "', " +
-				"(SELECT ID FROM CustomGroups WHERE (Name  = '" + groupName + "') LIMIT 0, 1));";
-
-			int result = cmd.ExecuteNonQuery();
+			Database.SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
 			MessageBox.Show("Verse saved!");
-
-			conn.Close();
 		}
     }
 }
