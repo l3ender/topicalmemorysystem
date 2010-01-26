@@ -474,19 +474,35 @@ namespace Topical_Memory_System
 			dlg.Multiselect = false;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
-				ImportVerses iv = new ImportVerses(dlg.FileName);
-				iv.ShowDialog();
+				try
+				{
+					ImportVerses iv = new ImportVerses(dlg.FileName);
+					iv.ShowDialog();
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("The file you selected could not be loaded.");
+				}
 			}
 		}
 
 		private void exportVersesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			List<VersePack> vps = new List<VersePack>();
-			vps.Add(TMSVerses.A_PACK());
-			vps.Add(TMSVerses.B_PACK());
-			vps.Add(TMSVerses.C_PACK());
-			ExportVerses ev = new ExportVerses(vps);
-			ev.ShowDialog();
+			List<VersePack> verses = Database.LoadCustomVerses();
+			int numVerses = 0;
+			foreach (VersePack vp in verses)
+			{
+				numVerses += vp.Verses.Count;
+			}
+			if (numVerses > 0)
+			{
+				ExportVerses ev = new ExportVerses(verses);
+				ev.ShowDialog();
+			}
+			else
+			{
+				MessageBox.Show("You have no custom verses to export!");
+			}
 		}
 	}
 }
