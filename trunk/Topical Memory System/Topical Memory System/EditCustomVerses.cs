@@ -14,18 +14,18 @@ namespace Topical_Memory_System
 {
     public partial class EditCustomVerses : Form
     {
-        private List<VersePack> CustomVerses;
+        private static List<VersePack> CustomVerses;
         private List<Verse> verses;      //verses for the currently selected custom group in the drop down
         private Verse currentVerse;
 
         public EditCustomVerses(List<VersePack> IncomingCustomVerses)
         {
-            this.CustomVerses = IncomingCustomVerses;
+            CustomVerses = IncomingCustomVerses;
             InitializeComponent();
             UpdateGroupNames(null, null);
         }
 
-        private void UpdateGroupNames(object sender, EventArgs e)
+        private static void UpdateGroupNames(object sender, EventArgs e)
         {
             groupNames.Items.Clear();
 			foreach (VersePack vp in CustomVerses)
@@ -133,80 +133,41 @@ namespace Topical_Memory_System
             else
             {
                 Verse newVerse = new Verse(verseNameBox.Text.Trim(), Convert.ToInt32(verseReferenceBox.Text.Split(':')[0].Trim()),
-                    verseReferenceBox.Text.Split(':')[1].Trim(), "", "", "", verseDataBox.Text.Trim().Replace("'", "''"), "", "", "", "", false);
+                    verseReferenceBox.Text.Split(':')[1].Trim(), "", "", "", verseDataBox.Text.Trim(), "", "", "", "", false);
 				UpdateVerse(currentVerse, newVerse);
             }
         }
 
-        private void UpdateGroupName(string oldName, string newName)
+        private static void UpdateGroupName(string oldName, string newName)
         {
-			SQLiteConnection conn;
-			SQLiteCommand cmd;
+			Database.UpdateGroupName(oldName, newName);
 
-			//set up connection
-			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
-			conn.Open();
-			cmd = conn.CreateCommand();
-
-			//insert statement
-			cmd.CommandText = "UPDATE CustomGroups SET Name = '" + newName.Replace("'", "''") + "' WHERE (CustomGroups.Name = '" + oldName.Replace("'", "''") + "');";
-			cmd.ExecuteNonQuery();
-
-			int result = cmd.ExecuteNonQuery();
-			conn.Close();
-
-			CustomVerses = MenuExit.LoadCustomVerses();
+			CustomVerses = Database.LoadCustomVerses();
 			UpdateGroupNames(null, null);
 			MessageBox.Show("Group name updated!");
         }
 
-		private void UpdateVerse(Verse oldVerse, Verse newVerse)
+		private static void UpdateVerse(Verse oldVerse, Verse newVerse)
 		{
-			SQLiteConnection conn;
-			SQLiteCommand cmd;
+			Database.UpdateVerse(oldVerse, newVerse);
 
-			//set up connection
-			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
-			conn.Open();
-			cmd = conn.CreateCommand();
-
-			//insert statement
-			cmd.CommandText = "UPDATE CustomVerses " +
-				"SET Book = '" + newVerse.getBook() + "', Chapter = " + newVerse.getChapter() +
-					", VerseNumbers = '" + newVerse.getVerseNumbers() + "', VerseData = '" + newVerse.getVerseData() + "' " +
-				"WHERE (CustomVerses.Book = '" + oldVerse.getBook() + "') AND (CustomVerses.Chapter = " + oldVerse.getChapter() + ") AND " +
-					"(CustomVerses.VerseNumbers = '" + oldVerse.getVerseNumbers() + "') AND (CustomVerses.VerseData = '" + oldVerse.getVerseData().Replace("'", "''") + "');";
-			cmd.ExecuteNonQuery();
-
-			int result = cmd.ExecuteNonQuery();
-			conn.Close();
-
-			CustomVerses = MenuExit.LoadCustomVerses();
+			CustomVerses = Database.LoadCustomVerses();
+			//save state so that we remain on the same selected group
+			object obj = groupNames.SelectedItem;
 			UpdateGroupNames(null, null);
+			groupNames.SelectedItem = obj;
 			MessageBox.Show("Verse updated!");
 		}
 
-		private void DeleteVerse(Verse oldVerse)
+		private static void DeleteVerse(Verse oldVerse)
 		{
-			SQLiteConnection conn;
-			SQLiteCommand cmd;
+			Database.DeleteVerse(oldVerse);
 
-			//set up connection
-			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
-			conn.Open();
-			cmd = conn.CreateCommand();
-
-			//insert statement
-			cmd.CommandText = "DELETE FROM CustomVerses " + 
-				"WHERE (CustomVerses.Book = '" + oldVerse.getBook() + "') AND (CustomVerses.Chapter = " + oldVerse.getChapter() + ") AND " +
-					"(CustomVerses.VerseNumbers = '" + oldVerse.getVerseNumbers() + "') AND (CustomVerses.VerseData = '" + oldVerse.getVerseData().Replace("'", "''") + "');";
-			cmd.ExecuteNonQuery();
-
-			int result = cmd.ExecuteNonQuery();
-			conn.Close();
-
-			CustomVerses = MenuExit.LoadCustomVerses();
+			CustomVerses = Database.LoadCustomVerses();
+			//save state so that we remain on the same selected group
+			object obj = groupNames.SelectedItem;
 			UpdateGroupNames(null, null);
+			groupNames.SelectedItem = obj;
 			MessageBox.Show("Verse deleted.");
 		}
     }

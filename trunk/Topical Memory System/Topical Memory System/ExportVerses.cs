@@ -72,7 +72,7 @@ namespace Topical_Memory_System
 			}
 			AddVerseButton.Enabled = false;
 			RemoveAllButton.Enabled = true;
-			SaveButton.Enabled = true;
+			SaveSelectedButton.Enabled = true;
 		}
 
 		private void AddAllButton_Click(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace Topical_Memory_System
 			//remove verses from selection box
 			VersesBox.Items.Clear();
 			RemoveAllButton.Enabled = true;
-			SaveButton.Enabled = true;
+			SaveSelectedButton.Enabled = true;
 			AddAllButton.Enabled = false;
 		}
 
@@ -107,7 +107,7 @@ namespace Topical_Memory_System
 			VersePackSelected(null, null);	//this refreshes verses box
 			if (SelectedVersesBox.Items.Count < 1)
 			{
-				SaveButton.Enabled = false;
+				SaveSelectedButton.Enabled = false;
 			}
 			RemoveVerseButton.Enabled = false;
 		}
@@ -121,7 +121,7 @@ namespace Topical_Memory_System
 				SelectedVersesBox.Items.Remove((string)obj);
 			}
 			VersePackSelected(null, null);	//this refreshes verses box
-			SaveButton.Enabled = false;
+			SaveSelectedButton.Enabled = false;
 			RemoveAllButton.Enabled = false;
 		}
 
@@ -147,6 +147,32 @@ namespace Topical_Memory_System
 							sb.Append(v.getVerseData());
 							sb.Append(Constants.NewLine);
 						}
+					}
+				}
+				File.WriteAllText(dlg.FileName, sb.ToString());
+			}
+			this.Close();
+		}
+
+		private void SaveAllButton_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog dlg = new SaveFileDialog();
+			dlg.FileName = "Custom_Verses.txt";
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				StringBuilder sb = new StringBuilder("");
+				foreach (VersePack vp in CustomVerses)
+				{
+					foreach (Verse v in vp.Verses)
+					{
+						sb.Append(v.getBook());
+						sb.Append(Constants.FileDelimiter);
+						sb.Append(v.getChapter());
+						sb.Append(Constants.FileDelimiter);
+						sb.Append(v.getVerseNumbers());
+						sb.Append(Constants.FileDelimiter);
+						sb.Append(v.getVerseData());
+						sb.Append(Constants.NewLine);
 					}
 				}
 				File.WriteAllText(dlg.FileName, sb.ToString());

@@ -121,78 +121,6 @@ namespace Topical_Memory_System
             aboutToolStripMenuItem.Text = "Help";
         }
 
-		public static List<string> LoadCustomGroupNames()
-		{
-			List<string> names = new List<string>();
-
-			SQLiteConnection conn;
-			SQLiteCommand cmd;
-			SQLiteDataReader dataReader;
-
-			//set up connection
-			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
-			conn.Open();
-			cmd = conn.CreateCommand();
-
-			//select statement
-			cmd.CommandText = "SELECT Name FROM CustomGroups;";
-			dataReader = cmd.ExecuteReader();
-
-			int numColumns = dataReader.FieldCount;
-			while (dataReader.Read())
-			{
-				names.Add(dataReader[0].ToString());
-			}
-			conn.Close();
-
-			return names;
-		}
-
-		public static List<VersePack> LoadCustomVerses()
-		{
-			List<string> groupNames = LoadCustomGroupNames();
-
-			List<VersePack> vps = new List<VersePack>();
-			foreach (string name in groupNames)
-			{
-				vps.Add(LoadCustomVersesByGroupName(name));
-			}
-
-			return vps;
-		}
-
-		public static VersePack LoadCustomVersesByGroupName(string groupName)
-		{
-			VersePack vp = new VersePack();
-			vp.SetName(groupName);
-
-			SQLiteConnection conn;
-			SQLiteCommand cmd;
-			SQLiteDataReader dataReader;
-
-			//set up connection
-			conn = new SQLiteConnection(Constants.DatabaseConnectionString);
-			conn.Open();
-			cmd = conn.CreateCommand();
-
-			//select statement
-			cmd.CommandText = "SELECT V.Book, V.Chapter, V.VerseNumbers, V.VerseData, G.Name FROM CustomVerses V " +
-				"INNER JOIN CustomGroups G ON V.GroupNameID = G.ID " +
-				"WHERE (G.Name = '" + groupName.Replace("'", "''") + "');";
-			dataReader = cmd.ExecuteReader();
-
-			int numColumns = dataReader.FieldCount;
-			while (dataReader.Read())
-			{
-				Verse v = new Verse(dataReader[0].ToString(), Convert.ToInt32(dataReader[1]), dataReader[2].ToString(),
-					dataReader[4].ToString(), "", "", dataReader[3].ToString(), "", "", "", "", false);
-				vp.AddVerse(v);
-			}
-			conn.Close();
-
-			return vp;
-		}
-
 		private void MenuExitClick(object sender, EventArgs e)
 		{
 			Application.Exit();
@@ -276,7 +204,7 @@ namespace Topical_Memory_System
 		{
 			mainPanel.Controls.Remove((Control)sender);
 			List<VersePack> verses = CopyVersePackList(AllVerses);
-			List<VersePack> customVerses = LoadCustomVerses();
+			List<VersePack> customVerses = Database.LoadCustomVerses();
 			foreach (VersePack vp in customVerses)
 			{
 				if (vp.Verses.Count > 0)
@@ -290,7 +218,7 @@ namespace Topical_Memory_System
 		public static void ReviewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", LoadCustomVerses()));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", Database.LoadCustomVerses()));
 		}
 
         public static void MatchVersesHandler(object sender)
@@ -302,7 +230,7 @@ namespace Topical_Memory_System
 		public static void LearnVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learn", LoadCustomVerses()));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learn", Database.LoadCustomVerses()));
 		}
 
         public static void MatchVersesHandler(object sender, bool verseToReference)
@@ -310,11 +238,11 @@ namespace Topical_Memory_System
             mainPanel.Controls.Remove((Control)sender);
             if (verseToReference)
             {
-				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", LoadCustomVerses()));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", Database.LoadCustomVerses()));
             }
             else
             {
-				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", LoadCustomVerses()));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", Database.LoadCustomVerses()));
             }
         }
 
@@ -530,13 +458,13 @@ namespace Topical_Memory_System
 
         private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			AddCustomVerses obj = new AddCustomVerses(LoadCustomGroupNames());
+			AddCustomVerses obj = new AddCustomVerses(Database.LoadCustomGroupNames());
             obj.ShowDialog();
         }
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			EditCustomVerses obj = new EditCustomVerses(LoadCustomVerses());
+			EditCustomVerses obj = new EditCustomVerses(Database.LoadCustomVerses());
 			obj.ShowDialog();
         }
 
@@ -546,7 +474,8 @@ namespace Topical_Memory_System
 			dlg.Multiselect = false;
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
-				MessageBox.Show(dlg.FileName);
+				ImportVerses iv = new ImportVerses(dlg.FileName);
+				iv.ShowDialog();
 			}
 		}
 
