@@ -100,11 +100,15 @@ namespace Topical_Memory_System
             else if (groupName.Text.Trim().Length == 0)
             {
                 MessageBox.Show("The name cannot be left blank.");
-            }
-            else
-            {
-                UpdateGroupName(groupNames.Text, groupName.Text.Trim());
-            }
+			}
+			else if (groupName.Text.Trim().Length > Constants.MaximumCharactersForCustomGroupName)
+			{
+				MessageBox.Show("The name you entered is too long.  Please enter one under 20 characters long.");
+			}
+			else
+			{
+				UpdateGroupName(groupNames.Text, groupName.Text.Trim());
+			}
         }
 
         private void DeleteVerseButton_Click(object sender, EventArgs e)

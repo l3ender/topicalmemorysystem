@@ -65,7 +65,7 @@
 			this.LearnVersesButton.Name = "LearnVersesButton";
 			this.LearnVersesButton.Size = new System.Drawing.Size(143, 46);
 			this.LearnVersesButton.TabIndex = 4;
-			this.LearnVersesButton.Text = "Recite";
+			this.LearnVersesButton.Text = "Learn";
 			this.LearnVersesButton.UseVisualStyleBackColor = true;
 			this.LearnVersesButton.Click += new System.EventHandler(this.LearnVersesButton_Click);
 			// 
@@ -116,7 +116,8 @@
 			this.textBox3.ReadOnly = true;
 			this.textBox3.Size = new System.Drawing.Size(246, 27);
 			this.textBox3.TabIndex = 8;
-			this.textBox3.Text = "Type out a verse, given its reference.  The ultimate memory test!";
+			this.textBox3.Text = "Memorize a verse\'s reference, or type out a verse, given its reference.  The ulti" +
+				"mate memory test!";
 			// 
 			// textBox4
 			// 

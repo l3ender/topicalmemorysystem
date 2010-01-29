@@ -85,6 +85,7 @@
 			this.ClientSize = new System.Drawing.Size(206, 166);
 			this.ControlBox = false;
 			this.Controls.Add(this.panel1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
 			this.Name = "UpdateForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Update";

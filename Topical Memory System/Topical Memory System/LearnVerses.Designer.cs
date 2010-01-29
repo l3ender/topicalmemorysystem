@@ -62,8 +62,8 @@
 			this.VerseEntryBox.Size = new System.Drawing.Size(479, 83);
 			this.VerseEntryBox.TabIndex = 1;
 			this.VerseEntryBox.Text = "Type the verse here";
+			this.VerseEntryBox.Click += new System.EventHandler(this.EntryBoxEntered);
 			this.VerseEntryBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-			this.VerseEntryBox.Enter += new System.EventHandler(this.EntryBoxEntered);
 			// 
 			// CompareButton
 			// 

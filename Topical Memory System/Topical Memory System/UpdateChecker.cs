@@ -114,7 +114,7 @@ namespace Topical_Memory_System
 						throw new Exception();
 					}
 					else
-					{
+					{	//need update
 						UpdateForm uf = new UpdateForm(false);
 						uf.ShowDialog();
 					}

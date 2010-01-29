@@ -15,6 +15,7 @@ using System.Data.SQLite;
 using System.Configuration;
 using System.Threading;
 using System.Xml;
+using System.Net;
 
 namespace Topical_Memory_System
 {
@@ -230,7 +231,7 @@ namespace Topical_Memory_System
 		public static void LearnVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learn", Database.LoadCustomVerses()));
+			mainPanel.Controls.Add(new LearnVersesOptionPanel());
 		}
 
         public static void MatchVersesHandler(object sender, bool verseToReference)
@@ -260,6 +261,7 @@ namespace Topical_Memory_System
 			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
 			List<Verse> versesToMatchAgainst = new List<Verse>();
 
+			//add all the verses so we can do some matching
 			foreach (VersePack vp in AllVerses)
 			{
 				foreach (Verse v in vp.Verses)
@@ -278,11 +280,31 @@ namespace Topical_Memory_System
 			mainPanel.Controls.Add(new MatchVerses(versesToReview, SelectedTranslationName(), verseToReference, versesToMatchAgainst));
         }
 
-		public static void LearnVersesHandler(List<VersePack> CustomVerses, List<string> packs, object sender)
+		public static void LearnVersesHandler(object sender, bool learnReferences)
+		{
+			mainPanel.Controls.Remove((Control)sender);
+			if (learnReferences)
+			{
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learnReferences", Database.LoadCustomVerses()));
+			}
+			else
+			{
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learnVerses", Database.LoadCustomVerses()));
+			}
+		}
+
+		public static void LearnVersesHandler(List<VersePack> CustomVerses, List<string> packs, bool learnReferences, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
 			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
-			mainPanel.Controls.Add(new LearnVerses(versesToReview));
+			if (learnReferences)
+			{
+				mainPanel.Controls.Add(new LearnReferences(versesToReview));
+			}
+			else
+			{
+				mainPanel.Controls.Add(new LearnVerses(versesToReview));
+			}
 		}
 
 		private static List<Verse> GetDesiredVerses(List<string> packs, List<VersePack> CustomVerses)
