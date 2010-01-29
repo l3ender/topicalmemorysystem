@@ -109,11 +109,23 @@
     <Compile Include="ExportVerses.Designer.cs">
       <DependentUpon>ExportVerses.cs</DependentUpon>
     </Compile>
+    <Compile Include="LearnReferences.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LearnReferences.Designer.cs">
+      <DependentUpon>LearnReferences.cs</DependentUpon>
+    </Compile>
     <Compile Include="LearnVerses.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="LearnVerses.Designer.cs">
       <DependentUpon>LearnVerses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LearnVersesOptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LearnVersesOptionPanel.Designer.cs">
+      <DependentUpon>LearnVersesOptionPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -150,8 +162,16 @@
       <DependentUpon>ExportVerses.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="LearnReferences.resx">
+      <DependentUpon>LearnReferences.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="LearnVerses.resx">
       <DependentUpon>LearnVerses.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LearnVersesOptionPanel.resx">
+      <DependentUpon>LearnVersesOptionPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">

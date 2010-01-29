@@ -58,9 +58,13 @@ namespace Topical_Memory_System
             {
 				MenuExit.MatchVersesHandler(CustomVerses, packs, false, this);
 			}
-			else if (caller.Equals("learn"))
+			else if (caller.Equals("learnReferences"))
 			{
-				MenuExit.LearnVersesHandler(CustomVerses, packs, this);
+				MenuExit.LearnVersesHandler(CustomVerses, packs, true, this);
+			}
+			else if (caller.Equals("learnVerses"))
+			{
+				MenuExit.LearnVersesHandler(CustomVerses, packs, false, this);
 			}
 		}
 	}

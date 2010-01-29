@@ -165,5 +165,6 @@ namespace Topical_Memory_System
 		{
 			ResetFields();
 		}
+
 	}
 }

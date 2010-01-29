@@ -60,10 +60,10 @@
 			this.VersionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.VersionBox.Cursor = System.Windows.Forms.Cursors.Default;
 			this.VersionBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.VersionBox.Location = new System.Drawing.Point(100, 307);
+			this.VersionBox.Location = new System.Drawing.Point(73, 307);
 			this.VersionBox.Name = "VersionBox";
 			this.VersionBox.ReadOnly = true;
-			this.VersionBox.Size = new System.Drawing.Size(68, 19);
+			this.VersionBox.Size = new System.Drawing.Size(102, 19);
 			this.VersionBox.TabIndex = 4;
 			this.VersionBox.Text = "Version ";
 			// 
