@@ -11,14 +11,15 @@ namespace Topical_Memory_System
 {
 	public partial class LearnReferences : UserControl
 	{
-		private List<Verse> versesToReview;
+		private static List<Verse> versesToReview;
 		private int currentVerseIndex;
-		private Verse currentVerse;
+		private static Verse currentVerse;
 
 		public LearnReferences(List<Verse> incomingVersesToReview)
 		{
 			InitializeComponent();
-			foreach (string book in Constants.BooksOfTheBible())
+			List<string> books = Constants.BooksOfTheBible();
+			foreach (string book in books)
 			{
 				BookBox.AutoCompleteCustomSource.Add(book);
 				BookBox.Items.Add(book);
@@ -27,7 +28,7 @@ namespace Topical_Memory_System
 			{
 				NextVerseButton.Enabled = false;
 			}
-			this.versesToReview = incomingVersesToReview;
+			versesToReview = incomingVersesToReview;
 			currentVerseIndex = 0;
 			currentVerse = versesToReview[currentVerseIndex];
 			VerseBox.Text = currentVerse.getVerseData();
@@ -161,6 +162,37 @@ namespace Topical_Memory_System
 		private void PanelLoad(object sender, EventArgs e)
 		{
 			BookBox.Focus();
+		}
+
+		public static void ChangeTranslation(string translation)
+		{
+			foreach (Verse v in versesToReview)
+			{
+				v.setTranslation(translation);
+			}
+			currentVerse.setTranslation(translation);
+			//reload dropdown for books of the bible
+			BookBox.AutoCompleteCustomSource.Clear();
+			BookBox.Items.Clear();
+			if (translation == "NBV")
+			{
+				List<string> books = Constants.DutchBooksOfTheBible();
+				foreach (string book in books)
+				{
+					BookBox.AutoCompleteCustomSource.Add(book);
+					BookBox.Items.Add(book);
+				}
+			}
+			else
+			{
+				List<string> books = Constants.BooksOfTheBible();
+				foreach (string book in books)
+				{
+					BookBox.AutoCompleteCustomSource.Add(book);
+					BookBox.Items.Add(book);
+				}
+			}
+			VerseBox.Text = currentVerse.getVerseData();
 		}
 	}
 }

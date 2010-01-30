@@ -144,35 +144,56 @@ namespace Topical_Memory_System
 
         private static void UpdateGroupName(string oldName, string newName)
         {
-			Database.UpdateGroupName(oldName, newName);
+			try
+			{
+				MenuExit.UpdateGroupName(oldName, newName);
+				CustomVerses = MenuExit.LoadCustomVerses();
 
-			CustomVerses = Database.LoadCustomVerses();
-			UpdateGroupNames(null, null);
-			MessageBox.Show("Group name updated!");
+				UpdateGroupNames(null, null);
+				MessageBox.Show("Group name updated!");
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("A problem occurred while updating the group name.");
+			}
         }
 
 		private static void UpdateVerse(Verse oldVerse, Verse newVerse)
 		{
-			Database.UpdateVerse(oldVerse, newVerse);
+			try
+			{
+				MenuExit.UpdateVerse(oldVerse, newVerse);
+				CustomVerses = MenuExit.LoadCustomVerses();
 
-			CustomVerses = Database.LoadCustomVerses();
-			//save state so that we remain on the same selected group
-			object obj = groupNames.SelectedItem;
-			UpdateGroupNames(null, null);
-			groupNames.SelectedItem = obj;
-			MessageBox.Show("Verse updated!");
+				//save state so that we remain on the same selected group
+				object obj = groupNames.SelectedItem;
+				UpdateGroupNames(null, null);
+				groupNames.SelectedItem = obj;
+				MessageBox.Show("Verse updated!");
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("A problem occurred while updating the verse.");
+			}
 		}
 
 		private static void DeleteVerse(Verse oldVerse)
 		{
-			Database.DeleteVerse(oldVerse);
+			try
+			{
+				MenuExit.DeleteVerse(oldVerse);
+				CustomVerses = MenuExit.LoadCustomVerses();
 
-			CustomVerses = Database.LoadCustomVerses();
-			//save state so that we remain on the same selected group
-			object obj = groupNames.SelectedItem;
-			UpdateGroupNames(null, null);
-			groupNames.SelectedItem = obj;
-			MessageBox.Show("Verse deleted.");
+				//save state so that we remain on the same selected group
+				object obj = groupNames.SelectedItem;
+				UpdateGroupNames(null, null);
+				groupNames.SelectedItem = obj;
+				MessageBox.Show("Verse deleted.");
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("A problem occurred while deleting the verse.");
+			}
 		}
     }
 }

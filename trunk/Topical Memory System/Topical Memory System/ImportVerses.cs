@@ -27,7 +27,7 @@ namespace Topical_Memory_System
 
 		private static void FillCustomGroupNames()
 		{
-			List<string> names = Database.LoadCustomGroupNames();
+			List<string> names = MenuExit.LoadCustomGroupNames();
 			if (names.Count == 5)
 			{
 				CustomGroupLabel1.Text = names[0];
@@ -72,12 +72,19 @@ namespace Topical_Memory_System
 			}
 			if (shouldContinue)
 			{
-				AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox1), CustomGroupLabel1.Text);
-				AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox2), CustomGroupLabel2.Text);
-				AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox3), CustomGroupLabel3.Text);
-				AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox4), CustomGroupLabel4.Text);
-				AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox5), CustomGroupLabel5.Text);
-				MessageBox.Show("Import successful!");
+				try
+				{
+					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox1), CustomGroupLabel1.Text);
+					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox2), CustomGroupLabel2.Text);
+					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox3), CustomGroupLabel3.Text);
+					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox4), CustomGroupLabel4.Text);
+					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox5), CustomGroupLabel5.Text);
+					MessageBox.Show("Import successful!");
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("A problem occurred while importing the verses.");
+				}
 				this.Close();
 			}
 		}
@@ -97,7 +104,7 @@ namespace Topical_Memory_System
 
 		private static void AddVersesToDatabase(List<Verse> verses, string groupName)
 		{
-			Database.SaveMultipleVersesToDatabase(verses, groupName);
+			MenuExit.SaveMultipleVersesToDatabase(verses, groupName);
 		}
 
 	}

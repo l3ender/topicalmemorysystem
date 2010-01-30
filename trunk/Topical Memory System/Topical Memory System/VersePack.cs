@@ -22,5 +22,10 @@ namespace Topical_Memory_System
 		{
 			Verses.Add(v);
 		}
+
+		public override string ToString()
+		{
+			return Name;
+		}
 	}
 }

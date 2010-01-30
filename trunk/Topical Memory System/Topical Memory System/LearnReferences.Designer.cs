@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.VerseBox = new System.Windows.Forms.TextBox();
+			VerseBox = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
@@ -36,7 +36,7 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
-			this.BookBox = new System.Windows.Forms.ComboBox();
+			BookBox = new System.Windows.Forms.ComboBox();
 			this.GuessButton = new System.Windows.Forms.Button();
 			this.NextVerseButton = new System.Windows.Forms.Button();
 			this.PreviousVerseButton = new System.Windows.Forms.Button();
@@ -50,14 +50,14 @@
 			// 
 			// VerseBox
 			// 
-			this.VerseBox.BackColor = System.Drawing.SystemColors.Control;
-			this.VerseBox.Cursor = System.Windows.Forms.Cursors.Default;
-			this.VerseBox.Location = new System.Drawing.Point(204, 76);
-			this.VerseBox.Multiline = true;
-			this.VerseBox.Name = "VerseBox";
-			this.VerseBox.ReadOnly = true;
-			this.VerseBox.Size = new System.Drawing.Size(316, 169);
-			this.VerseBox.TabIndex = 50;
+			VerseBox.BackColor = System.Drawing.SystemColors.Control;
+			VerseBox.Cursor = System.Windows.Forms.Cursors.Default;
+			VerseBox.Location = new System.Drawing.Point(204, 76);
+			VerseBox.Multiline = true;
+			VerseBox.Name = "VerseBox";
+			VerseBox.ReadOnly = true;
+			VerseBox.Size = new System.Drawing.Size(316, 169);
+			VerseBox.TabIndex = 50;
 			// 
 			// label1
 			// 
@@ -130,13 +130,13 @@
 			// 
 			// BookBox
 			// 
-			this.BookBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-			this.BookBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-			this.BookBox.FormattingEnabled = true;
-			this.BookBox.Location = new System.Drawing.Point(120, 301);
-			this.BookBox.Name = "BookBox";
-			this.BookBox.Size = new System.Drawing.Size(198, 21);
-			this.BookBox.TabIndex = 0;
+			BookBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+			BookBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+			BookBox.FormattingEnabled = true;
+			BookBox.Location = new System.Drawing.Point(120, 301);
+			BookBox.Name = "BookBox";
+			BookBox.Size = new System.Drawing.Size(198, 21);
+			BookBox.TabIndex = 0;
 			// 
 			// GuessButton
 			// 
@@ -248,7 +248,7 @@
 			this.Controls.Add(this.PreviousVerseButton);
 			this.Controls.Add(this.NextVerseButton);
 			this.Controls.Add(this.GuessButton);
-			this.Controls.Add(this.BookBox);
+			this.Controls.Add(BookBox);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
@@ -256,7 +256,7 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.VerseBox);
+			this.Controls.Add(VerseBox);
 			this.Name = "LearnReferences";
 			this.Size = new System.Drawing.Size(637, 411);
 			this.Load += new System.EventHandler(this.PanelLoad);
@@ -267,7 +267,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.TextBox VerseBox;
+		private static System.Windows.Forms.TextBox VerseBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
@@ -275,7 +275,7 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.ComboBox BookBox;
+		private static System.Windows.Forms.ComboBox BookBox;
 		private System.Windows.Forms.Button GuessButton;
 		private System.Windows.Forms.Button NextVerseButton;
 		private System.Windows.Forms.Button PreviousVerseButton;

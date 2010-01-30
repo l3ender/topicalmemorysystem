@@ -87,5 +87,77 @@ namespace Topical_Memory_System
 			books.Add("Revelation");
 			return books;
 		}
+
+		public static List<string> DutchBooksOfTheBible()
+		{
+			List<string> books = new List<string>(66);
+			books.Add("Genesis");
+			books.Add("Exodus");
+			books.Add("Leviticus");
+			books.Add("Numeri");
+			books.Add("Deuteronomium");
+			books.Add("Jozua");
+			books.Add("Rechters");
+			books.Add("Ruth");
+			books.Add("1 Samuel");
+			books.Add("2 Samuel");
+			books.Add("1 Koningen");
+			books.Add("2 Koningen");
+			books.Add("1 Kronieken");
+			books.Add("2 Kronieken");
+			books.Add("Ezra");
+			books.Add("Nehemia");
+			books.Add("Ester");
+			books.Add("Job");
+			books.Add("Psalmen");
+			books.Add("Spreuken");
+			books.Add("Prediker");
+			books.Add("Hooglied");
+			books.Add("Jesaja");
+			books.Add("Jeremia");
+			books.Add("Klaagliederen");
+			books.Add("Ezechiel");
+			books.Add("Daniel");
+			books.Add("Hosea");
+			books.Add("Joel");
+			books.Add("Amos");
+			books.Add("Obadja");
+			books.Add("Jona");
+			books.Add("Micha");
+			books.Add("Nahum");
+			books.Add("Habakuk");
+			books.Add("Sefanja");
+			books.Add("Haggai");
+			books.Add("Zacharia");
+			books.Add("Maleachi");
+			books.Add("Matteus");
+			books.Add("Marcus");
+			books.Add("Lucas");
+			books.Add("Johannes");
+			books.Add("Handelingen");
+			books.Add("Romeinen");
+			books.Add("1 Korintiers");
+			books.Add("2 Korintiers");
+			books.Add("Galaten");
+			books.Add("Efeziers");
+			books.Add("Filippenzen");
+			books.Add("Kolossenzen");
+			books.Add("1 Tessalonicenzen");
+			books.Add("2 Tessalonicenzen");
+			books.Add("1 Timoteus");
+			books.Add("2 Timoteus");
+			books.Add("Titus");
+			books.Add("Filemon");
+			books.Add("Hebreeen");
+			books.Add("Jakobus");
+			books.Add("1 Petrus");
+			books.Add("2 Petrus");
+			books.Add("1 Johannes");
+			books.Add("2 Johannes");
+			books.Add("3 Johannes");
+			books.Add("Judas");
+			books.Add("Openbaring");
+			return books;
+		}
 	}
 }

@@ -21,18 +21,79 @@ namespace Topical_Memory_System
 {
 	public partial class MenuExit : Form
 	{
-
+		private static Database db;
 		private static List<VersePack> AllVerses;
+		private static List<VersePack> CustomVerses;
 
 		public MenuExit()
 		{
 			InitializeComponent();
+			db = new Database();
 			AllVerses = ReadInVerses();
+			try
+			{
+				CustomVerses = LoadCustomVerses();
+			}
+			catch (Exception)
+			{
+				CustomVerses = new List<VersePack>();
+				MessageBox.Show("A problem occurred while loading custom verses.");
+				customVersesToolStripMenuItem.Enabled = false;
+			}
             FindInstalledVoices();
             AddAboutStrip();    //add this last manually so it is the right-most strip
 			mainPanel.Controls.Add(new MainMenuPanel());
 			mainPanel.Refresh();
 		}
+
+		/******************************* Start Database Methods *******************************/
+		public static List<VersePack> LoadCustomVerses()
+		{
+			CustomVerses = db.LoadCustomVerses();
+			if (CustomVerses == null)
+			{
+				CustomVerses = new List<VersePack>();
+			}
+			return CustomVerses;
+		}
+		public static void UpdateVerse(Verse oldVerse, Verse newVerse)
+		{
+			db.UpdateVerse(oldVerse, newVerse);
+			CustomVerses = LoadCustomVerses();
+		}
+		public static void UpdateGroupName(string oldName, string newName)
+		{
+			db.UpdateGroupName(oldName, newName);
+			CustomVerses = LoadCustomVerses();
+		}
+		public static void DeleteVerse(Verse oldVerse)
+		{
+			db.DeleteVerse(oldVerse);
+			CustomVerses = LoadCustomVerses();
+		}
+		public static List<string> LoadCustomGroupNames()
+		{
+			try
+			{
+				return db.LoadCustomGroupNames();
+			}
+			catch (Exception)
+			{
+				return new List<string>();
+			}
+		}
+		public static void SaveMultipleVersesToDatabase(List<Verse> verses, string groupName)
+		{
+			db.SaveMultipleVersesToDatabase(verses, groupName);
+			CustomVerses = LoadCustomVerses();
+		}
+		public static void SaveVerseToDatabase(string book, int chapter, string verseNumbers, string verseData, string groupName)
+		{
+			db.SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
+			CustomVerses = LoadCustomVerses();
+		}
+		/******************************* End Database Methods *******************************/
+
 
 		private void CheckForUpdate(object sender, EventArgs e)
 		{
@@ -169,6 +230,10 @@ namespace Topical_Memory_System
 				{
 					ViewVerses.ChangeTranslation(SelectedTranslationName());
 				}
+				else if (mainPanel.Controls[0] is LearnReferences)
+				{
+					LearnReferences.ChangeTranslation(SelectedTranslationName());
+				}
             }
 		}
 
@@ -205,8 +270,7 @@ namespace Topical_Memory_System
 		{
 			mainPanel.Controls.Remove((Control)sender);
 			List<VersePack> verses = CopyVersePackList(AllVerses);
-			List<VersePack> customVerses = Database.LoadCustomVerses();
-			foreach (VersePack vp in customVerses)
+			foreach (VersePack vp in CustomVerses)
 			{
 				if (vp.Verses.Count > 0)
 				{
@@ -219,7 +283,7 @@ namespace Topical_Memory_System
 		public static void ReviewVersesHandler(object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", Database.LoadCustomVerses()));
+			mainPanel.Controls.Add(new ReviewVersesOptionsPanel("review", CustomVerses));
 		}
 
         public static void MatchVersesHandler(object sender)
@@ -239,26 +303,26 @@ namespace Topical_Memory_System
             mainPanel.Controls.Remove((Control)sender);
             if (verseToReference)
             {
-				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", Database.LoadCustomVerses()));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("vr", CustomVerses));
             }
             else
             {
-				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", Database.LoadCustomVerses()));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("rv", CustomVerses));
             }
         }
 
-		public static void ReviewVersesHandler(List<VersePack> CustomVerses, List<string> packs, object sender)
+		public static void ReviewVersesHandler(List<VersePack> packs, bool random, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
+			List<Verse> versesToReview = GetDesiredVerses(packs, random);
             string translation = SelectedTranslationName();
 			mainPanel.Controls.Add(new ReviewVerses(versesToReview, translation));
 		}
 
-		public static void MatchVersesHandler(List<VersePack> CustomVerses, List<string> packs, bool verseToReference, object sender)
+		public static void MatchVersesHandler(List<VersePack> packs, bool random, bool verseToReference, object sender)
         {
             mainPanel.Controls.Remove((Control)sender);
-			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
+			List<Verse> versesToReview = GetDesiredVerses(packs, random);
 			List<Verse> versesToMatchAgainst = new List<Verse>();
 
 			//add all the verses so we can do some matching
@@ -285,18 +349,18 @@ namespace Topical_Memory_System
 			mainPanel.Controls.Remove((Control)sender);
 			if (learnReferences)
 			{
-				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learnReferences", Database.LoadCustomVerses()));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learnReferences", CustomVerses));
 			}
 			else
 			{
-				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learnVerses", Database.LoadCustomVerses()));
+				mainPanel.Controls.Add(new ReviewVersesOptionsPanel("learnVerses", CustomVerses));
 			}
 		}
 
-		public static void LearnVersesHandler(List<VersePack> CustomVerses, List<string> packs, bool learnReferences, object sender)
+		public static void LearnVersesHandler(List<VersePack> packs, bool random, bool learnReferences, object sender)
 		{
 			mainPanel.Controls.Remove((Control)sender);
-			List<Verse> versesToReview = GetDesiredVerses(packs, CustomVerses);
+			List<Verse> versesToReview = GetDesiredVerses(packs, random);
 			if (learnReferences)
 			{
 				mainPanel.Controls.Add(new LearnReferences(versesToReview));
@@ -307,37 +371,33 @@ namespace Topical_Memory_System
 			}
 		}
 
-		private static List<Verse> GetDesiredVerses(List<string> packs, List<VersePack> CustomVerses)
+		private static List<Verse> GetDesiredVerses(List<VersePack> packs, bool random)
         {
             List<Verse> versesToReview = new List<Verse>();
-			foreach (VersePack vp in AllVerses)
+			foreach (VersePack vp in packs)
             {
-				if (packs.Contains(vp.Name))
+				foreach (Verse v in vp.Verses)
 				{
-					foreach (Verse v in vp.Verses)
-					{
-						versesToReview.Add(v);
-					}
+					v.setTranslation(SelectedTranslationName());
+					versesToReview.Add(v);
 				}
             }
-			foreach (VersePack vp in CustomVerses)
-            {
-				if (packs.Contains(vp.Name))
-                {
-                    foreach (Verse v in vp.Verses)
-                    {
-                        if (!versesToReview.Contains(v))
-                        {
-                            versesToReview.Add(v);
-                        }
-                    }
-                }
-            }
-			foreach (Verse v in versesToReview)
+			if (random)
 			{
-				v.setTranslation(SelectedTranslationName());
+				List<Verse> reviewVerses = new List<Verse>(versesToReview.Count);
+				Random rand = new Random();
+				while (versesToReview.Count > 0)
+				{
+					int rNum = rand.Next(versesToReview.Count);
+					reviewVerses.Add(versesToReview[rNum]);
+					versesToReview.RemoveAt(rNum);
+				}
+				return reviewVerses;
 			}
-            return versesToReview;
+			else
+			{
+				return versesToReview;
+			}
         }
 
 		private static List<VersePack> ReadInVerses()
@@ -480,13 +540,20 @@ namespace Topical_Memory_System
 
         private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			AddCustomVerses obj = new AddCustomVerses(Database.LoadCustomGroupNames());
-            obj.ShowDialog();
+			try
+			{
+				AddCustomVerses obj = new AddCustomVerses(MenuExit.LoadCustomGroupNames());
+				obj.ShowDialog();
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("An error occurred accessing the custom verses.  This feature will be disabled.");
+			}
         }
 
         private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			EditCustomVerses obj = new EditCustomVerses(Database.LoadCustomVerses());
+			EditCustomVerses obj = new EditCustomVerses(CustomVerses);
 			obj.ShowDialog();
         }
 
@@ -503,22 +570,21 @@ namespace Topical_Memory_System
 				}
 				catch (Exception)
 				{
-					MessageBox.Show("The file you selected could not be loaded.");
+					MessageBox.Show("The file could not be loaded.");
 				}
 			}
 		}
 
 		private void exportVersesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			List<VersePack> verses = Database.LoadCustomVerses();
 			int numVerses = 0;
-			foreach (VersePack vp in verses)
+			foreach (VersePack vp in CustomVerses)
 			{
 				numVerses += vp.Verses.Count;
 			}
 			if (numVerses > 0)
 			{
-				ExportVerses ev = new ExportVerses(verses);
+				ExportVerses ev = new ExportVerses(CustomVerses);
 				ev.ShowDialog();
 			}
 			else
