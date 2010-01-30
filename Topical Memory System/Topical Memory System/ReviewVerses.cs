@@ -30,12 +30,9 @@ namespace Topical_Memory_System
 			this.translationText = incomingTranslation;
 			frontOfCard = true;
 			verses = new List<Verse>(incomingVerses.Count);
-			Random r = new Random();
-			while (incomingVerses.Count > 0)
+			foreach (Verse verse in incomingVerses)
 			{
-				int random = r.Next(incomingVerses.Count);
-				verses.Add(incomingVerses[random]);
-				incomingVerses.RemoveAt(random);
+				verses.Add(verse);
 			}
 			currentVerseIndex = 0;
 

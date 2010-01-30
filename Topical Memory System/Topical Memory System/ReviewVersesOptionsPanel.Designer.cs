@@ -33,6 +33,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.startButton = new System.Windows.Forms.Button();
 			this.chooseVersesLabel = new System.Windows.Forms.Label();
+			this.RandomCheckbox = new System.Windows.Forms.CheckBox();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -40,6 +41,7 @@
 			// 
 			this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.RandomCheckbox);
 			this.panel1.Controls.Add(this.VersePackListBox);
 			this.panel1.Controls.Add(this.label1);
 			this.panel1.Controls.Add(this.startButton);
@@ -54,7 +56,7 @@
 			this.VersePackListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.VersePackListBox.FormattingEnabled = true;
 			this.VersePackListBox.ItemHeight = 15;
-			this.VersePackListBox.Location = new System.Drawing.Point(77, 92);
+			this.VersePackListBox.Location = new System.Drawing.Point(77, 72);
 			this.VersePackListBox.Name = "VersePackListBox";
 			this.VersePackListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
 			this.VersePackListBox.Size = new System.Drawing.Size(217, 169);
@@ -63,7 +65,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(102, 49);
+			this.label1.Location = new System.Drawing.Point(102, 42);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(166, 13);
 			this.label1.TabIndex = 14;
@@ -71,7 +73,7 @@
 			// 
 			// startButton
 			// 
-			this.startButton.Location = new System.Drawing.Point(136, 281);
+			this.startButton.Location = new System.Drawing.Point(136, 286);
 			this.startButton.Name = "startButton";
 			this.startButton.Size = new System.Drawing.Size(98, 30);
 			this.startButton.TabIndex = 20;
@@ -83,11 +85,23 @@
 			// 
 			this.chooseVersesLabel.AutoSize = true;
 			this.chooseVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.chooseVersesLabel.Location = new System.Drawing.Point(79, 25);
+			this.chooseVersesLabel.Location = new System.Drawing.Point(79, 18);
 			this.chooseVersesLabel.Name = "chooseVersesLabel";
 			this.chooseVersesLabel.Size = new System.Drawing.Size(212, 20);
 			this.chooseVersesLabel.TabIndex = 13;
 			this.chooseVersesLabel.Text = "Select verse packs to review:";
+			// 
+			// RandomCheckbox
+			// 
+			this.RandomCheckbox.AutoSize = true;
+			this.RandomCheckbox.Checked = true;
+			this.RandomCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.RandomCheckbox.Location = new System.Drawing.Point(118, 255);
+			this.RandomCheckbox.Name = "RandomCheckbox";
+			this.RandomCheckbox.Size = new System.Drawing.Size(135, 17);
+			this.RandomCheckbox.TabIndex = 22;
+			this.RandomCheckbox.Text = "Randomize verse order";
+			this.RandomCheckbox.UseVisualStyleBackColor = true;
 			// 
 			// ReviewVersesOptionsPanel
 			// 
@@ -109,6 +123,7 @@
 		private System.Windows.Forms.Button startButton;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ListBox VersePackListBox;
+		private System.Windows.Forms.CheckBox RandomCheckbox;
 
 
 

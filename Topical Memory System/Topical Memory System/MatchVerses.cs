@@ -31,12 +31,15 @@ namespace Topical_Memory_System
         private int versesLeft;
         private int incorrectAnswersForRound;
 
+		private bool foundCorrectAnswer;
+
 		private Random rNum;
 
         public MatchVerses(List<Verse> incomingVersesToMatch, string incomingTranslation, 
             bool incomingVerseToReference, List<Verse> incomingVersesToMatchAgainst)
         {
             InitializeComponent();
+			foundCorrectAnswer = false;
 			rNum = new Random();
 			totalVerses = incomingVersesToMatch.Count;
             correctAnswers = 0;
@@ -49,20 +52,15 @@ namespace Topical_Memory_System
 			versesToMatch = new List<Verse>(incomingVersesToMatch.Count);
 			undeletableVersesToMatchAgainst = new List<Verse>(incomingVersesToMatchAgainst.Count);
 			versesToMatchAgainst = new List<Verse>(incomingVersesToMatchAgainst.Count);
-            Random r = new Random();
-			while (incomingVersesToMatch.Count > 0)
-            {
-				int random = r.Next(incomingVersesToMatch.Count);
-				undeletableVersesToMatch.Add(incomingVersesToMatch[random]);
-				versesToMatch.Add(incomingVersesToMatch[random]);
-				incomingVersesToMatch.RemoveAt(random);
-            }
-			while (incomingVersesToMatchAgainst.Count > 0)
+			foreach (Verse v in incomingVersesToMatch)
 			{
-				int random = r.Next(incomingVersesToMatchAgainst.Count);
-				undeletableVersesToMatchAgainst.Add(incomingVersesToMatchAgainst[random]);
-				versesToMatchAgainst.Add(incomingVersesToMatchAgainst[random]);
-				incomingVersesToMatchAgainst.RemoveAt(random);
+				undeletableVersesToMatch.Add(v);
+				versesToMatch.Add(v);
+			}
+			foreach (Verse v in incomingVersesToMatchAgainst)
+			{
+				undeletableVersesToMatchAgainst.Add(v);
+				versesToMatchAgainst.Add(v);
 			}
             this.translationText = incomingTranslation;
             verseToReference = incomingVerseToReference;
@@ -205,7 +203,7 @@ namespace Topical_Memory_System
 
         private void BoxSelected(object sender, EventArgs e)
         {
-            if (!viewStatsButton.Visible)
+			if (!viewStatsButton.Visible && !foundCorrectAnswer)
             {
                 int choice = Convert.ToInt32(((TextBox)sender).Name.ToString().Replace("match", ""));
                 if (((TextBox)sender).BackColor.Equals(System.Drawing.SystemColors.Control))
@@ -225,6 +223,7 @@ namespace Topical_Memory_System
                 }
                 if (choice == correctMatch)
                 {
+					foundCorrectAnswer = true;
                     ((TextBox)sender).BackColor = Color.FromArgb(51, 221, 51);
                     if (versesLeft > 0)
                     {
@@ -256,6 +255,7 @@ namespace Topical_Memory_System
             match3.BackColor = System.Drawing.SystemColors.Control;
             match4.BackColor = System.Drawing.SystemColors.Control;
             match5.BackColor = System.Drawing.SystemColors.Control;
+			foundCorrectAnswer = false;
             SetFields(verseToReference);
         }
 
@@ -279,6 +279,7 @@ namespace Topical_Memory_System
         private void RestartButton_Click(object sender, EventArgs e)
         {
             blankLabel.Focus();
+			foundCorrectAnswer = false;
             match1.BackColor = System.Drawing.SystemColors.Control;
             match2.BackColor = System.Drawing.SystemColors.Control;
             match3.BackColor = System.Drawing.SystemColors.Control;

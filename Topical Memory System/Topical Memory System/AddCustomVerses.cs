@@ -19,12 +19,16 @@ namespace Topical_Memory_System
 
 		public AddCustomVerses(List<string> IncomingCustomGroupNames)
         {
-			this.CustomGroupNames = IncomingCustomGroupNames;
             InitializeComponent();
-            UpdateGroupNames(null, null);
+			this.CustomGroupNames = IncomingCustomGroupNames;
+			if (this.CustomGroupNames.Count == 0)
+			{
+				throw new Exception();
+			}
+            UpdateGroupNames();
         }
 
-        private void UpdateGroupNames(object sender, EventArgs e)
+        private void UpdateGroupNames()
         {
             groupNames.Items.Clear();
 			foreach (string name in CustomGroupNames)
@@ -64,8 +68,15 @@ namespace Topical_Memory_System
 
 		private void SaveVerseToDatabase(string book, int chapter, string verseNumbers, string verseData, string groupName)
 		{
-			Database.SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
-			MessageBox.Show("Verse saved!");
+			try
+			{
+				MenuExit.SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
+				MessageBox.Show("Verse saved!");
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("The verse was unable to be saved.");
+			}
 		}
     }
 }
