@@ -24,12 +24,17 @@ namespace Topical_Memory_System
 			{
 				if (vp.Verses.Count > 0)
 				{
-					VersePackBox.Items.Add(vp.Name);
+					VersePackBox.Items.Add(vp);
 				}
 			}
 			this.isPrint = incomingIsPrint;
 			if (isPrint)
 			{
+				VersePackBox.Items.Add(TMSVerses.A_PACK());
+				VersePackBox.Items.Add(TMSVerses.B_PACK());
+				VersePackBox.Items.Add(TMSVerses.C_PACK());
+				VersePackBox.Items.Add(TMSVerses.D_PACK());
+				VersePackBox.Items.Add(TMSVerses.E_PACK());
 				SaveAllButton.Text = "Print all verses";
 				SaveSelectedButton.Text = "Print selected verses";
 				label6.Text = "Verses to print";
@@ -42,18 +47,12 @@ namespace Topical_Memory_System
 			if (VersePackBox.SelectedIndex > -1)
 			{
 				VersesBox.Items.Clear();
-				foreach (VersePack vp in CustomVerses)
+				SelectedVersePack = (VersePack)VersePackBox.SelectedItem;
+				foreach (Verse v in SelectedVersePack.Verses)
 				{
-					if (vp.Name == VersePackBox.Text)
+					if (!SelectedVersesBox.Items.Contains(v.getReference()))
 					{
-						SelectedVersePack = vp;
-						foreach (Verse v in SelectedVersePack.Verses)
-						{
-							if (!SelectedVersesBox.Items.Contains(v.getReference()))
-							{
-								VersesBox.Items.Add(v.getReference());
-							}
-						}
+						VersesBox.Items.Add(v.getReference());
 					}
 				}
 				AddAllButton.Enabled = true;
@@ -142,37 +141,10 @@ namespace Topical_Memory_System
 		{
 			if (isPrint)
 			{
-				PrintOptions po = new PrintOptions();
-				//DialogResult.No;			//just references
-				//DialogResult.Ignore;		//just verses
-				//DialogResult.Yes;			//both
-				string selection = "both";
-				DialogResult dr = po.ShowDialog();
-				if (dr == DialogResult.No)
-				{
-					selection = "references";
-				}
-				else if (dr == DialogResult.Ignore)
-				{
-					selection = "verses";
-				}
-				else if (dr == DialogResult.Yes)
-				{
-					selection = "both";
-				}
+				string selection = GetOption();
 				panel1.Enabled = false;
 				PrintingBox.Visible = true;
-				List<Verse> verses = new List<Verse>();
-				foreach (VersePack vp in CustomVerses)
-				{
-					foreach (Verse v in vp.Verses)
-					{
-						if (SelectedVersesBox.Items.Contains(v.getReference()))
-						{
-							verses.Add(v);
-						}
-					}
-				}
+				List<Verse> verses = AddVerses(false);
 				PrintVerses.Print(verses, selection);
 			}
 			else
@@ -209,34 +181,10 @@ namespace Topical_Memory_System
 		{
 			if (isPrint)
 			{
-				PrintOptions po = new PrintOptions();
-				//DialogResult.No;			//just references
-				//DialogResult.Ignore;		//just verses
-				//DialogResult.Yes;			//both
-				string selection = "both";
-				DialogResult dr = po.ShowDialog();
-				if (dr == DialogResult.No)
-				{
-					selection = "references";
-				}
-				else if (dr == DialogResult.Ignore)
-				{
-					selection = "verses";
-				}
-				else if (dr == DialogResult.Yes)
-				{
-					selection = "both";
-				}
+				string selection = GetOption();
 				panel1.Enabled = false;
 				PrintingBox.Visible = true;
-				List<Verse> verses = new List<Verse>();
-				foreach (VersePack vp in CustomVerses)
-				{
-					foreach (Verse v in vp.Verses)
-					{
-						verses.Add(v);
-					}
-				}
+				List<Verse> verses = AddVerses(true);
 				PrintVerses.Print(verses, selection);
 			}
 			else
@@ -264,6 +212,122 @@ namespace Topical_Memory_System
 				}
 			}
 			this.Close();
+		}
+
+		private string GetOption()
+		{
+			PrintOptions po = new PrintOptions();
+			//DialogResult.No;			//just references
+			//DialogResult.Ignore;		//just verses
+			//DialogResult.Yes;			//both
+			string selection = "both";
+			DialogResult dr = po.ShowDialog();
+			if (dr == DialogResult.No)
+			{
+				selection = "references";
+			}
+			else if (dr == DialogResult.Ignore)
+			{
+				selection = "verses";
+			}
+			else if (dr == DialogResult.Yes)
+			{
+				selection = "both";
+			}
+			return selection;
+		}
+
+		private List<Verse> AddVerses(bool addAll)
+		{
+			List<Verse> verses = new List<Verse>();
+			foreach (VersePack vp in CustomVerses)
+			{
+				foreach (Verse v in vp.Verses)
+				{
+					if (addAll)
+					{
+						verses.Add(v);
+					}
+					else
+					{
+						if (SelectedVersesBox.Items.Contains(v.getReference()))
+						{
+							verses.Add(v);
+						}
+					}
+				}
+			}
+			foreach (Verse v in TMSVerses.A_PACK().Verses)
+			{
+				if (addAll)
+				{
+					verses.Add(v);
+				}
+				else
+				{
+					if (SelectedVersesBox.Items.Contains(v.getReference()))
+					{
+						verses.Add(v);
+					}
+				}
+			}
+			foreach (Verse v in TMSVerses.B_PACK().Verses)
+			{
+				if (addAll)
+				{
+					verses.Add(v);
+				}
+				else
+				{
+					if (SelectedVersesBox.Items.Contains(v.getReference()))
+					{
+						verses.Add(v);
+					}
+				}
+			}
+			foreach (Verse v in TMSVerses.C_PACK().Verses)
+			{
+				if (addAll)
+				{
+					verses.Add(v);
+				}
+				else
+				{
+					if (SelectedVersesBox.Items.Contains(v.getReference()))
+					{
+						verses.Add(v);
+					}
+				}
+			}
+			foreach (Verse v in TMSVerses.D_PACK().Verses)
+			{
+				if (addAll)
+				{
+					verses.Add(v);
+				}
+				else
+				{
+					if (SelectedVersesBox.Items.Contains(v.getReference()))
+					{
+						verses.Add(v);
+					}
+				}
+			}
+			foreach (Verse v in TMSVerses.E_PACK().Verses)
+			{
+				if (addAll)
+				{
+					verses.Add(v);
+				}
+				else
+				{
+					if (SelectedVersesBox.Items.Contains(v.getReference()))
+					{
+						verses.Add(v);
+					}
+				}
+			}
+			return verses;
 		}
 	}
 }
