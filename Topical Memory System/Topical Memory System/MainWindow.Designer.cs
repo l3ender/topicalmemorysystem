@@ -40,6 +40,7 @@ namespace Topical_Memory_System
 			this.editCustomVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.printVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			translationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.esvStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nivStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,7 +103,8 @@ namespace Topical_Memory_System
             this.editCustomVersesToolStripMenuItem,
 			new ToolStripSeparator(),
             this.importVersesToolStripMenuItem,
-            this.exportVersesToolStripMenuItem});
+            this.exportVersesToolStripMenuItem,
+            this.printVersesToolStripMenuItem});
 			this.customVersesToolStripMenuItem.Name = "customVersesToolStripMenuItem";
 			this.customVersesToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
 			this.customVersesToolStripMenuItem.Text = "Custom Verses";
@@ -110,32 +112,39 @@ namespace Topical_Memory_System
 			// addVerseToolStripMenuItem
 			// 
 			this.addVerseToolStripMenuItem.Name = "addVerseToolStripMenuItem";
-			this.addVerseToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.addVerseToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.addVerseToolStripMenuItem.Text = "Add verses";
 			this.addVerseToolStripMenuItem.Click += new System.EventHandler(this.addVerseToolStripMenuItem_Click);
 			// 
 			// editCustomVersesToolStripMenuItem
 			// 
 			this.editCustomVersesToolStripMenuItem.Name = "editCustomVersesToolStripMenuItem";
-			this.editCustomVersesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.editCustomVersesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.editCustomVersesToolStripMenuItem.Text = "Edit groups and verses";
 			this.editCustomVersesToolStripMenuItem.Click += new System.EventHandler(this.editCustomVersesToolStripMenuItem_Click);
 			// 
 			// importVersesToolStripMenuItem
 			// 
 			this.importVersesToolStripMenuItem.Name = "importVersesToolStripMenuItem";
-			this.importVersesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-			this.importVersesToolStripMenuItem.Text = "Import verses";
+			this.importVersesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.importVersesToolStripMenuItem.Text = "Import verses from file";
 			this.importVersesToolStripMenuItem.ToolTipText = "Import verses from a file";
 			this.importVersesToolStripMenuItem.Click += new System.EventHandler(this.importVersesToolStripMenuItem_Click);
 			// 
 			// exportVersesToolStripMenuItem
 			// 
 			this.exportVersesToolStripMenuItem.Name = "exportVersesToolStripMenuItem";
-			this.exportVersesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-			this.exportVersesToolStripMenuItem.Text = "Export verses";
+			this.exportVersesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.exportVersesToolStripMenuItem.Text = "Export verses to file";
 			this.exportVersesToolStripMenuItem.ToolTipText = "Save your verses to a file so you can use them on a different computer";
 			this.exportVersesToolStripMenuItem.Click += new System.EventHandler(this.exportVersesToolStripMenuItem_Click);
+			// 
+			// printVersesToolStripMenuItem
+			// 
+			this.printVersesToolStripMenuItem.Name = "printVersesToolStripMenuItem";
+			this.printVersesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.printVersesToolStripMenuItem.Text = "Print verses";
+			this.printVersesToolStripMenuItem.Click += new System.EventHandler(this.PrintVersesClick);
 			// 
 			// translationToolStripMenuItem
 			// 
@@ -310,6 +319,7 @@ namespace Topical_Memory_System
 		private ToolStripMenuItem importVersesToolStripMenuItem;
 		private ToolStripMenuItem exportVersesToolStripMenuItem;
 		private ToolTip ToolTip;
+		private ToolStripMenuItem printVersesToolStripMenuItem;
 		public static PictureBox loadingBox;
 		private static ToolStripMenuItem bibleGatewayToolStripMenuItem;
 		private static ToolStripMenuItem esvOnlineStudyBibleToolStripMenuItem;

@@ -14,8 +14,9 @@ namespace Topical_Memory_System
 	{
 		private List<VersePack> CustomVerses;
 		private VersePack SelectedVersePack;
+		private bool isPrint;
 
-		public ExportVerses(List<VersePack> CustomVerses)
+		public ExportVerses(List<VersePack> CustomVerses, bool incomingIsPrint)	//class can be used for printing verses or saving to file
 		{
 			InitializeComponent();
 			this.CustomVerses = CustomVerses;
@@ -25,6 +26,14 @@ namespace Topical_Memory_System
 				{
 					VersePackBox.Items.Add(vp.Name);
 				}
+			}
+			this.isPrint = incomingIsPrint;
+			if (isPrint)
+			{
+				SaveAllButton.Text = "Print all verses";
+				SaveSelectedButton.Text = "Print selected verses";
+				label6.Text = "Verses to print";
+				this.Text = "Print Custom Verses";
 			}
 		}
 
@@ -131,16 +140,79 @@ namespace Topical_Memory_System
 
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
-			SaveFileDialog dlg = new SaveFileDialog();
-			dlg.FileName = "Custom_Verses.txt";
-			if (dlg.ShowDialog() == DialogResult.OK)
+			if (isPrint)
 			{
-				StringBuilder sb = new StringBuilder("");
+				panel1.Enabled = false;
+				PrintingBox.Visible = true;
+				List<Verse> verses = new List<Verse>();
 				foreach (VersePack vp in CustomVerses)
 				{
 					foreach (Verse v in vp.Verses)
 					{
 						if (SelectedVersesBox.Items.Contains(v.getReference()))
+						{
+							verses.Add(v);
+						}
+					}
+				}
+				PrintVerses.Print(verses);
+			}
+			else
+			{
+				SaveFileDialog dlg = new SaveFileDialog();
+				dlg.FileName = "Custom_Verses.txt";
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					StringBuilder sb = new StringBuilder("");
+					foreach (VersePack vp in CustomVerses)
+					{
+						foreach (Verse v in vp.Verses)
+						{
+							if (SelectedVersesBox.Items.Contains(v.getReference()))
+							{
+								sb.Append(v.getBook());
+								sb.Append(Constants.FileDelimiter);
+								sb.Append(v.getChapter());
+								sb.Append(Constants.FileDelimiter);
+								sb.Append(v.getVerseNumbers());
+								sb.Append(Constants.FileDelimiter);
+								sb.Append(v.getVerseData());
+								sb.Append(Constants.NewLine);
+							}
+						}
+					}
+					File.WriteAllText(dlg.FileName, sb.ToString());
+				}
+			}
+			this.Close();
+		}
+
+		private void SaveAllButton_Click(object sender, EventArgs e)
+		{
+			if (isPrint)
+			{
+				panel1.Enabled = false;
+				PrintingBox.Visible = true;
+				List<Verse> verses = new List<Verse>();
+				foreach (VersePack vp in CustomVerses)
+				{
+					foreach (Verse v in vp.Verses)
+					{
+						verses.Add(v);
+					}
+				}
+				PrintVerses.Print(verses);
+			}
+			else
+			{
+				SaveFileDialog dlg = new SaveFileDialog();
+				dlg.FileName = "Custom_Verses.txt";
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					StringBuilder sb = new StringBuilder("");
+					foreach (VersePack vp in CustomVerses)
+					{
+						foreach (Verse v in vp.Verses)
 						{
 							sb.Append(v.getBook());
 							sb.Append(Constants.FileDelimiter);
@@ -152,34 +224,8 @@ namespace Topical_Memory_System
 							sb.Append(Constants.NewLine);
 						}
 					}
+					File.WriteAllText(dlg.FileName, sb.ToString());
 				}
-				File.WriteAllText(dlg.FileName, sb.ToString());
-			}
-			this.Close();
-		}
-
-		private void SaveAllButton_Click(object sender, EventArgs e)
-		{
-			SaveFileDialog dlg = new SaveFileDialog();
-			dlg.FileName = "Custom_Verses.txt";
-			if (dlg.ShowDialog() == DialogResult.OK)
-			{
-				StringBuilder sb = new StringBuilder("");
-				foreach (VersePack vp in CustomVerses)
-				{
-					foreach (Verse v in vp.Verses)
-					{
-						sb.Append(v.getBook());
-						sb.Append(Constants.FileDelimiter);
-						sb.Append(v.getChapter());
-						sb.Append(Constants.FileDelimiter);
-						sb.Append(v.getVerseNumbers());
-						sb.Append(Constants.FileDelimiter);
-						sb.Append(v.getVerseData());
-						sb.Append(Constants.NewLine);
-					}
-				}
-				File.WriteAllText(dlg.FileName, sb.ToString());
 			}
 			this.Close();
 		}

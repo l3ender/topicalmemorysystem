@@ -584,12 +584,30 @@ namespace Topical_Memory_System
 			}
 			if (numVerses > 0)
 			{
-				ExportVerses ev = new ExportVerses(CustomVerses);
+				ExportVerses ev = new ExportVerses(CustomVerses, false);
 				ev.ShowDialog();
 			}
 			else
 			{
 				MessageBox.Show("You have no custom verses to export!");
+			}
+		}
+
+		private void PrintVersesClick(object sender, EventArgs e)
+		{
+			int numVerses = 0;
+			foreach (VersePack vp in CustomVerses)
+			{
+				numVerses += vp.Verses.Count;
+			}
+			if (numVerses > 0)
+			{
+				ExportVerses ev = new ExportVerses(CustomVerses, true);
+				ev.ShowDialog();
+			}
+			else
+			{
+				MessageBox.Show("You have no custom verses to print!");
 			}
 		}
 	}
