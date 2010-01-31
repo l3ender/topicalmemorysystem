@@ -166,7 +166,20 @@ namespace Topical_Memory_System
 								sb.Append(Constants.FileDelimiter);
 								sb.Append(v.getVerseNumbers());
 								sb.Append(Constants.FileDelimiter);
-								sb.Append(v.getVerseData());
+								string verseData = v.getVerseData();
+								if (verseData.Contains("\r\n"))
+								{
+									verseData = verseData.Replace("\r\n", " ");
+								}
+								else if (verseData.Contains("\r"))
+								{
+									verseData = verseData.Replace("\r", " ");
+								}
+								else if (verseData.Contains("\n"))
+								{
+									verseData = verseData.Replace("\n", " ");
+								}
+								sb.Append(verseData);
 								sb.Append(Constants.NewLine);
 							}
 						}
@@ -204,7 +217,20 @@ namespace Topical_Memory_System
 							sb.Append(Constants.FileDelimiter);
 							sb.Append(v.getVerseNumbers());
 							sb.Append(Constants.FileDelimiter);
-							sb.Append(v.getVerseData());
+							string verseData = v.getVerseData();
+							if (verseData.Contains("\r\n"))
+							{
+								verseData = verseData.Replace("\r\n", " ");
+							}
+							else if (verseData.Contains("\r"))
+							{
+								verseData = verseData.Replace("\r", " ");
+							}
+							else if (verseData.Contains("\n"))
+							{
+								verseData = verseData.Replace("\n", " ");
+							}
+							sb.Append(verseData);
 							sb.Append(Constants.NewLine);
 						}
 					}
