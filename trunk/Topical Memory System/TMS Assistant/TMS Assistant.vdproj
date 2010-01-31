@@ -88,12 +88,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C297B587D57C06BED224BED45496919A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EB4D63B9D5463129B59DD80CF555A5F8"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -101,6 +95,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D27CAADBAEC1B8DD5AA4B52DA0B5F6F7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C297B587D57C06BED224BED45496919A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -294,11 +294,11 @@
                 {
                     "_D27CAADBAEC1B8DD5AA4B52DA0B5F6F7"
                     {
-                    "Name" = "8:Office.dll"
+                    "Name" = "8:office.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Office.dll"
+            "SourcePath" = "8:office.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A456694850774FBBA9665735CBCDBCE1"
@@ -476,14 +476,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TMS Assistant"
-        "ProductCode" = "8:{493C39EC-7540-488D-A904-CD6D0EA60147}"
-        "PackageCode" = "8:{AC136E87-8BAB-4963-8E6C-3643E4290987}"
+        "ProductCode" = "8:{BCCA2CA5-9E83-45DF-AD5F-6098D4EEA546}"
+        "PackageCode" = "8:{E4CC4A05-41A4-490E-8BE4-24886B56C39F}"
         "UpgradeCode" = "8:{EC9C93F5-CEB1-4408-BED7-7C2941E6597E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:5.0.0"
+        "ProductVersion" = "8:5.0.1"
         "Manufacturer" = "8:TMS"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

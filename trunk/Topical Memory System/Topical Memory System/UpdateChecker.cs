@@ -109,15 +109,8 @@ namespace Topical_Memory_System
 				}
 				if (update == 0)
 				{	//no update needed, we are using the same version as the feed
-					if (currentVersion != latestVersion)
-					{	//something went wrong in our parsing :S
-						throw new Exception();
-					}
-					else
-					{	//need update
-						UpdateForm uf = new UpdateForm(false);
-						uf.ShowDialog();
-					}
+					UpdateForm uf = new UpdateForm(false);
+					uf.ShowDialog();
 				}
 				else if (update == 1)
 				{	//need an update
