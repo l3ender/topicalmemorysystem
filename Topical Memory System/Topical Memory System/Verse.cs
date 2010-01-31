@@ -52,7 +52,7 @@ namespace Topical_Memory_System
 
 		public override string ToString()
 		{
-			return book + Convert.ToString(chapter) + verseNumbers;
+			return getReference();
 		}
 
 		public string getBook()
