@@ -9,7 +9,7 @@ namespace Topical_Memory_System
 {
 	public class PrintVerses
 	{
-		public static void Print(List<Verse> incomingVerses)
+		public static void Print(List<Verse> incomingVerses, string selection)
 		{
 			try
 			{
@@ -47,7 +47,18 @@ namespace Topical_Memory_System
 					{
 						if (verses[i][j] != null)
 						{
-							table.Cell(i + 1, j + 1).Range.Text = verses[i][j].getReference() + Constants.NewLine + Constants.NewLine + verses[i][j].getVerseData();
+							if (selection == "verses")
+							{
+								table.Cell(i + 1, j + 1).Range.Text = verses[i][j].getVerseData() + Constants.NewLine;
+							}
+							else if (selection == "references")
+							{
+								table.Cell(i + 1, j + 1).Range.Text = verses[i][j].getReference() + Constants.NewLine;
+							}
+							else
+							{
+								table.Cell(i + 1, j + 1).Range.Text = verses[i][j].getReference() + Constants.NewLine + Constants.NewLine + verses[i][j].getVerseData();
+							}
 						}
 					}
 				}
