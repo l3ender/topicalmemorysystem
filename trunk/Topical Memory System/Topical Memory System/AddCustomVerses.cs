@@ -59,7 +59,6 @@ namespace Topical_Memory_System
 				string verseData = verseDataBox.Text.Trim();
 				string groupName = groupNames.Text;
 				SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
-				groupNames.SelectedIndex = 0;
 				bookBox.Text = "";
 				referenceBox.Text = "";
 				verseDataBox.Text = "";
@@ -70,7 +69,20 @@ namespace Topical_Memory_System
 		{
 			try
 			{
-				MenuExit.SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
+				string newVerseData = verseData;
+				if (verseData.Contains("\r\n"))
+				{
+					newVerseData = newVerseData.Replace("\r\n", " ");
+				}
+				else if (verseData.Contains("\n"))
+				{
+					newVerseData = newVerseData.Replace("\n", " ");
+				}
+				else if (verseData.Contains("\r"))
+				{
+					newVerseData = newVerseData.Replace("\r", " ");
+				}
+				MenuExit.SaveVerseToDatabase(book, chapter, verseNumbers, newVerseData, groupName);
 				MessageBox.Show("Verse saved!");
 			}
 			catch (Exception)

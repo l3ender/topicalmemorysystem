@@ -47,3 +47,4 @@ C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memor
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ImportVerses.resources
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.LearnVersesOptionPanel.resources
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.LearnReferences.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical Memory System.csproj.ResolveComReference.cache

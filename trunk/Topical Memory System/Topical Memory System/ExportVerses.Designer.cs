@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.SaveAllButton = new System.Windows.Forms.Button();
+			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.SaveSelectedButton = new System.Windows.Forms.Button();
@@ -43,8 +45,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.VersesBox = new System.Windows.Forms.ListBox();
 			this.VersePackBox = new System.Windows.Forms.ListBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.SaveAllButton = new System.Windows.Forms.Button();
+			this.PrintingBox = new System.Windows.Forms.TextBox();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -70,6 +71,26 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(508, 395);
 			this.panel1.TabIndex = 0;
+			// 
+			// SaveAllButton
+			// 
+			this.SaveAllButton.Location = new System.Drawing.Point(228, 15);
+			this.SaveAllButton.Name = "SaveAllButton";
+			this.SaveAllButton.Size = new System.Drawing.Size(92, 30);
+			this.SaveAllButton.TabIndex = 17;
+			this.SaveAllButton.Text = "Save all verses";
+			this.SaveAllButton.UseVisualStyleBackColor = true;
+			this.SaveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label7.Location = new System.Drawing.Point(188, 22);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(28, 16);
+			this.label7.TabIndex = 16;
+			this.label7.Text = "OR";
 			// 
 			// label6
 			// 
@@ -219,31 +240,26 @@
 			this.VersePackBox.TabIndex = 1;
 			this.VersePackBox.SelectedIndexChanged += new System.EventHandler(this.VersePackSelected);
 			// 
-			// label7
+			// PrintingBox
 			// 
-			this.label7.AutoSize = true;
-			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label7.Location = new System.Drawing.Point(188, 22);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(28, 16);
-			this.label7.TabIndex = 16;
-			this.label7.Text = "OR";
-			// 
-			// SaveAllButton
-			// 
-			this.SaveAllButton.Location = new System.Drawing.Point(228, 15);
-			this.SaveAllButton.Name = "SaveAllButton";
-			this.SaveAllButton.Size = new System.Drawing.Size(92, 30);
-			this.SaveAllButton.TabIndex = 17;
-			this.SaveAllButton.Text = "Save all verses";
-			this.SaveAllButton.UseVisualStyleBackColor = true;
-			this.SaveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
+			this.PrintingBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PrintingBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.PrintingBox.Location = new System.Drawing.Point(201, 193);
+			this.PrintingBox.Multiline = true;
+			this.PrintingBox.Name = "PrintingBox";
+			this.PrintingBox.ReadOnly = true;
+			this.PrintingBox.Size = new System.Drawing.Size(131, 33);
+			this.PrintingBox.TabIndex = 1;
+			this.PrintingBox.Text = "Printing...";
+			this.PrintingBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.PrintingBox.Visible = false;
 			// 
 			// ExportVerses
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(532, 419);
+			this.Controls.Add(this.PrintingBox);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
 			this.MaximizeBox = false;
@@ -253,6 +269,7 @@
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -275,6 +292,7 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Button SaveAllButton;
+		private System.Windows.Forms.TextBox PrintingBox;
 
 	}
 }
