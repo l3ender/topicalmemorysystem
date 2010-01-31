@@ -142,6 +142,24 @@ namespace Topical_Memory_System
 		{
 			if (isPrint)
 			{
+				PrintOptions po = new PrintOptions();
+				//DialogResult.No;			//just references
+				//DialogResult.Ignore;		//just verses
+				//DialogResult.Yes;			//both
+				string selection = "both";
+				DialogResult dr = po.ShowDialog();
+				if (dr == DialogResult.No)
+				{
+					selection = "references";
+				}
+				else if (dr == DialogResult.Ignore)
+				{
+					selection = "verses";
+				}
+				else if (dr == DialogResult.Yes)
+				{
+					selection = "both";
+				}
 				panel1.Enabled = false;
 				PrintingBox.Visible = true;
 				List<Verse> verses = new List<Verse>();
@@ -155,7 +173,7 @@ namespace Topical_Memory_System
 						}
 					}
 				}
-				PrintVerses.Print(verses);
+				PrintVerses.Print(verses, selection);
 			}
 			else
 			{
@@ -191,6 +209,24 @@ namespace Topical_Memory_System
 		{
 			if (isPrint)
 			{
+				PrintOptions po = new PrintOptions();
+				//DialogResult.No;			//just references
+				//DialogResult.Ignore;		//just verses
+				//DialogResult.Yes;			//both
+				string selection = "both";
+				DialogResult dr = po.ShowDialog();
+				if (dr == DialogResult.No)
+				{
+					selection = "references";
+				}
+				else if (dr == DialogResult.Ignore)
+				{
+					selection = "verses";
+				}
+				else if (dr == DialogResult.Yes)
+				{
+					selection = "both";
+				}
 				panel1.Enabled = false;
 				PrintingBox.Visible = true;
 				List<Verse> verses = new List<Verse>();
@@ -201,7 +237,7 @@ namespace Topical_Memory_System
 						verses.Add(v);
 					}
 				}
-				PrintVerses.Print(verses);
+				PrintVerses.Print(verses, selection);
 			}
 			else
 			{
