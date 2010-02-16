@@ -74,11 +74,11 @@ namespace Topical_Memory_System
 				{
 					newVerseData = newVerseData.Replace("\r\n", " ");
 				}
-				else if (verseData.Contains("\n"))
+				if (verseData.Contains("\n"))
 				{
 					newVerseData = newVerseData.Replace("\n", " ");
 				}
-				else if (verseData.Contains("\r"))
+				if (verseData.Contains("\r"))
 				{
 					newVerseData = newVerseData.Replace("\r", " ");
 				}

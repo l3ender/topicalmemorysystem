@@ -150,7 +150,7 @@ namespace Topical_Memory_System
 			else
 			{
 				SaveFileDialog dlg = new SaveFileDialog();
-				dlg.FileName = "Custom_Verses.txt";
+				dlg.FileName = "Custom Verses.txt";
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					StringBuilder sb = new StringBuilder("");
@@ -171,11 +171,11 @@ namespace Topical_Memory_System
 								{
 									verseData = verseData.Replace("\r\n", " ");
 								}
-								else if (verseData.Contains("\r"))
+								if (verseData.Contains("\r"))
 								{
 									verseData = verseData.Replace("\r", " ");
 								}
-								else if (verseData.Contains("\n"))
+								if (verseData.Contains("\n"))
 								{
 									verseData = verseData.Replace("\n", " ");
 								}
@@ -222,11 +222,11 @@ namespace Topical_Memory_System
 							{
 								verseData = verseData.Replace("\r\n", " ");
 							}
-							else if (verseData.Contains("\r"))
+							if (verseData.Contains("\r"))
 							{
 								verseData = verseData.Replace("\r", " ");
 							}
-							else if (verseData.Contains("\n"))
+							if (verseData.Contains("\n"))
 							{
 								verseData = verseData.Replace("\n", " ");
 							}

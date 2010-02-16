@@ -136,46 +136,27 @@ namespace Topical_Memory_System
 
 		private void FlipButton_Click(object sender, EventArgs e)
 		{
-			if (frontOfCard)
+			theme.Enabled = !theme.Enabled;
+			theme.Visible = !theme.Visible;
+			reference.Enabled = !reference.Enabled;
+			reference.Visible = !reference.Visible;
+			translation.Enabled = !translation.Enabled;
+			translation.Visible = !translation.Visible;
+			verseData.Enabled = !verseData.Enabled;
+			verseData.Visible = !verseData.Visible;
+			packInformation.Enabled = !packInformation.Enabled;
+			packInformation.Visible = !packInformation.Visible;
+			if (MenuExit.voiceToolStripMenuItem.DropDownItems.Count > 0)
 			{
-				theme.Enabled = true;
-				theme.Visible = true;
-				reference.Enabled = true;
-				reference.Visible = true;
-				translation.Enabled = true;
-				translation.Visible = true;
-				verseData.Enabled = true;
-				verseData.Visible = true;
-				packInformation.Enabled = true;
-				packInformation.Visible = true;
-				this.hearButton.Enabled = true;
-				this.hearButton.Visible = true;
-                this.viewVerseInContextButton.Enabled = true;
-                this.viewVerseInContextButton.Visible = true;
-
-				frontReference.Enabled = false;
-				frontReference.Visible = false;
+				this.hearButton.Enabled = !this.hearButton.Enabled;
+				this.hearButton.Visible = !this.hearButton.Visible;
 			}
-			else
-			{
-				theme.Enabled = false;
-				theme.Visible = false;
-				reference.Enabled = false;
-				reference.Visible = false;
-				translation.Enabled = false;
-				translation.Visible = false;
-				verseData.Enabled = false;
-				verseData.Visible = false;
-				packInformation.Enabled = false;
-				packInformation.Visible = false;
-				this.hearButton.Enabled = false;
-				this.hearButton.Visible = false;
-                this.viewVerseInContextButton.Enabled = false;
-                this.viewVerseInContextButton.Visible = false;
+			this.viewVerseInContextButton.Enabled = !this.viewVerseInContextButton.Enabled;
+			this.viewVerseInContextButton.Visible = !this.viewVerseInContextButton.Visible;
 
-				frontReference.Enabled = true;
-				frontReference.Visible = true;
-			}
+			frontReference.Enabled = !frontReference.Enabled;
+			frontReference.Visible = !frontReference.Visible;
+
 			//flip
 			frontOfCard = !frontOfCard;
 		}

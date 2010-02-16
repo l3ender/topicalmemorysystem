@@ -41,7 +41,7 @@
 			this.nextVerseButton = new System.Windows.Forms.Button();
 			this.previousVerseButton = new System.Windows.Forms.Button();
 			this.titleLabel = new System.Windows.Forms.Label();
-			this.blankLabel = new System.Windows.Forms.Label();
+			this.blankLabel = new System.Windows.Forms.TextBox();
 			this.versePanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -202,11 +202,11 @@
 			// 
 			// blankLabel
 			// 
-			this.blankLabel.AutoSize = true;
-			this.blankLabel.Location = new System.Drawing.Point(40, 41);
+			this.blankLabel.Location = new System.Drawing.Point(46, 36);
 			this.blankLabel.Name = "blankLabel";
-			this.blankLabel.Size = new System.Drawing.Size(0, 13);
-			this.blankLabel.TabIndex = 5;
+			this.blankLabel.Size = new System.Drawing.Size(100, 20);
+			this.blankLabel.TabIndex = 6;
+			this.blankLabel.Visible = false;
 			// 
 			// ReviewVerses
 			// 
@@ -235,8 +235,8 @@
 		private System.Windows.Forms.Button nextVerseButton;
 		private System.Windows.Forms.Button previousVerseButton;
 		private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Button viewVerseInContextButton;
-		private System.Windows.Forms.Label blankLabel;
+		private System.Windows.Forms.Button viewVerseInContextButton;
+		private System.Windows.Forms.TextBox blankLabel;
 		private static System.Windows.Forms.Label theme;
 		private static System.Windows.Forms.Label translation;
 		private static System.Windows.Forms.Label reference;
