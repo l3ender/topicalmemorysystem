@@ -11,18 +11,24 @@ namespace Topical_Memory_System
 {
 	public partial class UpdateForm : Form
 	{
-		public UpdateForm(bool updateNeeded)
+		private string downloadUrl;
+		public UpdateForm(bool updateNeeded, string incomingDownloadUrl)
 		{
 			InitializeComponent();
+			this.downloadUrl = incomingDownloadUrl;
+			if (this.downloadUrl == null || this.downloadUrl.Trim() == "")
+			{
+				this.downloadUrl = "http://code.google.com/p/topicalmemorysystem/";
+			}
 			if (updateNeeded)
 			{
 				LinkLabel.Visible = true;
-				DisplayBox.Text = "A new version is available!";
+				DisplayBox.Text = "A new version is available! Click here to download.";
 			}
 			else
 			{
 				LinkLabel.Visible = false;
-				DisplayBox.Text = "Congratulations!  You are using the latest version!";
+				DisplayBox.Text = "Congratulations! You are using the latest version!";
 			}
 		}
 
@@ -33,7 +39,8 @@ namespace Topical_Memory_System
 
 		private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			System.Diagnostics.Process.Start("http://code.google.com/p/topicalmemorysystem/");
+			System.Diagnostics.Process.Start(downloadUrl);
+			this.Close();
 		}
 	}
 }

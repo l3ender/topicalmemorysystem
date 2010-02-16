@@ -27,6 +27,11 @@ namespace Topical_Memory_System
 			{
 				VersePacksBox.Items.Add(vp.Name);
 			}
+			if (MenuExit.voiceToolStripMenuItem.DropDownItems.Count < 1)
+			{
+				HearVerseButton.Enabled = false;
+				HearVerseButton.Visible = false;
+			}
 		}
 
 		private static void PackSelected(object sender, EventArgs e)
