@@ -21,10 +21,6 @@ namespace Topical_Memory_System
         {
             InitializeComponent();
 			this.CustomGroupNames = IncomingCustomGroupNames;
-			if (this.CustomGroupNames.Count == 0)
-			{
-				throw new Exception();
-			}
             UpdateGroupNames();
         }
 
@@ -35,7 +31,10 @@ namespace Topical_Memory_System
             {
 				groupNames.Items.Add(name);
             }
-			groupNames.SelectedIndex = 0;
+			if (groupNames.Items.Count > 0)
+			{
+				groupNames.SelectedIndex = 0;
+			}
         }
 
         private void saveButton_Click(object sender, EventArgs e)

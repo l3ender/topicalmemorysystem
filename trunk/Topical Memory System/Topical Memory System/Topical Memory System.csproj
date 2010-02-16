@@ -76,6 +76,12 @@
     <Compile Include="AboutApplication.Designer.cs">
       <DependentUpon>AboutApplication.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddCustomGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCustomGroups.Designer.cs">
+      <DependentUpon>AddCustomGroups.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddCustomVerses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,12 +89,24 @@
       <DependentUpon>AddCustomVerses.cs</DependentUpon>
     </Compile>
     <Compile Include="ComparedString.cs" />
+    <Compile Include="ConfigureVoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigureVoices.Designer.cs">
+      <DependentUpon>ConfigureVoices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DragDropListBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DroppedEventArgs.cs" />
+    <Compile Include="EditCustomGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCustomGroups.Designer.cs">
+      <DependentUpon>EditCustomGroups.cs</DependentUpon>
+    </Compile>
     <Compile Include="IDragDropSource.cs" />
     <Compile Include="ImportVerses.cs">
       <SubType>Form</SubType>
@@ -153,8 +171,20 @@
       <DependentUpon>AboutApplication.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddCustomGroups.resx">
+      <DependentUpon>AddCustomGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddCustomVerses.resx">
       <DependentUpon>AddCustomVerses.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigureVoices.resx">
+      <DependentUpon>ConfigureVoices.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCustomGroups.resx">
+      <DependentUpon>EditCustomGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportVerses.resx">

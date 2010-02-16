@@ -32,10 +32,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			groupNames = new System.Windows.Forms.ComboBox();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.panel4 = new System.Windows.Forms.Panel();
-			this.SaveGroupNameButton = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
-			this.groupName = new System.Windows.Forms.TextBox();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -50,7 +46,6 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
-			this.panel4.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -87,56 +82,15 @@
 			// panel2
 			// 
 			this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel2.Controls.Add(this.panel4);
 			this.panel2.Controls.Add(this.panel3);
 			this.panel2.Controls.Add(this.label2);
 			this.panel2.Location = new System.Drawing.Point(12, 96);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(499, 317);
+			this.panel2.Size = new System.Drawing.Size(499, 230);
 			this.panel2.TabIndex = 2;
-			// 
-			// panel4
-			// 
-			this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.panel4.Controls.Add(this.SaveGroupNameButton);
-			this.panel4.Controls.Add(this.label3);
-			this.panel4.Controls.Add(this.groupName);
-			this.panel4.Location = new System.Drawing.Point(14, 35);
-			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(469, 49);
-			this.panel4.TabIndex = 3;
-			// 
-			// SaveGroupNameButton
-			// 
-			this.SaveGroupNameButton.Enabled = false;
-			this.SaveGroupNameButton.Location = new System.Drawing.Point(360, 11);
-			this.SaveGroupNameButton.Name = "SaveGroupNameButton";
-			this.SaveGroupNameButton.Size = new System.Drawing.Size(50, 23);
-			this.SaveGroupNameButton.TabIndex = 2;
-			this.SaveGroupNameButton.Text = "Save";
-			this.SaveGroupNameButton.UseVisualStyleBackColor = true;
-			this.SaveGroupNameButton.Click += new System.EventHandler(this.SaveGroupNameButton_Click);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(55, 16);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(124, 13);
-			this.label3.TabIndex = 1;
-			this.label3.Text = "Edit custom group name:";
-			// 
-			// groupName
-			// 
-			this.groupName.Location = new System.Drawing.Point(185, 13);
-			this.groupName.Name = "groupName";
-			this.groupName.Size = new System.Drawing.Size(155, 20);
-			this.groupName.TabIndex = 0;
-			this.groupName.TextChanged += new System.EventHandler(this.GroupNameChanged);
 			// 
 			// panel3
 			// 
-			this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.panel3.Controls.Add(this.label7);
 			this.panel3.Controls.Add(this.label6);
 			this.panel3.Controls.Add(this.label4);
@@ -147,7 +101,7 @@
 			this.panel3.Controls.Add(this.verseReferenceBox);
 			this.panel3.Controls.Add(this.verseNameBox);
 			this.panel3.Controls.Add(this.versesListBox);
-			this.panel3.Location = new System.Drawing.Point(14, 102);
+			this.panel3.Location = new System.Drawing.Point(14, 25);
 			this.panel3.Name = "panel3";
 			this.panel3.Size = new System.Drawing.Size(469, 199);
 			this.panel3.TabIndex = 2;
@@ -253,13 +207,13 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(131, 16);
 			this.label2.TabIndex = 1;
-			this.label2.Text = "2.  Edit desired fields";
+			this.label2.Text = "2.  Edit desired fields:";
 			// 
 			// EditCustomVerses
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(523, 425);
+			this.ClientSize = new System.Drawing.Size(523, 341);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -272,8 +226,6 @@
 			this.panel1.PerformLayout();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
-			this.panel4.ResumeLayout(false);
-			this.panel4.PerformLayout();
 			this.panel3.ResumeLayout(false);
 			this.panel3.PerformLayout();
 			this.ResumeLayout(false);
@@ -286,11 +238,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button SaveGroupNameButton;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox groupName;
+		private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListBox versesListBox;
         private System.Windows.Forms.TextBox verseDataBox;
         private System.Windows.Forms.TextBox verseReferenceBox;

@@ -25,6 +25,10 @@ namespace Topical_Memory_System
 		private static List<VersePack> AllVerses;
 		private static List<VersePack> CustomVerses;
 
+		private static List<VoiceInfo> AvailableVoices;
+		public static string SelectedVoiceName;
+		public static int SelectedVoiceSpeed;
+
 		public MenuExit()
 		{
 			InitializeComponent();
@@ -40,7 +44,7 @@ namespace Topical_Memory_System
 				MessageBox.Show("A problem occurred while loading custom verses.");
 				customVersesToolStripMenuItem.Enabled = false;
 			}
-            FindInstalledVoices();
+			InstallSystemVoices();
             AddAboutStrip();    //add this last manually so it is the right-most strip
 			mainPanel.Controls.Add(new MainMenuPanel());
 			mainPanel.Refresh();
@@ -71,6 +75,11 @@ namespace Topical_Memory_System
 			db.DeleteVerse(oldVerse);
 			CustomVerses = LoadCustomVerses();
 		}
+		public static void DeleteGroupName(string name)
+		{
+			db.DeleteGroupName(name);
+			CustomVerses = LoadCustomVerses();
+		}
 		public static List<string> LoadCustomGroupNames()
 		{
 			try
@@ -92,6 +101,11 @@ namespace Topical_Memory_System
 			db.SaveVerseToDatabase(book, chapter, verseNumbers, verseData, groupName);
 			CustomVerses = LoadCustomVerses();
 		}
+		public static void CreateGroup(string groupName)
+		{
+			db.CreateGroup(groupName);
+			CustomVerses = LoadCustomVerses();
+		}
 		/******************************* End Database Methods *******************************/
 
 
@@ -110,44 +124,19 @@ namespace Topical_Memory_System
 			return newList;
 		}
 
-        private void FindInstalledVoices()
+        private void InstallSystemVoices()
         {
             //get the installed voices on the system
             SpeechSynthesizer speechSynth = new SpeechSynthesizer();
             var listOfVoiceInfo = from voice
                                       in speechSynth.GetInstalledVoices(CultureInfo.CurrentCulture)
                                   select voice.VoiceInfo;
-            List<VoiceInfo> availableVoices = listOfVoiceInfo.ToList<VoiceInfo>();
-            if (availableVoices.Count > 0)
-            {
-                voiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-                this.menuStrip1.Items.Add(voiceToolStripMenuItem);
-
-                List<ToolStripMenuItem> stripItems = new List<ToolStripMenuItem>(availableVoices.Count);
-                for (int i = 0; i < availableVoices.Count; i++)
-                {
-                    ToolStripMenuItem stripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-                    stripMenuItem.Name = availableVoices[i].Name;
-                    stripMenuItem.Size = new System.Drawing.Size(240, 22);
-                    stripMenuItem.Text = availableVoices[i].Name;
-                    stripMenuItem.Click += new System.EventHandler(this.VoiceChanged);
-                    if (i == 0)
-                    {
-                        stripMenuItem.Checked = true;
-                    }
-
-                    stripItems.Add(stripMenuItem);
-                }
-
-                foreach (ToolStripMenuItem tsmi in stripItems)
-                {
-                    voiceToolStripMenuItem.DropDownItems.Add(tsmi);
-                }
-
-                voiceToolStripMenuItem.Name = "voiceToolStripMenuItem";
-                voiceToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-                voiceToolStripMenuItem.Text = "Voice";
-            }
+            AvailableVoices = listOfVoiceInfo.ToList<VoiceInfo>();
+			if (AvailableVoices.Count > 0)
+			{
+				SelectedVoiceName = AvailableVoices[0].Name;
+				SelectedVoiceSpeed = -2;
+			}
         }
 
         private void AddAboutStrip()
@@ -236,24 +225,6 @@ namespace Topical_Memory_System
 				}
             }
 		}
-
-        private void VoiceChanged(object sender, EventArgs e)
-        {
-            if (sender is ToolStripMenuItem)
-            {
-                foreach (ToolStripMenuItem item in voiceToolStripMenuItem.DropDownItems)
-                {
-                    if (item == sender)
-                    {
-                        item.Checked = true;
-                    }
-                    if ((item != null) && (item != sender))
-                    {
-                        item.Checked = false;
-                    }
-                }
-            }
-        }
 
         private void AboutInfo(object sender, EventArgs e)
         {
@@ -490,22 +461,10 @@ namespace Topical_Memory_System
             return translation;
         }
 
-        public static string SelectedVoiceName()
-        {
-            string voice = "";
-            bool found = false;
-            int i = 0;
-            while (!found && i < voiceToolStripMenuItem.DropDownItems.Count)
-            {
-                if (((ToolStripMenuItem)voiceToolStripMenuItem.DropDownItems[i]).Checked)
-                {
-                    found = true;
-                    voice = voiceToolStripMenuItem.DropDownItems[i].Name;
-                }
-                i++;
-            }
-            return voice;
-        }
+		public static bool VoiceAvailable()
+		{
+			return AvailableVoices.Count > 0;
+		}
 
         private void BibleSelected(object sender, EventArgs e)
         {
@@ -536,25 +495,6 @@ namespace Topical_Memory_System
                     i++;
                 }
             }
-        }
-
-        private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			try
-			{
-				AddCustomVerses obj = new AddCustomVerses(MenuExit.LoadCustomGroupNames());
-				obj.ShowDialog();
-			}
-			catch (Exception)
-			{
-				MessageBox.Show("An error occurred accessing the custom verses.  This feature will be disabled.");
-			}
-        }
-
-        private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			EditCustomVerses obj = new EditCustomVerses(CustomVerses);
-			obj.ShowDialog();
         }
 
 		private void importVersesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -597,6 +537,81 @@ namespace Topical_Memory_System
 		{
 			ExportVerses ev = new ExportVerses(CustomVerses, true);
 			ev.ShowDialog();
+		}
+
+		private static SpeechSynthesizer speaker = new SpeechSynthesizer();
+
+		public static void TextToSpeech(string text, string name, int speed)
+		{
+			try
+			{
+				speaker.SelectVoice(name);
+				speaker.Rate = speed;
+				speaker.SpeakAsync(text);
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("An error has occurred.  Please report the error to the project's administrator.");
+			}
+		}
+
+		private void configureReadingVoicesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ConfigureVoices cv = new ConfigureVoices(AvailableVoices);
+			cv.ShowDialog();
+		}
+
+		private void addVerseToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				List<string> groupNames = MenuExit.LoadCustomGroupNames();
+				if (groupNames.Count > 0)
+				{
+					AddCustomVerses obj = new AddCustomVerses(groupNames);
+					obj.ShowDialog();
+				}
+				else
+				{
+					MessageBox.Show("There are no custom groups!  You can add groups from the menu by selecting Custom Verses -> Add groups.");
+				}
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("An error occurred accessing the custom verses.  This feature will be disabled.");
+			}
+		}
+
+		private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (CustomVerses.Count > 0)
+			{
+				EditCustomVerses obj = new EditCustomVerses(CustomVerses);
+				obj.ShowDialog();
+			}
+			else
+			{
+				MessageBox.Show("There are no custom verses!  You can add verses from the menu by selecting Custom Verses -> Add verses.");
+			}
+		}
+
+		private void addGroupToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			AddCustomGroups acg = new AddCustomGroups(CustomVerses);
+			acg.ShowDialog();
+		}
+
+		private void editGroupsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (CustomVerses.Count > 0)
+			{
+				EditCustomGroups ecg = new EditCustomGroups(CustomVerses);
+				ecg.ShowDialog();
+			}
+			else
+			{
+				MessageBox.Show("There are no custom groups!  You can add groups from the menu by selecting Custom Verses -> Add groups.");
+			}
 		}
 	}
 }
