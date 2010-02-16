@@ -34,6 +34,7 @@ namespace Topical_Memory_System
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
+			this.configureReadingVoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.customVersesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addVerseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,8 @@ namespace Topical_Memory_System
 			mainPanel = new System.Windows.Forms.Panel();
 			loadingBox = new System.Windows.Forms.PictureBox();
 			this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.addGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(loadingBox)).BeginInit();
 			this.SuspendLayout();
@@ -77,6 +80,7 @@ namespace Topical_Memory_System
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainMenuStrip,
+            this.configureReadingVoicesToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -85,14 +89,21 @@ namespace Topical_Memory_System
 			// mainMenuStrip
 			// 
 			this.mainMenuStrip.Name = "mainMenuStrip";
-			this.mainMenuStrip.Size = new System.Drawing.Size(135, 22);
+			this.mainMenuStrip.Size = new System.Drawing.Size(206, 22);
 			this.mainMenuStrip.Text = "Main menu";
 			this.mainMenuStrip.Click += new System.EventHandler(this.MainMenuStripClick);
+			// 
+			// configureReadingVoicesToolStripMenuItem
+			// 
+			this.configureReadingVoicesToolStripMenuItem.Name = "configureReadingVoicesToolStripMenuItem";
+			this.configureReadingVoicesToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.configureReadingVoicesToolStripMenuItem.Text = "Configure reading voices";
+			this.configureReadingVoicesToolStripMenuItem.Click += new System.EventHandler(this.configureReadingVoicesToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.MenuExitClick);
 			// 
@@ -101,6 +112,9 @@ namespace Topical_Memory_System
 			this.customVersesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addVerseToolStripMenuItem,
             this.editCustomVersesToolStripMenuItem,
+			new ToolStripSeparator(),
+            this.addGroupToolStripMenuItem,
+            this.editGroupsToolStripMenuItem,
 			new ToolStripSeparator(),
             this.importVersesToolStripMenuItem,
             this.exportVersesToolStripMenuItem,
@@ -120,7 +134,7 @@ namespace Topical_Memory_System
 			// 
 			this.editCustomVersesToolStripMenuItem.Name = "editCustomVersesToolStripMenuItem";
 			this.editCustomVersesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-			this.editCustomVersesToolStripMenuItem.Text = "Edit groups and verses";
+			this.editCustomVersesToolStripMenuItem.Text = "Edit verses";
 			this.editCustomVersesToolStripMenuItem.Click += new System.EventHandler(this.editCustomVersesToolStripMenuItem_Click);
 			// 
 			// importVersesToolStripMenuItem
@@ -275,6 +289,20 @@ namespace Topical_Memory_System
 			loadingBox.TabStop = false;
 			loadingBox.Visible = false;
 			// 
+			// addGroupToolStripMenuItem
+			// 
+			this.addGroupToolStripMenuItem.Name = "addGroupToolStripMenuItem";
+			this.addGroupToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.addGroupToolStripMenuItem.Text = "Add groups";
+			this.addGroupToolStripMenuItem.Click += new System.EventHandler(this.addGroupToolStripMenuItem_Click);
+			// 
+			// editGroupsToolStripMenuItem
+			// 
+			this.editGroupsToolStripMenuItem.Name = "editGroupsToolStripMenuItem";
+			this.editGroupsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.editGroupsToolStripMenuItem.Text = "Edit groups";
+			this.editGroupsToolStripMenuItem.Click += new System.EventHandler(this.editGroupsToolStripMenuItem_Click);
+			// 
 			// MenuExit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,7 +331,6 @@ namespace Topical_Memory_System
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        public static System.Windows.Forms.ToolStripMenuItem voiceToolStripMenuItem;
         private static System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem esvStripMenuItem;
@@ -320,6 +347,7 @@ namespace Topical_Memory_System
 		private ToolStripMenuItem exportVersesToolStripMenuItem;
 		private ToolTip ToolTip;
 		private ToolStripMenuItem printVersesToolStripMenuItem;
+		private ToolStripMenuItem configureReadingVoicesToolStripMenuItem;
 		public static PictureBox loadingBox;
 		private static ToolStripMenuItem bibleGatewayToolStripMenuItem;
 		private static ToolStripMenuItem esvOnlineStudyBibleToolStripMenuItem;
@@ -327,6 +355,8 @@ namespace Topical_Memory_System
 		private static ToolStripMenuItem openBibleInApplicationToolStripMenuItem;
 		private static ToolStripMenuItem translationToolStripMenuItem;
 		private static Panel mainPanel;
+		private ToolStripMenuItem addGroupToolStripMenuItem;
+		private ToolStripMenuItem editGroupsToolStripMenuItem;
     }
 }
 

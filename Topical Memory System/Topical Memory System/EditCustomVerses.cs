@@ -30,14 +30,19 @@ namespace Topical_Memory_System
             groupNames.Items.Clear();
 			foreach (VersePack vp in CustomVerses)
             {
-				groupNames.Items.Add(vp.Name);
+				if (vp.Verses.Count > 0)
+				{
+					groupNames.Items.Add(vp.Name);
+				}
             }
-			groupNames.SelectedIndex = 0;
+			if (groupNames.Items.Count > 0)
+			{
+				groupNames.SelectedIndex = 0;
+			}
         }
 
         private void SelectedIndexChanged(object sender, EventArgs e)
         {
-            groupName.Text = groupNames.Text;
             versesListBox.Items.Clear();
 			foreach (VersePack vp in CustomVerses)
             {
@@ -54,7 +59,6 @@ namespace Topical_Memory_System
             verseNameBox.Text = "";
             verseReferenceBox.Text = "";
             verseDataBox.Text = "";
-            SaveGroupNameButton.Enabled = false;
             DeleteVerseButton.Enabled = false;
             UpdateVerseButton.Enabled = false;
         }
@@ -75,40 +79,6 @@ namespace Topical_Memory_System
         private void VerseValueChanged(object sender, EventArgs e)
         {
             UpdateVerseButton.Enabled = true;
-        }
-
-        private void GroupNameChanged(object sender, EventArgs e)
-        {
-            SaveGroupNameButton.Enabled = true;
-        }
-
-        private void SaveGroupNameButton_Click(object sender, EventArgs e)
-        {
-            bool nameAlreadyUsed = false;
-            foreach (String obj in groupNames.Items)
-            {
-                if (groupName.Text.Equals(obj))
-                {
-                    nameAlreadyUsed = true;
-                    break;
-                }
-            }
-            if (nameAlreadyUsed)
-            {
-                MessageBox.Show("That name is already in use.  Please select another.");
-            }
-            else if (groupName.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("The name cannot be left blank.");
-			}
-			else if (groupName.Text.Trim().Length > Constants.MaximumCharactersForCustomGroupName)
-			{
-				MessageBox.Show("The name you entered is too long.  Please enter one under 20 characters long.");
-			}
-			else
-			{
-				UpdateGroupName(groupNames.Text, groupName.Text.Trim());
-			}
         }
 
         private void DeleteVerseButton_Click(object sender, EventArgs e)
@@ -140,22 +110,6 @@ namespace Topical_Memory_System
                     verseReferenceBox.Text.Split(':')[1].Trim(), "", "", "", verseDataBox.Text.Trim(), "", "", "", "", false);
 				UpdateVerse(currentVerse, newVerse);
             }
-        }
-
-        private static void UpdateGroupName(string oldName, string newName)
-        {
-			try
-			{
-				MenuExit.UpdateGroupName(oldName, newName);
-				CustomVerses = MenuExit.LoadCustomVerses();
-
-				UpdateGroupNames(null, null);
-				MessageBox.Show("Group name updated!");
-			}
-			catch (Exception)
-			{
-				MessageBox.Show("A problem occurred while updating the group name.");
-			}
         }
 
 		private static void UpdateVerse(Verse oldVerse, Verse newVerse)

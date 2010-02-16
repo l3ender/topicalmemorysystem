@@ -193,6 +193,35 @@ namespace Topical_Memory_System
 			}
 		}
 
+		public void CreateGroup(string incomingGroupName)
+		{
+			try
+			{
+				SQLiteConnection conn;
+				SQLiteCommand cmd;
+
+				//set up connection
+				conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+				conn.Open();
+				cmd = conn.CreateCommand();
+
+				//insert statement
+				cmd.CommandText = @"INSERT INTO CustomGroups (Name) 
+								VALUES (@groupName);";
+				SQLiteParameter groupName = new SQLiteParameter("@groupName");
+				cmd.Parameters.Add(groupName);
+				groupName.Value = incomingGroupName;
+
+				cmd.ExecuteNonQuery();
+
+				conn.Close();
+			}
+			catch (Exception)
+			{
+				throw new Exception();
+			}
+		}
+
 		public void SaveMultipleVersesToDatabase(List<Verse> verses, string groupName)
 		{
 			try
@@ -260,8 +289,6 @@ namespace Topical_Memory_System
 				newName.Value = incomingNewName;
 				oldName.Value = incomingOldName;
 
-				cmd.ExecuteNonQuery();
-
 				int result = cmd.ExecuteNonQuery();
 				conn.Close();
 			}
@@ -314,8 +341,6 @@ namespace Topical_Memory_System
 				cmd.Parameters.Add(oldVerseData);
 				oldVerseData.Value = oldVerse.getVerseData();
 
-				cmd.ExecuteNonQuery();
-
 				int result = cmd.ExecuteNonQuery();
 				conn.Close();
 			}
@@ -354,9 +379,48 @@ namespace Topical_Memory_System
 				cmd.Parameters.Add(verseData);
 				verseData.Value = v.getVerseData();
 
+				int result = cmd.ExecuteNonQuery();
+				conn.Close();
+			}
+			catch (Exception)
+			{
+				throw new Exception();
+			}
+		}
+
+		public void DeleteGroupName(string groupName)
+		{
+			try
+			{
+				SQLiteConnection conn;
+				SQLiteCommand cmd;
+
+				//set up connection
+				conn = new SQLiteConnection(Constants.DatabaseConnectionString);
+				conn.Open();
+				cmd = conn.CreateCommand();
+
+				//get the group id
+				int groupId = GetCustomGroupIdByName(groupName);
+
+				//delete all verses associated with that group:
+				cmd.CommandText = @"DELETE FROM CustomVerses 
+									WHERE (CustomVerses.GroupNameID = @id);";
+				SQLiteParameter id = new SQLiteParameter("@id");
+				cmd.Parameters.Add(id);
+				id.Value = groupId;
+
+				cmd.ExecuteNonQuery();
+				cmd.Parameters.Clear();
+
+				//remove the group itself
+				cmd.CommandText = @"DELETE FROM CustomGroups 
+									WHERE (CustomGroups.ID = @id);";
+				cmd.Parameters.Add(id);
+				id.Value = groupId;
+
 				cmd.ExecuteNonQuery();
 
-				int result = cmd.ExecuteNonQuery();
 				conn.Close();
 			}
 			catch (Exception)

@@ -27,7 +27,7 @@ namespace Topical_Memory_System
 			{
 				VersePacksBox.Items.Add(vp.Name);
 			}
-			if (MenuExit.voiceToolStripMenuItem.DropDownItems.Count < 1)
+			if (!MenuExit.VoiceAvailable())
 			{
 				HearVerseButton.Enabled = false;
 				HearVerseButton.Visible = false;
@@ -100,55 +100,25 @@ namespace Topical_Memory_System
             MenuExit.ViewVerseInContext(SelectedVerse, MenuExit.SelectedTranslationName());
 		}
 
+		private string speakReference;
+		private string speakVerse;
+
 		private void HearVerseButton_Click(object sender, EventArgs e)
 		{
-			if (!isReading)
+			string verseReference = SelectedVerse.getBook() + ", " + Convert.ToString(SelectedVerse.getChapter() + " ");
+			if (SelectedVerse.getVerseNumbers().Contains(','))
 			{
-				string verseReference = SelectedVerse.getBook() + ", " + Convert.ToString(SelectedVerse.getChapter() + " ");
-				if (SelectedVerse.getVerseNumbers().Contains(','))
-				{
-					string[] numbers = SelectedVerse.getVerseNumbers().Split(',');
-					verseReference += numbers[0] + " and " + numbers[1];
-				}
-				else
-				{
-					verseReference += SelectedVerse.getVerseNumbers();
-				}
-				speakReference = verseReference;
-				speakVerse = SelectedVerse.getVerseData();
-				Thread t = new Thread(SayVerse);
-				t.Start();
+				string[] numbers = SelectedVerse.getVerseNumbers().Split(',');
+				verseReference += numbers[0] + " and " + numbers[1];
 			}
+			else
+			{
+				verseReference += SelectedVerse.getVerseNumbers();
+			}
+			speakReference = verseReference;
+			speakVerse = SelectedVerse.getVerseData();
+			MenuExit.TextToSpeech(speakReference + ".  " + speakVerse, MenuExit.SelectedVoiceName, MenuExit.SelectedVoiceSpeed);
 			Refocus(null, null);
-		}
-
-		private static string speakReference;
-		private static string speakVerse;
-		private static bool isReading;
-
-		private static void SayVerse()
-		{
-			isReading = true;
-			SpeechSynthesizer speaker = new SpeechSynthesizer();
-			bool canRead = false;
-			try
-			{
-				speaker.SelectVoice(MenuExit.SelectedVoiceName());
-				canRead = true;
-			}
-			catch (ArgumentException e)
-			{
-				MessageBox.Show("Text to speech is not supported on this computer.");
-				e.ToString();
-			}
-			if (canRead)
-			{
-				speaker.Rate = -2;
-				speaker.Volume = 100;
-				speaker.Speak(speakReference);
-				speaker.Speak(speakVerse);
-			}
-			isReading = false;
 		}
 	}
 }
