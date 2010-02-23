@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportVerses));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.SaveAllButton = new System.Windows.Forms.Button();
 			this.label7 = new System.Windows.Forms.Label();
@@ -177,9 +178,9 @@
 			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label4.Location = new System.Drawing.Point(233, 79);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(97, 16);
+			this.label4.Size = new System.Drawing.Size(100, 16);
 			this.label4.TabIndex = 8;
-			this.label4.Text = "3) Add/remove";
+			this.label4.Text = "3 - Add/remove";
 			// 
 			// SelectedVersesBox
 			// 
@@ -207,9 +208,9 @@
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label2.Location = new System.Drawing.Point(55, 185);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(104, 16);
+			this.label2.Size = new System.Drawing.Size(107, 16);
 			this.label2.TabIndex = 5;
-			this.label2.Text = "2) Select verses";
+			this.label2.Text = "2 - Select verses";
 			// 
 			// label1
 			// 
@@ -217,9 +218,9 @@
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(38, 22);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(144, 16);
+			this.label1.Size = new System.Drawing.Size(147, 16);
 			this.label1.TabIndex = 4;
-			this.label1.Text = "1) Select custom group";
+			this.label1.Text = "1 - Select custom group";
 			// 
 			// VersesBox
 			// 
@@ -262,8 +263,10 @@
 			this.Controls.Add(this.PrintingBox);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "ExportVerses";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Export Custom Verses";
 			this.panel1.ResumeLayout(false);

@@ -38,7 +38,7 @@ namespace Topical_Memory_System
 
 		private void TrySettingsButton_Click(object sender, EventArgs e)
 		{
-			MenuExit.TextToSpeech("John 3:30.  He must increase, but I must decrease.", VoicesDropDown.Text, SoundBar.Value);
+			MenuExit.TextToSpeech("Romans 3:23.  For all have sinned and fall short of the glory of God.", VoicesDropDown.Text, SoundBar.Value);
 		}
 	}
 }

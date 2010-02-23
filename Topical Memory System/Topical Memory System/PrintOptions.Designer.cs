@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintOptions));
 			this.BothRadio = new System.Windows.Forms.RadioButton();
 			this.VerseRadio = new System.Windows.Forms.RadioButton();
 			this.ReferenceRadio = new System.Windows.Forms.RadioButton();
@@ -80,13 +81,14 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(222, 184);
+			this.ClientSize = new System.Drawing.Size(218, 180);
 			this.ControlBox = false;
 			this.Controls.Add(this.PrintButton);
 			this.Controls.Add(this.ReferenceRadio);
 			this.Controls.Add(this.VerseRadio);
 			this.Controls.Add(this.BothRadio);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PrintOptions";

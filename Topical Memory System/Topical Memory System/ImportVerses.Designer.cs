@@ -28,119 +28,194 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportVerses));
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.ShowHelpButton = new System.Windows.Forms.Button();
+			this.GroupStatsBox = new System.Windows.Forms.ListBox();
+			this.RemoveButton = new System.Windows.Forms.Button();
+			this.RemoveAllButton = new System.Windows.Forms.Button();
+			this.AddAllButton = new System.Windows.Forms.Button();
+			this.AddButton = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
+			this.PlacedVersesBox = new System.Windows.Forms.ListBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.GroupNamesDropDown = new System.Windows.Forms.ComboBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.VersesBox = new System.Windows.Forms.ListBox();
 			this.SaveButton = new System.Windows.Forms.Button();
-			CustomGroupBox5 = new Topical_Memory_System.DragDropListBox();
-			CustomGroupBox4 = new Topical_Memory_System.DragDropListBox();
-			CustomGroupBox3 = new Topical_Memory_System.DragDropListBox();
-			CustomGroupBox2 = new Topical_Memory_System.DragDropListBox();
-			VersesBox = new Topical_Memory_System.DragDropListBox();
-			CustomGroupBox1 = new Topical_Memory_System.DragDropListBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			CustomGroupLabel5 = new System.Windows.Forms.Label();
-			CustomGroupLabel4 = new System.Windows.Forms.Label();
-			CustomGroupLabel3 = new System.Windows.Forms.Label();
-			CustomGroupLabel2 = new System.Windows.Forms.Label();
-			CustomGroupLabel1 = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.ShowHelpButton);
+			this.panel1.Controls.Add(this.GroupStatsBox);
+			this.panel1.Controls.Add(this.RemoveButton);
+			this.panel1.Controls.Add(this.RemoveAllButton);
+			this.panel1.Controls.Add(this.AddAllButton);
+			this.panel1.Controls.Add(this.AddButton);
+			this.panel1.Controls.Add(this.label5);
+			this.panel1.Controls.Add(this.PlacedVersesBox);
+			this.panel1.Controls.Add(this.label4);
+			this.panel1.Controls.Add(this.GroupNamesDropDown);
+			this.panel1.Controls.Add(this.label3);
+			this.panel1.Controls.Add(this.VersesBox);
 			this.panel1.Controls.Add(this.SaveButton);
-			this.panel1.Controls.Add(CustomGroupBox5);
-			this.panel1.Controls.Add(CustomGroupBox4);
-			this.panel1.Controls.Add(CustomGroupBox3);
-			this.panel1.Controls.Add(CustomGroupBox2);
-			this.panel1.Controls.Add(VersesBox);
-			this.panel1.Controls.Add(CustomGroupBox1);
 			this.panel1.Controls.Add(this.label2);
 			this.panel1.Controls.Add(this.label1);
-			this.panel1.Controls.Add(CustomGroupLabel5);
-			this.panel1.Controls.Add(CustomGroupLabel4);
-			this.panel1.Controls.Add(CustomGroupLabel3);
-			this.panel1.Controls.Add(CustomGroupLabel2);
-			this.panel1.Controls.Add(CustomGroupLabel1);
 			this.panel1.Location = new System.Drawing.Point(12, 12);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(561, 436);
+			this.panel1.Size = new System.Drawing.Size(561, 359);
 			this.panel1.TabIndex = 0;
 			// 
-			// SaveButton
+			// ShowHelpButton
 			// 
-			this.SaveButton.Location = new System.Drawing.Point(228, 400);
-			this.SaveButton.Name = "SaveButton";
-			this.SaveButton.Size = new System.Drawing.Size(104, 35);
-			this.SaveButton.TabIndex = 24;
-			this.SaveButton.Text = "Save Import";
-			this.SaveButton.UseVisualStyleBackColor = true;
-			this.SaveButton.Click += new System.EventHandler(SaveButton_Click);
+			this.ShowHelpButton.BackColor = System.Drawing.SystemColors.InactiveCaption;
+			this.ShowHelpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.ShowHelpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ShowHelpButton.Location = new System.Drawing.Point(4, 325);
+			this.ShowHelpButton.Name = "ShowHelpButton";
+			this.ShowHelpButton.Size = new System.Drawing.Size(35, 31);
+			this.ShowHelpButton.TabIndex = 36;
+			this.ShowHelpButton.Text = "?";
+			this.ShowHelpButton.UseVisualStyleBackColor = false;
+			this.ShowHelpButton.Click += new System.EventHandler(this.ShowHelpButton_Click);
 			// 
-			// CustomGroupBox5
+			// GroupStatsBox
 			// 
-			CustomGroupBox5.AllowDrop = true;
-			CustomGroupBox5.FormattingEnabled = true;
-			CustomGroupBox5.Location = new System.Drawing.Point(427, 248);
-			CustomGroupBox5.Name = "CustomGroupBox5";
-			CustomGroupBox5.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			CustomGroupBox5.Size = new System.Drawing.Size(103, 121);
-			CustomGroupBox5.TabIndex = 23;
+			this.GroupStatsBox.BackColor = System.Drawing.SystemColors.Control;
+			this.GroupStatsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.GroupStatsBox.FormattingEnabled = true;
+			this.GroupStatsBox.Location = new System.Drawing.Point(349, 280);
+			this.GroupStatsBox.Name = "GroupStatsBox";
+			this.GroupStatsBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.GroupStatsBox.Size = new System.Drawing.Size(186, 78);
+			this.GroupStatsBox.TabIndex = 35;
 			// 
-			// CustomGroupBox4
+			// RemoveButton
 			// 
-			CustomGroupBox4.AllowDrop = true;
-			CustomGroupBox4.FormattingEnabled = true;
-			CustomGroupBox4.Location = new System.Drawing.Point(230, 248);
-			CustomGroupBox4.Name = "CustomGroupBox4";
-			CustomGroupBox4.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			CustomGroupBox4.Size = new System.Drawing.Size(103, 121);
-			CustomGroupBox4.TabIndex = 22;
+			this.RemoveButton.Enabled = false;
+			this.RemoveButton.Location = new System.Drawing.Point(227, 141);
+			this.RemoveButton.Name = "RemoveButton";
+			this.RemoveButton.Size = new System.Drawing.Size(107, 23);
+			this.RemoveButton.TabIndex = 34;
+			this.RemoveButton.Text = "<< Remove Verses";
+			this.RemoveButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.RemoveButton.UseVisualStyleBackColor = true;
+			this.RemoveButton.Click += new System.EventHandler(this.RemoveVerseButton_Click);
 			// 
-			// CustomGroupBox3
+			// RemoveAllButton
 			// 
-			CustomGroupBox3.AllowDrop = true;
-			CustomGroupBox3.FormattingEnabled = true;
-			CustomGroupBox3.Location = new System.Drawing.Point(22, 248);
-			CustomGroupBox3.Name = "CustomGroupBox3";
-			CustomGroupBox3.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			CustomGroupBox3.Size = new System.Drawing.Size(103, 121);
-			CustomGroupBox3.TabIndex = 21;
+			this.RemoveAllButton.Enabled = false;
+			this.RemoveAllButton.Location = new System.Drawing.Point(227, 171);
+			this.RemoveAllButton.Name = "RemoveAllButton";
+			this.RemoveAllButton.Size = new System.Drawing.Size(107, 23);
+			this.RemoveAllButton.TabIndex = 33;
+			this.RemoveAllButton.Text = "<< Remove All";
+			this.RemoveAllButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.RemoveAllButton.UseVisualStyleBackColor = true;
+			this.RemoveAllButton.Click += new System.EventHandler(this.RemoveAllButton_Click);
 			// 
-			// CustomGroupBox2
+			// AddAllButton
 			// 
-			CustomGroupBox2.AllowDrop = true;
-			CustomGroupBox2.FormattingEnabled = true;
-			CustomGroupBox2.Location = new System.Drawing.Point(427, 83);
-			CustomGroupBox2.Name = "CustomGroupBox2";
-			CustomGroupBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			CustomGroupBox2.Size = new System.Drawing.Size(103, 121);
-			CustomGroupBox2.TabIndex = 20;
+			this.AddAllButton.Enabled = false;
+			this.AddAllButton.Location = new System.Drawing.Point(227, 252);
+			this.AddAllButton.Name = "AddAllButton";
+			this.AddAllButton.Size = new System.Drawing.Size(107, 23);
+			this.AddAllButton.TabIndex = 32;
+			this.AddAllButton.Text = "Add All >>";
+			this.AddAllButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.AddAllButton.UseVisualStyleBackColor = true;
+			this.AddAllButton.Click += new System.EventHandler(this.AddAllButton_Click);
+			// 
+			// AddButton
+			// 
+			this.AddButton.Enabled = false;
+			this.AddButton.Location = new System.Drawing.Point(227, 223);
+			this.AddButton.Name = "AddButton";
+			this.AddButton.Size = new System.Drawing.Size(107, 23);
+			this.AddButton.TabIndex = 31;
+			this.AddButton.Text = "Add Verses >>";
+			this.AddButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.AddButton.UseVisualStyleBackColor = true;
+			this.AddButton.Click += new System.EventHandler(this.AddVerseButton_Click);
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.Location = new System.Drawing.Point(346, 109);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(148, 16);
+			this.label5.TabIndex = 30;
+			this.label5.Text = "Verses in current group:";
+			// 
+			// PlacedVersesBox
+			// 
+			this.PlacedVersesBox.FormattingEnabled = true;
+			this.PlacedVersesBox.Location = new System.Drawing.Point(349, 128);
+			this.PlacedVersesBox.Name = "PlacedVersesBox";
+			this.PlacedVersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+			this.PlacedVersesBox.Size = new System.Drawing.Size(186, 147);
+			this.PlacedVersesBox.TabIndex = 29;
+			this.PlacedVersesBox.SelectedIndexChanged += new System.EventHandler(this.VerseBox_SelectedIndexChanged);
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(346, 57);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(147, 16);
+			this.label4.TabIndex = 28;
+			this.label4.Text = "Group to add verses to:";
+			// 
+			// GroupNamesDropDown
+			// 
+			this.GroupNamesDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.GroupNamesDropDown.FormattingEnabled = true;
+			this.GroupNamesDropDown.Location = new System.Drawing.Point(349, 76);
+			this.GroupNamesDropDown.Name = "GroupNamesDropDown";
+			this.GroupNamesDropDown.Size = new System.Drawing.Size(186, 21);
+			this.GroupNamesDropDown.TabIndex = 27;
+			this.GroupNamesDropDown.SelectedIndexChanged += new System.EventHandler(this.GroupNamesDropDown_SelectedIndexChanged);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(31, 57);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(108, 16);
+			this.label3.TabIndex = 26;
+			this.label3.Text = "Verses to import:";
 			// 
 			// VersesBox
 			// 
-			VersesBox.AllowDrop = true;
-			VersesBox.FormattingEnabled = true;
-			VersesBox.Location = new System.Drawing.Point(184, 53);
-			VersesBox.Name = "VersesBox";
-			VersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			VersesBox.Size = new System.Drawing.Size(193, 134);
-			VersesBox.TabIndex = 19;
+			this.VersesBox.FormattingEnabled = true;
+			this.VersesBox.Location = new System.Drawing.Point(33, 76);
+			this.VersesBox.Name = "VersesBox";
+			this.VersesBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+			this.VersesBox.Size = new System.Drawing.Size(177, 199);
+			this.VersesBox.TabIndex = 25;
+			this.VersesBox.SelectedIndexChanged += new System.EventHandler(this.VersesBox_SelectedIndexChanged);
 			// 
-			// CustomGroupBox1
+			// SaveButton
 			// 
-			CustomGroupBox1.AllowDrop = true;
-			CustomGroupBox1.FormattingEnabled = true;
-			CustomGroupBox1.Location = new System.Drawing.Point(22, 83);
-			CustomGroupBox1.Name = "CustomGroupBox1";
-			CustomGroupBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			CustomGroupBox1.Size = new System.Drawing.Size(103, 121);
-			CustomGroupBox1.TabIndex = 18;
+			this.SaveButton.Location = new System.Drawing.Point(228, 312);
+			this.SaveButton.Name = "SaveButton";
+			this.SaveButton.Size = new System.Drawing.Size(104, 35);
+			this.SaveButton.TabIndex = 24;
+			this.SaveButton.Text = "Finalize Import";
+			this.SaveButton.UseVisualStyleBackColor = true;
+			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(199, 191);
+			this.label2.Location = new System.Drawing.Point(40, 278);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(162, 13);
 			this.label2.TabIndex = 16;
@@ -150,66 +225,23 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(53, 9);
+			this.label1.Location = new System.Drawing.Point(41, 13);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(459, 20);
+			this.label1.Size = new System.Drawing.Size(479, 20);
 			this.label1.TabIndex = 10;
-			this.label1.Text = "Select verses from the list and drag to the desired custom group";
-			// 
-			// CustomGroupLabel5
-			// 
-			CustomGroupLabel5.AutoSize = true;
-			CustomGroupLabel5.Location = new System.Drawing.Point(424, 232);
-			CustomGroupLabel5.Name = "CustomGroupLabel5";
-			CustomGroupLabel5.Size = new System.Drawing.Size(83, 13);
-			CustomGroupLabel5.TabIndex = 9;
-			CustomGroupLabel5.Text = "Custom Group 5";
-			// 
-			// CustomGroupLabel4
-			// 
-			CustomGroupLabel4.AutoSize = true;
-			CustomGroupLabel4.Location = new System.Drawing.Point(227, 232);
-			CustomGroupLabel4.Name = "CustomGroupLabel4";
-			CustomGroupLabel4.Size = new System.Drawing.Size(83, 13);
-			CustomGroupLabel4.TabIndex = 8;
-			CustomGroupLabel4.Text = "Custom Group 4";
-			// 
-			// CustomGroupLabel3
-			// 
-			CustomGroupLabel3.AutoSize = true;
-			CustomGroupLabel3.Location = new System.Drawing.Point(19, 232);
-			CustomGroupLabel3.Name = "CustomGroupLabel3";
-			CustomGroupLabel3.Size = new System.Drawing.Size(83, 13);
-			CustomGroupLabel3.TabIndex = 7;
-			CustomGroupLabel3.Text = "Custom Group 3";
-			// 
-			// CustomGroupLabel2
-			// 
-			CustomGroupLabel2.AutoSize = true;
-			CustomGroupLabel2.Location = new System.Drawing.Point(424, 65);
-			CustomGroupLabel2.Name = "CustomGroupLabel2";
-			CustomGroupLabel2.Size = new System.Drawing.Size(83, 13);
-			CustomGroupLabel2.TabIndex = 6;
-			CustomGroupLabel2.Text = "Custom Group 2";
-			// 
-			// CustomGroupLabel1
-			// 
-			CustomGroupLabel1.AutoSize = true;
-			CustomGroupLabel1.Location = new System.Drawing.Point(19, 65);
-			CustomGroupLabel1.Name = "CustomGroupLabel1";
-			CustomGroupLabel1.Size = new System.Drawing.Size(83, 13);
-			CustomGroupLabel1.TabIndex = 5;
-			CustomGroupLabel1.Text = "Custom Group 1";
+			this.label1.Text = "Select verses on the left and add to the desired groups on the right";
 			// 
 			// ImportVerses
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(585, 460);
+			this.ClientSize = new System.Drawing.Size(585, 383);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "ImportVerses";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Import Custom Verses";
 			this.panel1.ResumeLayout(false);
@@ -221,20 +253,21 @@
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private static System.Windows.Forms.Label CustomGroupLabel5;
-		private static System.Windows.Forms.Label CustomGroupLabel4;
-		private static System.Windows.Forms.Label CustomGroupLabel3;
-		private static System.Windows.Forms.Label CustomGroupLabel2;
-		private static System.Windows.Forms.Label CustomGroupLabel1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private static DragDropListBox VersesBox;
-		private static DragDropListBox CustomGroupBox1;
-		private static DragDropListBox CustomGroupBox5;
-		private static DragDropListBox CustomGroupBox4;
-		private static DragDropListBox CustomGroupBox3;
-		private static DragDropListBox CustomGroupBox2;
 		private System.Windows.Forms.Button SaveButton;
+		private System.Windows.Forms.ListBox VersesBox;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox GroupNamesDropDown;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.ListBox PlacedVersesBox;
+		private System.Windows.Forms.Button RemoveButton;
+		private System.Windows.Forms.Button RemoveAllButton;
+		private System.Windows.Forms.Button AddAllButton;
+		private System.Windows.Forms.Button AddButton;
+		private System.Windows.Forms.ListBox GroupStatsBox;
+		private System.Windows.Forms.Button ShowHelpButton;
 
 	}
 }
