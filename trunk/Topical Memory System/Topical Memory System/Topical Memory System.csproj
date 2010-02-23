@@ -97,17 +97,12 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="DragDropListBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DroppedEventArgs.cs" />
     <Compile Include="EditCustomGroups.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditCustomGroups.Designer.cs">
       <DependentUpon>EditCustomGroups.cs</DependentUpon>
     </Compile>
-    <Compile Include="IDragDropSource.cs" />
     <Compile Include="ImportVerses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +121,12 @@
     </Compile>
     <Compile Include="ExportVerses.Designer.cs">
       <DependentUpon>ExportVerses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportVersesHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportVersesHelp.Designer.cs">
+      <DependentUpon>ImportVersesHelp.cs</DependentUpon>
     </Compile>
     <Compile Include="LearnReferences.cs">
       <SubType>UserControl</SubType>
@@ -197,6 +198,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExportVerses.resx">
       <DependentUpon>ExportVerses.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportVersesHelp.resx">
+      <DependentUpon>ImportVersesHelp.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LearnReferences.resx">
@@ -316,8 +321,6 @@
     <Compile Include="ViewVerses.Designer.cs">
       <DependentUpon>ViewVerses.cs</DependentUpon>
     </Compile>
-    <Compile Include="VisualCue.cs" />
-    <Compile Include="Win32.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

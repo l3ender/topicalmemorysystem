@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutApplication));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.VersionBox = new System.Windows.Forms.RichTextBox();
 			this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -73,12 +74,12 @@
 			this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.richTextBox3.ContextMenuStrip = this.contextMenuStrip1;
 			this.richTextBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.richTextBox3.Location = new System.Drawing.Point(0, 283);
+			this.richTextBox3.Location = new System.Drawing.Point(40, 283);
 			this.richTextBox3.Name = "richTextBox3";
 			this.richTextBox3.ReadOnly = true;
-			this.richTextBox3.Size = new System.Drawing.Size(227, 22);
+			this.richTextBox3.Size = new System.Drawing.Size(184, 22);
 			this.richTextBox3.TabIndex = 3;
-			this.richTextBox3.Text = "bender.r.o.s.s+TMS@gmail.com";
+			this.richTextBox3.Text = "tms.assistant@gmail.com";
 			// 
 			// contextMenuStrip1
 			// 
@@ -146,9 +147,11 @@
 			this.ClientSize = new System.Drawing.Size(292, 344);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AboutApplication";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "About TMS Assistant";
 			this.panel1.ResumeLayout(false);

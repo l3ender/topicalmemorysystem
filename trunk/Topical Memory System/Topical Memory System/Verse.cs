@@ -45,11 +45,6 @@ namespace Topical_Memory_System
 			return book.GetHashCode() * chapter.GetHashCode() * verseNumbers.GetHashCode();
 		}
 
-		public override bool Equals(object obj)
-		{
-			return this.GetHashCode() == ((Verse)obj).GetHashCode();
-		}
-
 		public override string ToString()
 		{
 			return getReference();

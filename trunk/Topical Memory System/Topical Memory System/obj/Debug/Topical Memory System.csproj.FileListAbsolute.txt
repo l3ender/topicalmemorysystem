@@ -52,3 +52,4 @@ C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memor
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ConfigureVoices.resources
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.EditCustomGroups.resources
 C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.AddCustomGroups.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\Debug\Topical_Memory_System.ImportVersesHelp.resources

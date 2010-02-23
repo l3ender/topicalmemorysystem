@@ -12,29 +12,32 @@ namespace Topical_Memory_System
 {
 	public partial class ImportVerses : Form
 	{
-		private static List<Verse> Verses;
+		private List<VersePack> VerseGroups;	//indexes relate to custom verse group names indexes
+		private List<string> CustomGroupNames;
+		private int PreviousSelectedIndex;		//need to store so when group name is changed, we can save the verses in the box
 
-		public ImportVerses(string fileName)
+		public ImportVerses(string fileName, List<string> groupNames)
 		{
 			InitializeComponent();
-			FillCustomGroupNames();
-			Verses = ReadInVerses(fileName);
+			List<Verse> Verses = ReadInVerses(fileName);
 			foreach (Verse v in Verses)
 			{
-				VersesBox.Items.Add(v.getReference());
+				VersesBox.Items.Add(v);
 			}
-		}
-
-		private static void FillCustomGroupNames()
-		{
-			List<string> names = MenuExit.LoadCustomGroupNames();
-			if (names.Count == 5)
+			this.CustomGroupNames = groupNames;
+			VerseGroups = new List<VersePack>(CustomGroupNames.Count);
+			foreach (string s in CustomGroupNames)
 			{
-				CustomGroupLabel1.Text = names[0];
-				CustomGroupLabel2.Text = names[1];
-				CustomGroupLabel3.Text = names[2];
-				CustomGroupLabel4.Text = names[3];
-				CustomGroupLabel5.Text = names[4];
+				GroupNamesDropDown.Items.Add(s);
+				VersePack vp = new VersePack();
+				vp.SetName(s);
+				VerseGroups.Add(vp);
+				GroupStatsBox.Items.Add(s + " - 0 verses placed");
+			}
+			if (CustomGroupNames.Count > 0)
+			{
+				GroupNamesDropDown.SelectedIndex = 0;
+				PreviousSelectedIndex = 0;
 			}
 		}
 
@@ -55,56 +58,204 @@ namespace Topical_Memory_System
 			return verses;
 		}
 
-		private void SaveButton_Click(object sender, EventArgs e)
+		private void GroupNamesDropDown_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			bool shouldContinue = false;
+			//save verses in the list, if any
+			foreach (object obj in PlacedVersesBox.Items)
+			{
+				if (!VerseGroups[PreviousSelectedIndex].Verses.Contains((Verse)obj))
+				{
+					VerseGroups[PreviousSelectedIndex].Verses.Add((Verse)obj);
+				}
+			}
+
+			PreviousSelectedIndex = GroupNamesDropDown.SelectedIndex;
+			PlacedVersesBox.Items.Clear();
+
+			//add verses from index change (ones that are already stored):
+			foreach (Verse v in VerseGroups[PreviousSelectedIndex].Verses)
+			{
+				PlacedVersesBox.Items.Add(v);
+			}
+			if (PlacedVersesBox.Items.Count > 0)
+			{
+				RemoveAllButton.Enabled = true;
+			}
+			else
+			{
+				RemoveAllButton.Enabled = false;
+			}
 			if (VersesBox.Items.Count > 0)
 			{
-				if (MessageBox.Show("You have not placed all the verses.  Do you want to continue?", "Verse Import", MessageBoxButtons.YesNo)
+				AddAllButton.Enabled = true;
+			}
+			else
+			{
+				AddAllButton.Enabled = false;
+			}
+			RemoveButton.Enabled = false;
+		}
+
+		private void VersesBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			AddButton.Enabled = true;
+		}
+
+		private void VerseBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			RemoveButton.Enabled = true;
+		}
+
+		private void AddVerseButton_Click(object sender, EventArgs e)
+		{
+			foreach (object obj in VersesBox.SelectedItems)
+			{
+				PlacedVersesBox.Items.Add((Verse)obj);
+			}
+			foreach (object obj in PlacedVersesBox.Items)
+			{
+				if (VersesBox.Items.Contains((Verse)obj))
+				{
+					VersesBox.Items.Remove((Verse)obj);
+				}
+				if (!VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Contains((Verse)obj))
+				{
+					VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Add((Verse)obj);
+				}
+			}
+			if (VersesBox.Items.Count < 1)
+			{
+				AddAllButton.Enabled = false;
+				AddButton.Enabled = false;
+			}
+			RemoveAllButton.Enabled = true;
+			//update stats:
+			GroupStatsBox.Items[GroupNamesDropDown.SelectedIndex] = GroupNamesDropDown.Text + " - " + PlacedVersesBox.Items.Count.ToString() + " verses placed";
+		}
+
+		private void AddAllButton_Click(object sender, EventArgs e)
+		{
+			foreach (object obj in VersesBox.Items)
+			{
+				PlacedVersesBox.Items.Add((Verse)obj);
+			}
+			foreach (object obj in PlacedVersesBox.Items)
+			{
+				if (VersesBox.Items.Contains((Verse)obj))
+				{
+					VersesBox.Items.Remove((Verse)obj);
+				}
+				if (!VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Contains((Verse)obj))
+				{
+					VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Add((Verse)obj);
+				}
+			}
+			AddAllButton.Enabled = false;
+			AddButton.Enabled = false;
+			RemoveAllButton.Enabled = true;
+			//update stats:
+			GroupStatsBox.Items[GroupNamesDropDown.SelectedIndex] = GroupNamesDropDown.Text + " - " + PlacedVersesBox.Items.Count.ToString() + " verses placed";
+		}
+
+		private void RemoveVerseButton_Click(object sender, EventArgs e)
+		{
+			foreach (object obj in PlacedVersesBox.SelectedItems)
+			{
+				VersesBox.Items.Add((Verse)obj);
+			}
+			foreach (object obj in VersesBox.Items)
+			{
+				if (PlacedVersesBox.Items.Contains((Verse)obj))
+				{
+					PlacedVersesBox.Items.Remove((Verse)obj);
+				}
+				if (VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Contains((Verse)obj))
+				{
+					VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Remove((Verse)obj);
+				}
+			}
+			if (PlacedVersesBox.Items.Count < 1)
+			{
+				RemoveAllButton.Enabled = false;
+				RemoveButton.Enabled = false;
+			}
+			AddAllButton.Enabled = true;
+			//update stats:
+			GroupStatsBox.Items[GroupNamesDropDown.SelectedIndex] = GroupNamesDropDown.Text + " - " + PlacedVersesBox.Items.Count.ToString() + " verses placed";
+		}
+
+		private void RemoveAllButton_Click(object sender, EventArgs e)
+		{
+			foreach (object obj in PlacedVersesBox.Items)
+			{
+				VersesBox.Items.Add((Verse)obj);
+			}
+			foreach (object obj in VersesBox.Items)
+			{
+				if (PlacedVersesBox.Items.Contains((Verse)obj))
+				{
+					PlacedVersesBox.Items.Remove((Verse)obj);
+				}
+				if (VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Contains((Verse)obj))
+				{
+					VerseGroups[GroupNamesDropDown.SelectedIndex].Verses.Remove((Verse)obj);
+				}
+			}
+			RemoveAllButton.Enabled = false;
+			RemoveButton.Enabled = false;
+			AddAllButton.Enabled = true;
+			//update stats:
+			GroupStatsBox.Items[GroupNamesDropDown.SelectedIndex] = GroupNamesDropDown.Text + " - " + PlacedVersesBox.Items.Count.ToString() + " verses placed";
+		}
+
+		private void SaveButton_Click(object sender, EventArgs e)
+		{
+			if (VersesBox.Items.Count > 0)
+			{
+				if (MessageBox.Show("You have not placed all the verses.  Would you like to continue without doing so?", "Import Verses Confirmation", MessageBoxButtons.YesNo)
 					== DialogResult.Yes)
 				{
-					shouldContinue = true;
+					foreach (VersePack vp in VerseGroups)
+					{
+						if (vp.Verses.Count > 0)
+						{
+							AddVersesToDatabase(vp.Verses, vp.Name);
+						}
+					}
+					MessageBox.Show("Verses successfully imported!");
+					this.Close();
 				}
 			}
 			else
 			{
-				shouldContinue = true;
-			}
-			if (shouldContinue)
-			{
-				try
+				foreach (VersePack vp in VerseGroups)
 				{
-					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox1), CustomGroupLabel1.Text);
-					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox2), CustomGroupLabel2.Text);
-					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox3), CustomGroupLabel3.Text);
-					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox4), CustomGroupLabel4.Text);
-					AddVersesToDatabase(LoadVersesFromListBox(CustomGroupBox5), CustomGroupLabel5.Text);
-					MessageBox.Show("Import successful!");
+					if (vp.Verses.Count > 0)
+					{
+						AddVersesToDatabase(vp.Verses, vp.Name);
+					}
 				}
-				catch (Exception)
-				{
-					MessageBox.Show("A problem occurred while importing the verses.");
-				}
+				MessageBox.Show("Verses successfully imported!");
 				this.Close();
 			}
 		}
 
-		private List<Verse> LoadVersesFromListBox(DragDropListBox box)
-		{
-			List<Verse> verses = new List<Verse>();
-			foreach (Verse v in Verses)
-			{
-				if (box.Items.Contains(v.getReference()))
-				{
-					verses.Add(v);
-				}
-			}
-			return verses;
-		}
-
 		private static void AddVersesToDatabase(List<Verse> verses, string groupName)
 		{
-			MenuExit.SaveMultipleVersesToDatabase(verses, groupName);
+			try
+			{
+				MenuExit.SaveMultipleVersesToDatabase(verses, groupName);
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("An error occurred while importing the verses.  Please contact the project's administrator.");
+			}
+		}
+
+		private void ShowHelpButton_Click(object sender, EventArgs e)
+		{
+			ImportVersesHelp ivh = new ImportVersesHelp();
+			ivh.ShowDialog();
 		}
 
 	}

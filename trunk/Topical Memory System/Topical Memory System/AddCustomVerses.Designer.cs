@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddCustomVerses));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.groupNames = new System.Windows.Forms.ComboBox();
@@ -60,11 +61,11 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(126, 12);
+			this.label1.Location = new System.Drawing.Point(109, 12);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(159, 20);
+			this.label1.Size = new System.Drawing.Size(192, 20);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "Custom Group Name";
+			this.label1.Text = "1 - Select group to add to:";
 			// 
 			// groupNames
 			// 
@@ -168,11 +169,11 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(137, 10);
+			this.label2.Location = new System.Drawing.Point(111, 10);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(136, 20);
+			this.label2.Size = new System.Drawing.Size(189, 20);
 			this.label2.TabIndex = 2;
-			this.label2.Text = "Verse Information";
+			this.label2.Text = "2 - Add verse information:";
 			// 
 			// saveButton
 			// 
@@ -193,9 +194,11 @@
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AddCustomVerses";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Add Custom Verses";
 			this.panel1.ResumeLayout(false);

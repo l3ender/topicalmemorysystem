@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCustomVerses));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
 			groupNames = new System.Windows.Forms.ComboBox();
@@ -65,9 +66,9 @@
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(157, 9);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(182, 16);
+			this.label1.Size = new System.Drawing.Size(183, 16);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "1.  Select custom group pack:";
+			this.label1.Text = "1 - Select custom group pack:";
 			// 
 			// groupNames
 			// 
@@ -203,11 +204,11 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(183, 6);
+			this.label2.Location = new System.Drawing.Point(181, 6);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(131, 16);
+			this.label2.Size = new System.Drawing.Size(135, 16);
 			this.label2.TabIndex = 1;
-			this.label2.Text = "2.  Edit desired fields:";
+			this.label2.Text = "2 - Edit desired fields:";
 			// 
 			// EditCustomVerses
 			// 
@@ -217,9 +218,11 @@
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "EditCustomVerses";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Edit Custom Verses";
 			this.panel1.ResumeLayout(false);

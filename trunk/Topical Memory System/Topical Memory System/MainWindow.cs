@@ -499,19 +499,26 @@ namespace Topical_Memory_System
 
 		private void importVersesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			OpenFileDialog dlg = new OpenFileDialog();
-			dlg.Multiselect = false;
-			if (dlg.ShowDialog() == DialogResult.OK)
+			if (CustomVerses.Count > 0)
 			{
-				try
+				OpenFileDialog dlg = new OpenFileDialog();
+				dlg.Multiselect = false;
+				if (dlg.ShowDialog() == DialogResult.OK)
 				{
-					ImportVerses iv = new ImportVerses(dlg.FileName);
-					iv.ShowDialog();
+					try
+					{
+						ImportVerses iv = new ImportVerses(dlg.FileName, MenuExit.LoadCustomGroupNames());
+						iv.ShowDialog();
+					}
+					catch (Exception)
+					{
+						MessageBox.Show("The verses could not be imported.");
+					}
 				}
-				catch (Exception)
-				{
-					MessageBox.Show("The file could not be loaded.");
-				}
+			}
+			else
+			{
+				MessageBox.Show("There are no custom groups!  You can add groups from the menu by selecting Custom Verses -> Add groups.");
 			}
 		}
 
@@ -584,7 +591,12 @@ namespace Topical_Memory_System
 
 		private void editCustomVersesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (CustomVerses.Count > 0)
+			int numVerses = 0;
+			foreach (VersePack vp in CustomVerses)
+			{
+				numVerses += vp.Verses.Count;
+			}
+			if (numVerses > 0)
 			{
 				EditCustomVerses obj = new EditCustomVerses(CustomVerses);
 				obj.ShowDialog();
