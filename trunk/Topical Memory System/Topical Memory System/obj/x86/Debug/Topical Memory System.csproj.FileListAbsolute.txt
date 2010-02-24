@@ -1,0 +1,30 @@
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical Memory System.csproj.ResolveComReference.cache
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\bin\x86\Debug\Topical Memory System.exe
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\bin\x86\Debug\Topical Memory System.pdb
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.AboutApplication.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.AddCustomGroups.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.AddCustomVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ConfigureVoices.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.EditCustomGroups.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ImportVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.EditCustomVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ExportVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ImportVersesHelp.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.LearnReferences.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.LearnVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.LearnVersesOptionPanel.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.MenuExit.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.MatchVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.MatchVersesOptionPanel.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.PrintOptions.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.Properties.Resources.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.MainMenuPanel.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ReviewVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ReviewVersesOptionsPanel.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.UpdateForm.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ViewInContextPanel.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical_Memory_System.ViewVerses.resources
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical Memory System.csproj.GenerateResource.Cache
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical Memory System.exe
+C:\Users\l3ender\Desktop\topicalmemorysystem\Topical Memory System\Topical Memory System\obj\x86\Debug\Topical Memory System.pdb

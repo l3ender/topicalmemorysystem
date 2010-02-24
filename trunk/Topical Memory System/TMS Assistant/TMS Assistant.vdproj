@@ -476,14 +476,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TMS Assistant"
-        "ProductCode" = "8:{604A06CC-F200-4282-A516-E2687B7B7908}"
-        "PackageCode" = "8:{FC1751C2-3863-47F8-A696-86FB3B0F7C11}"
+        "ProductCode" = "8:{5603231F-90EF-41AA-A931-4D14748786D5}"
+        "PackageCode" = "8:{964D8700-3130-4979-BC7A-90CBB50F4755}"
         "UpgradeCode" = "8:{EC9C93F5-CEB1-4408-BED7-7C2941E6597E}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:5.2.0"
+        "ProductVersion" = "8:5.2.1"
         "Manufacturer" = "8:TMS"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1035,7 +1035,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_88E128F951CE48A682F8BD92D41728F2"
             {
-            "SourcePath" = "8:..\\Topical Memory System\\obj\\Debug\\Topical Memory System.exe"
+            "SourcePath" = "8:..\\Topical Memory System\\obj\\x86\\Debug\\Topical Memory System.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A456694850774FBBA9665735CBCDBCE1"
